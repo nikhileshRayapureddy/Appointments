@@ -10,10 +10,15 @@ import UIKit
 
 class AddBusinessViewController: BaseViewController {
 
+    @IBOutlet weak var scrlVw: UIScrollView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Do any additional setup after loading the view.
+    }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        scrlVw.contentSize = CGSizeMake(scrlVw.frame.size.width, 580)
+
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
