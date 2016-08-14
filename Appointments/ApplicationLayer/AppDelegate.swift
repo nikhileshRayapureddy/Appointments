@@ -18,7 +18,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         IQKeyboardManager.sharedManager().enable = true
-
+//kiran kumar
+        
+        
+        
+        
         return true
     }
 
