@@ -108,6 +108,74 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
+    
+    //MARK: - Loader Methods
+    func showLoader(message:String)
+    {
+        
+        self.performSelectorOnMainThread(#selector(AppDelegate.showLoaderr), withObject: message, waitUntilDone: false)
+    }
+    
+    func showLoaderr(message : String)
+    {
+        let vwBgg = self.window!.viewWithTag(123453)
+        if vwBgg == nil
+        {
+            let vwBg = UIView( frame:self.window!.frame)
+            vwBg.backgroundColor = UIColor.clearColor()
+            vwBg.tag = 123453
+            self.window!.addSubview(vwBg)
+            
+            let imgVw = UIImageView (frame: vwBg.frame)
+            imgVw.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
+            vwBg.addSubview(imgVw)
+            
+            let height = vwBg.frame.size.height/2.0
+            
+            let lblText = UILabel(frame:CGRect(x: 0, y: height-60, width: vwBg.frame.size.width, height: 30))
+            
+            if message == ""
+            {
+                lblText.text =  "Loading ..."
+            }
+            else
+            {
+                lblText.text = message
+            }
+            lblText.textAlignment = NSTextAlignment.Center
+            lblText.backgroundColor = UIColor.clearColor()
+            lblText.textColor = UIColor.whiteColor()
+            // lblText.textColor = Color_NavBarTint
+            vwBg.addSubview(lblText)
+            
+            
+            
+            let indicator = UIActivityIndicatorView(activityIndicatorStyle:.WhiteLarge)
+            indicator.center = vwBg.center
+            vwBg.addSubview(indicator)
+            indicator.startAnimating()
+            
+            vwBg.addSubview(indicator)
+            indicator.bringSubviewToFront(vwBg)
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+            
+        }
+    }
+    func removeloder()
+    {
+        self.performSelectorOnMainThread(#selector(AppDelegate.removeloderr), withObject: nil, waitUntilDone: false)
+    }
+    func removeloderr()
+    {
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        
+        let vwBg = self.window!.viewWithTag(123453)
+        if vwBg != nil
+        {
+            vwBg!.removeFromSuperview()
+        }
+        
+    }
 
 }
 

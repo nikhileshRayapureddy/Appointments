@@ -9,6 +9,7 @@
 import UIKit
 
 class AddResourceViewController: BaseViewController {
+    @IBOutlet weak var tableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,6 +18,13 @@ class AddResourceViewController: BaseViewController {
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        if let view = NSBundle.mainBundle().loadNibNamed("AddResourceHeaderCustomView", owner: nil , options: nil)[0] as? AddResourceHeaderCustomView
+        {
+            tableView.sectionHeaderHeight = 520
+            tableView.tableHeaderView = view
+        }
+
+        
         self.navigationController?.navigationBar.hidden = false
         self.designNavBar("Add Resource")
         self.designTabBar()
@@ -56,4 +64,33 @@ class AddResourceViewController: BaseViewController {
     }
     */
 
+}
+extension AddResourceViewController : UITableViewDelegate, UITableViewDataSource
+{
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let cell : AddBranchAddressCustomCell = tableView.dequeueReusableCellWithIdentifier("ADDRESSCELL") as! AddBranchAddressCustomCell
+        cell.configureCell()
+        return cell
+    }
+    
+}
+
+extension AddResourceViewController : UITextFieldDelegate
+{
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        return true
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }

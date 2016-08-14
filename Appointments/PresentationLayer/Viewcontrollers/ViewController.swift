@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: BaseViewController,ParserDelegate {
 
     @IBOutlet weak var txtFldEmail: UITextField!
     @IBOutlet weak var txtFldPwd: UITextField!
@@ -32,14 +32,37 @@ class ViewController: UIViewController {
     @IBAction func btnForgotPwdClicked(sender: UIButton) {
     }
     @IBAction func btnLoginClicked(sender: UIButton) {
-        let vc : HomeViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("HomeViewController") as! HomeViewController
-        self.navigationController!.pushViewController(vc, animated: true)
-
+        self.callLoginService()
     }
     
     @IBAction func btnSignUpClicked(sender: UIButton) {
         let vc : SignUpViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("SignUpViewController") as! SignUpViewController
         self.navigationController!.pushViewController(vc, animated: true)
+    }
+    func callLoginService()
+    {
+        app_delegate.showLoader("Loading...")
+        let layer = BusinessLayerClass()
+        layer.callBack = self
+        layer.doUserLoginWithUserName(txtFldEmail.text!, strPassword: txtFldPwd.text!)
+
+    }
+    func parsingFinished(object: AnyObject?, withTag tag: NSInteger) {
+        app_delegate.removeloder()
+        self.performSelectorOnMainThread(#selector(self.navigateToHome), withObject: nil, waitUntilDone: true)
+        
+    }
+    func parsingError(error: String?, withTag tag: NSInteger) {
+        app_delegate.removeloder()
+        self.showAlert(error!, strTitle: "Failed!")
+    }
+    
+    func navigateToHome()
+    {
+        let vc : HomeViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("HomeViewController") as! HomeViewController
+        self.navigationController!.pushViewController(vc, animated: true)
+        
+
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
