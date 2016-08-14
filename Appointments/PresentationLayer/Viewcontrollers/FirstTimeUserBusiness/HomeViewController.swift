@@ -7,9 +7,6 @@
 //
 
 import UIKit
-let ScreenWidth : CGFloat =  UIScreen.mainScreen().bounds.size.width
-let ScreenHeight = UIScreen.mainScreen().bounds.height
-
 class HomeViewController: BaseViewController {
     @IBOutlet weak var btnRegisterBusiness: UIButton!
 

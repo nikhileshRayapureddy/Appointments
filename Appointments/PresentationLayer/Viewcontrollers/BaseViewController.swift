@@ -205,5 +205,23 @@ class BaseViewController: UIViewController {
             
         }
     }
+    
+    //MARK:- Show Alert
+    func  showAlert (message :String, strTitle : String)
+    {
+        if NSThread.currentThread() != NSThread.mainThread()
+        {
+            dispatch_async(dispatch_get_main_queue(),{
+                self.showAlert(message, strTitle: strTitle)
+            })
+        }
+        else
+        {
+            let alert = UIAlertController(title: strTitle, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+    }
+
 
 }

@@ -9,6 +9,7 @@
 import UIKit
 
 class ServiceOfferedViewController: BaseViewController {
+    @IBOutlet weak var tableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,6 +18,14 @@ class ServiceOfferedViewController: BaseViewController {
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        if let view = NSBundle.mainBundle().loadNibNamed("ServicesOfferedCustomView", owner: nil , options: nil)[0] as? ServicesOfferedCustomView
+        {
+            tableView.sectionHeaderHeight = 504
+            tableView.tableHeaderView = view
+        }
+        
+
         self.navigationController?.navigationBar.hidden = false
 
         self.designNavBar("Services Offered")
@@ -58,3 +67,35 @@ class ServiceOfferedViewController: BaseViewController {
     */
 
 }
+
+
+extension ServiceOfferedViewController : UITableViewDelegate, UITableViewDataSource
+{
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let cell : AddBranchAddressCustomCell = tableView.dequeueReusableCellWithIdentifier("ADDRESSCELL") as! AddBranchAddressCustomCell
+        cell.configureCell()
+        return cell
+    }
+    
+}
+
+extension ServiceOfferedViewController : UITextFieldDelegate
+{
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        return true
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
+

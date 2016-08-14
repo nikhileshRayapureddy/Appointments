@@ -39,6 +39,18 @@
 		A78D2A551D4A7A3D00756F2A /* IQToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78D2A441D4A7A3D00756F2A /* IQToolbar.swift */; };
 		A78D2A561D4A7A3D00756F2A /* IQUIView+IQKeyboardToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78D2A451D4A7A3D00756F2A /* IQUIView+IQKeyboardToolbar.swift */; };
 		A78D2A581D4A85B800756F2A /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78D2A571D4A85B800756F2A /* SignUpViewController.swift */; };
+		A7CC021A1D5EFF480018A428 /* AddBranchHeaderCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CC02181D5EFF480018A428 /* AddBranchHeaderCustomView.swift */; };
+		A7CC021B1D5EFF480018A428 /* AddBranchHeaderCustomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7CC02191D5EFF480018A428 /* AddBranchHeaderCustomView.xib */; };
+		A7CC021D1D5EFF520018A428 /* AddBranchAddressCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CC021C1D5EFF520018A428 /* AddBranchAddressCustomCell.swift */; };
+		A7CC021F1D5F870B0018A428 /* AddCalenderHeaderCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CC021E1D5F870B0018A428 /* AddCalenderHeaderCustomView.swift */; };
+		A7CC02211D5F871A0018A428 /* AddCalenderHeaderCustomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7CC02201D5F871A0018A428 /* AddCalenderHeaderCustomView.xib */; };
+		A7E6949F1D6055460042DAE9 /* ServicesOfferedCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E6949E1D6055460042DAE9 /* ServicesOfferedCustomView.swift */; };
+		A7E694A11D6055520042DAE9 /* ServicesOfferedCustomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7E694A01D6055520042DAE9 /* ServicesOfferedCustomView.xib */; };
+		A7E694A31D60A1C90042DAE9 /* AddResourceHeaderCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E694A21D60A1C90042DAE9 /* AddResourceHeaderCustomView.swift */; };
+		A7E694A51D60A1D40042DAE9 /* AddResourceHeaderCustomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7E694A41D60A1D40042DAE9 /* AddResourceHeaderCustomView.xib */; };
+		A7E694AA1D60A9E60042DAE9 /* BusinessLayerClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E694A91D60A9E60042DAE9 /* BusinessLayerClass.swift */; };
+		A7E694AC1D60AA910042DAE9 /* BaseBL.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E694AB1D60AA910042DAE9 /* BaseBL.swift */; };
+		A7E694AE1D60AA9E0042DAE9 /* HttpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E694AD1D60AA9E0042DAE9 /* HttpRequest.swift */; };
 		A7F502DF1D5AE1D700D9A427 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F502DE1D5AE1D700D9A427 /* BaseViewController.swift */; };
 		A7F502E11D5AE1FE00D9A427 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F502E01D5AE1FE00D9A427 /* HomeViewController.swift */; };
 		A7F502E81D5B5A6400D9A427 /* AddBusinessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F502E71D5B5A6400D9A427 /* AddBusinessViewController.swift */; };
@@ -105,6 +117,18 @@
 		A78D2A441D4A7A3D00756F2A /* IQToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IQToolbar.swift; sourceTree = "<group>"; };
 		A78D2A451D4A7A3D00756F2A /* IQUIView+IQKeyboardToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IQUIView+IQKeyboardToolbar.swift"; sourceTree = "<group>"; };
 		A78D2A571D4A85B800756F2A /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		A7CC02181D5EFF480018A428 /* AddBranchHeaderCustomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBranchHeaderCustomView.swift; sourceTree = "<group>"; };
+		A7CC02191D5EFF480018A428 /* AddBranchHeaderCustomView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddBranchHeaderCustomView.xib; sourceTree = "<group>"; };
+		A7CC021C1D5EFF520018A428 /* AddBranchAddressCustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBranchAddressCustomCell.swift; sourceTree = "<group>"; };
+		A7CC021E1D5F870B0018A428 /* AddCalenderHeaderCustomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCalenderHeaderCustomView.swift; sourceTree = "<group>"; };
+		A7CC02201D5F871A0018A428 /* AddCalenderHeaderCustomView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddCalenderHeaderCustomView.xib; sourceTree = "<group>"; };
+		A7E6949E1D6055460042DAE9 /* ServicesOfferedCustomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServicesOfferedCustomView.swift; sourceTree = "<group>"; };
+		A7E694A01D6055520042DAE9 /* ServicesOfferedCustomView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServicesOfferedCustomView.xib; sourceTree = "<group>"; };
+		A7E694A21D60A1C90042DAE9 /* AddResourceHeaderCustomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddResourceHeaderCustomView.swift; sourceTree = "<group>"; };
+		A7E694A41D60A1D40042DAE9 /* AddResourceHeaderCustomView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddResourceHeaderCustomView.xib; sourceTree = "<group>"; };
+		A7E694A91D60A9E60042DAE9 /* BusinessLayerClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessLayerClass.swift; sourceTree = "<group>"; };
+		A7E694AB1D60AA910042DAE9 /* BaseBL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseBL.swift; sourceTree = "<group>"; };
+		A7E694AD1D60AA9E0042DAE9 /* HttpRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpRequest.swift; sourceTree = "<group>"; };
 		A7F502DE1D5AE1D700D9A427 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		A7F502E01D5AE1FE00D9A427 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		A7F502E71D5B5A6400D9A427 /* AddBusinessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBusinessViewController.swift; sourceTree = "<group>"; };
@@ -163,8 +187,8 @@
 		A78D29D71D4A699D00756F2A /* Appointments */ = {
 			isa = PBXGroup;
 			children = (
+				A7E694A61D60A9D70042DAE9 /* BusinessLayer */,
 				A78D2A131D4A6D4500756F2A /* ApplicationLayer */,
-				A78D2A151D4A6D4500756F2A /* BusinessLayer */,
 				A78D2A161D4A6D4500756F2A /* DataAccessLayer */,
 				A78D2A191D4A6D4500756F2A /* PresentationLayer */,
 				A78D2A1E1D4A6D4500756F2A /* Resources */,
@@ -202,13 +226,6 @@
 			path = ApplicationLayer;
 			sourceTree = "<group>";
 		};
-		A78D2A151D4A6D4500756F2A /* BusinessLayer */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = BusinessLayer;
-			sourceTree = "<group>";
-		};
 		A78D2A161D4A6D4500756F2A /* DataAccessLayer */ = {
 			isa = PBXGroup;
 			children = (
@@ -220,25 +237,11 @@
 		A78D2A191D4A6D4500756F2A /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
-				A78D2A1A1D4A6D4500756F2A /* Customviews */,
-				A78D2A1B1D4A6D4500756F2A /* Cutomcells */,
+				A7CC02161D5EFF3A0018A428 /* CustomCells */,
+				A7CC02171D5EFF3A0018A428 /* CustomViews */,
 				A78D2A1C1D4A6D4500756F2A /* Viewcontrollers */,
 			);
 			path = PresentationLayer;
-			sourceTree = "<group>";
-		};
-		A78D2A1A1D4A6D4500756F2A /* Customviews */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Customviews;
-			sourceTree = "<group>";
-		};
-		A78D2A1B1D4A6D4500756F2A /* Cutomcells */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Cutomcells;
 			sourceTree = "<group>";
 		};
 		A78D2A1C1D4A6D4500756F2A /* Viewcontrollers */ = {
@@ -336,6 +339,55 @@
 				A78D2A451D4A7A3D00756F2A /* IQUIView+IQKeyboardToolbar.swift */,
 			);
 			path = IQToolbar;
+			sourceTree = "<group>";
+		};
+		A7CC02161D5EFF3A0018A428 /* CustomCells */ = {
+			isa = PBXGroup;
+			children = (
+				A7CC021C1D5EFF520018A428 /* AddBranchAddressCustomCell.swift */,
+			);
+			path = CustomCells;
+			sourceTree = "<group>";
+		};
+		A7CC02171D5EFF3A0018A428 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				A7CC02181D5EFF480018A428 /* AddBranchHeaderCustomView.swift */,
+				A7CC02191D5EFF480018A428 /* AddBranchHeaderCustomView.xib */,
+				A7CC021E1D5F870B0018A428 /* AddCalenderHeaderCustomView.swift */,
+				A7CC02201D5F871A0018A428 /* AddCalenderHeaderCustomView.xib */,
+				A7E6949E1D6055460042DAE9 /* ServicesOfferedCustomView.swift */,
+				A7E694A01D6055520042DAE9 /* ServicesOfferedCustomView.xib */,
+				A7E694A21D60A1C90042DAE9 /* AddResourceHeaderCustomView.swift */,
+				A7E694A41D60A1D40042DAE9 /* AddResourceHeaderCustomView.xib */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		A7E694A61D60A9D70042DAE9 /* BusinessLayer */ = {
+			isa = PBXGroup;
+			children = (
+				A7E694A71D60A9D70042DAE9 /* BusinessLogic */,
+				A7E694A81D60A9D70042DAE9 /* BusinessObjects */,
+			);
+			path = BusinessLayer;
+			sourceTree = "<group>";
+		};
+		A7E694A71D60A9D70042DAE9 /* BusinessLogic */ = {
+			isa = PBXGroup;
+			children = (
+				A7E694AB1D60AA910042DAE9 /* BaseBL.swift */,
+				A7E694A91D60A9E60042DAE9 /* BusinessLayerClass.swift */,
+				A7E694AD1D60AA9E0042DAE9 /* HttpRequest.swift */,
+			);
+			path = BusinessLogic;
+			sourceTree = "<group>";
+		};
+		A7E694A81D60A9D70042DAE9 /* BusinessObjects */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = BusinessObjects;
 			sourceTree = "<group>";
 		};
 		A7F502DD1D5ADE3100D9A427 /* FirstTimeUserBusiness */ = {
@@ -456,7 +508,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7CC021B1D5EFF480018A428 /* AddBranchHeaderCustomView.xib in Resources */,
 				A78D2A501D4A7A3D00756F2A /* IQKeyboardManager.bundle in Resources */,
+				A7E694A51D60A1D40042DAE9 /* AddResourceHeaderCustomView.xib in Resources */,
+				A7CC02211D5F871A0018A428 /* AddCalenderHeaderCustomView.xib in Resources */,
 				A78D29E61D4A699D00756F2A /* LaunchScreen.storyboard in Resources */,
 				A78D29E31D4A699D00756F2A /* Assets.xcassets in Resources */,
 				A78D2A2D1D4A765400756F2A /* Roboto-Regular.ttf in Resources */,
@@ -465,6 +520,7 @@
 				A78D2A2A1D4A765400756F2A /* Roboto-Bold.ttf in Resources */,
 				A78D29DE1D4A699D00756F2A /* Main.storyboard in Resources */,
 				A78D2A291D4A765400756F2A /* Roboto-Black.ttf in Resources */,
+				A7E694A11D6055520042DAE9 /* ServicesOfferedCustomView.xib in Resources */,
 				A78D2A2E1D4A765400756F2A /* Roboto-Thin.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -492,19 +548,26 @@
 			files = (
 				A78D2A4F1D4A7A3D00756F2A /* IQKeyboardReturnKeyHandler.swift in Sources */,
 				A78D2A4E1D4A7A3D00756F2A /* IQKeyboardManager.swift in Sources */,
+				A7E694A31D60A1C90042DAE9 /* AddResourceHeaderCustomView.swift in Sources */,
 				A78D2A461D4A7A3D00756F2A /* IQNSArray+Sort.swift in Sources */,
 				A78D2A211D4A6D4500756F2A /* ViewController.swift in Sources */,
+				A7E694AE1D60AA9E0042DAE9 /* HttpRequest.swift in Sources */,
 				A78D2A531D4A7A3D00756F2A /* IQPreviousNextView.swift in Sources */,
 				A7F502DF1D5AE1D700D9A427 /* BaseViewController.swift in Sources */,
 				A7F502E81D5B5A6400D9A427 /* AddBusinessViewController.swift in Sources */,
 				A78D2A481D4A7A3D00756F2A /* IQUITextFieldView+Additions.swift in Sources */,
 				A7F502E11D5AE1FE00D9A427 /* HomeViewController.swift in Sources */,
 				A78D2A4D1D4A7A3D00756F2A /* IQKeyboardManagerConstantsInternal.swift in Sources */,
+				A7CC021A1D5EFF480018A428 /* AddBranchHeaderCustomView.swift in Sources */,
+				A7E694AA1D60A9E60042DAE9 /* BusinessLayerClass.swift in Sources */,
 				A78D2A4B1D4A7A3D00756F2A /* IQUIWindow+Hierarchy.swift in Sources */,
 				A78D2A561D4A7A3D00756F2A /* IQUIView+IQKeyboardToolbar.swift in Sources */,
+				A7CC021F1D5F870B0018A428 /* AddCalenderHeaderCustomView.swift in Sources */,
 				A78D2A1F1D4A6D4500756F2A /* AppDelegate.swift in Sources */,
+				A7E6949F1D6055460042DAE9 /* ServicesOfferedCustomView.swift in Sources */,
 				A78D2A491D4A7A3D00756F2A /* IQUIView+Hierarchy.swift in Sources */,
 				A7F502EA1D5B5A7200D9A427 /* AddBranchViewController.swift in Sources */,
+				A7CC021D1D5EFF520018A428 /* AddBranchAddressCustomCell.swift in Sources */,
 				A7F502F01D5B5AA800D9A427 /* ServiceOfferedViewController.swift in Sources */,
 				A78D2A521D4A7A3D00756F2A /* IQBarButtonItem.swift in Sources */,
 				A7F502EE1D5B5A9600D9A427 /* AddSkillsViewController.swift in Sources */,
@@ -513,6 +576,7 @@
 				A78D2A581D4A85B800756F2A /* SignUpViewController.swift in Sources */,
 				A78D2A4C1D4A7A3D00756F2A /* IQKeyboardManagerConstants.swift in Sources */,
 				A78D2A541D4A7A3D00756F2A /* IQTitleBarButtonItem.swift in Sources */,
+				A7E694AC1D60AA910042DAE9 /* BaseBL.swift in Sources */,
 				A78D2A201D4A6D4500756F2A /* Appointments.xcdatamodeld in Sources */,
 				A78D2A511D4A7A3D00756F2A /* IQTextView.swift in Sources */,
 				A78D2A551D4A7A3D00756F2A /* IQToolbar.swift in Sources */,

@@ -10,13 +10,20 @@ import UIKit
 
 class AddBranchViewController: BaseViewController {
 
+    @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Do any additional setup after loading the view.
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        if let view = NSBundle.mainBundle().loadNibNamed("AddBranchHeaderCustomView", owner: nil , options: nil)[0] as? AddBranchHeaderCustomView
+        {
+            tableView.sectionHeaderHeight = 520
+            tableView.tableHeaderView = view
+        }
+        
         self.navigationController?.navigationBar.hidden = false
 
         self.designNavBar("Add Branch")
@@ -35,6 +42,7 @@ class AddBranchViewController: BaseViewController {
         let bItem = UIBarButtonItem(customView:rightBarButtonItems)
         self.navigationItem.rightBarButtonItem = bItem
         
+        
     }
     func btnNextClicked(sender : UIButton)
     {
@@ -45,16 +53,34 @@ class AddBranchViewController: BaseViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+}
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+extension AddBranchViewController : UITableViewDelegate, UITableViewDataSource
+{
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
     }
-    */
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let cell : AddBranchAddressCustomCell = tableView.dequeueReusableCellWithIdentifier("ADDRESSCELL") as! AddBranchAddressCustomCell
+        cell.configureCell()
+        return cell
+    }
+    
+}
 
+extension AddBranchViewController : UITextFieldDelegate
+{
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        return true
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }
