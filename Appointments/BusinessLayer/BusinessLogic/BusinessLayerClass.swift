@@ -19,8 +19,8 @@ class BusinessLayerClass: BaseBL {
 func doUserLoginWithUserName(strUsername : String, strPassword : String){
         let obj : HttpRequest = HttpRequest()
         obj.tag = ParsingConstant.getLogin.rawValue
-        obj._serviceURL = NSString(format: "http://103.231.43.83:101/api/login/AuthenticateUser?email=admin@appdest.com&password=Admin_321") as String
-        obj.MethodNamee = "GET";
+        obj._serviceURL = NSString(format: "http://103.231.43.83:120/api/login/AuthenticateUser?email=admin@appdest.com&password=Admin_321") as String
+        obj.MethodNamee = "POST";
         obj.serviceName = ""
         obj.params = [:]
         
