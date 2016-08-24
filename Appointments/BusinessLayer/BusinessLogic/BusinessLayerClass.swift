@@ -17,12 +17,16 @@ let SERVER_ERROR = "Server not responding.\nPlease try after some time."
 let NoInternet : NSString = "There seems to be some data connectivity issue with your network. Please check connection and try again."
 class BusinessLayerClass: BaseBL {
 func doUserLoginWithUserName(strUsername : String, strPassword : String){
+    
+    let dictData = NSMutableDictionary()
+    dictData.setValue(strUsername, forKey: "EMail")
+    dictData.setValue(strPassword, forKey: "Password")
         let obj : HttpRequest = HttpRequest()
         obj.tag = ParsingConstant.getLogin.rawValue
-        obj._serviceURL = NSString(format: "http://103.231.43.83:101/api/login/AuthenticateUser?email=admin@appdest.com&password=Admin_321") as String
-        obj.MethodNamee = "GET";
+        obj._serviceURL = NSString(format: "http://103.231.43.83:120/api/login/AuthenticateUserPost") as String
+        obj.MethodNamee = "POST";
         obj.serviceName = ""
-        obj.params = [:]
+        obj.params = dictData
         
         
         obj.doGetSOAPResponse {(success : Bool) -> Void in
