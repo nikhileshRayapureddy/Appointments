@@ -10,7 +10,8 @@ import UIKit
 
 class AddResourceViewController: BaseViewController {
     @IBOutlet weak var tableView: UITableView!
-
+    @IBOutlet weak var btnViewList: UIButton!
+    @IBOutlet weak var scrlVwAddAddResource: UIScrollView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -18,12 +19,6 @@ class AddResourceViewController: BaseViewController {
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        if let view = NSBundle.mainBundle().loadNibNamed("AddResourceHeaderCustomView", owner: nil , options: nil)[0] as? AddResourceHeaderCustomView
-        {
-            tableView.sectionHeaderHeight = 520
-            tableView.tableHeaderView = view
-        }
-
         
         self.navigationController?.navigationBar.hidden = false
         self.designNavBar("Add Resource")
@@ -41,29 +36,31 @@ class AddResourceViewController: BaseViewController {
         rightBarButtonItems.addSubview(btnNext)
         let bItem = UIBarButtonItem(customView:rightBarButtonItems)
         self.navigationItem.rightBarButtonItem = bItem
-        
+        scrlVwAddAddResource.hidden = false
+        tableView.hidden = true
     }
     func btnNextClicked(sender : UIButton)
     {
         
+    }
+    
+    @IBAction func btnViewListClicked(sender: UIButton) {
+        sender.selected = !sender.selected
+        if sender.selected == true{
+            scrlVwAddAddResource.hidden = true
+            tableView.hidden = false
+        }
+        else
+        {
+            scrlVwAddAddResource.hidden = false
+            tableView.hidden = true
+        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 extension AddResourceViewController : UITableViewDelegate, UITableViewDataSource
 {

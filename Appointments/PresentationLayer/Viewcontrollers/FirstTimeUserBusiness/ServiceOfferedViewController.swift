@@ -10,7 +10,8 @@ import UIKit
 
 class ServiceOfferedViewController: BaseViewController {
     @IBOutlet weak var tableView: UITableView!
-
+    @IBOutlet weak var btnViewList: UIButton!
+    @IBOutlet weak var scrlVwSevicesOffered: UIScrollView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -18,16 +19,7 @@ class ServiceOfferedViewController: BaseViewController {
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
-        if let view = NSBundle.mainBundle().loadNibNamed("ServicesOfferedCustomView", owner: nil , options: nil)[0] as? ServicesOfferedCustomView
-        {
-            tableView.sectionHeaderHeight = 504
-            tableView.tableHeaderView = view
-        }
-        
-
         self.navigationController?.navigationBar.hidden = false
-
         self.designNavBar("Services Offered")
         self.designTabBar()
         self.setSelected(5)
@@ -43,11 +35,25 @@ class ServiceOfferedViewController: BaseViewController {
         rightBarButtonItems.addSubview(btnNext)
         let bItem = UIBarButtonItem(customView:rightBarButtonItems)
         self.navigationItem.rightBarButtonItem = bItem
-        
+        scrlVwSevicesOffered.hidden = false
+        tableView.hidden = true
     }
     func btnNextClicked(sender : UIButton)
     {
         
+    }
+    
+    @IBAction func btnViewListClicked(sender: UIButton) {
+        sender.selected = !sender.selected
+        if sender.selected == true{
+            scrlVwSevicesOffered.hidden = true
+            tableView.hidden = false
+        }
+        else
+        {
+            scrlVwSevicesOffered.hidden = false
+            tableView.hidden = true
+        }
     }
 
     override func didReceiveMemoryWarning() {

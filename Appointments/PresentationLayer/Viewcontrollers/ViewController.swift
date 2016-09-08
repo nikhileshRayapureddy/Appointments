@@ -32,7 +32,7 @@ class ViewController: BaseViewController,ParserDelegate {
     @IBAction func btnForgotPwdClicked(sender: UIButton) {
     }
     @IBAction func btnLoginClicked(sender: UIButton) {
-        self.callLoginService()
+        self.navigateToHome()
     }
     
     @IBAction func btnSignUpClicked(sender: UIButton) {
