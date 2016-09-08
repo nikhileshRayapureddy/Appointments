@@ -82,6 +82,7 @@ class HttpRequest
         print("url = "+(webStringURL as String))
 
         request.HTTPBody = requestBody
+        request.setValue("application/json" as String, forHTTPHeaderField: "Accept")
         let url : NSURL = NSURL(string: webStringURL as String)!
         request.URL = url
      
