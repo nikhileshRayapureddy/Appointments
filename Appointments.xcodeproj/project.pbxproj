@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A780BB8B1D7BFA3300D70BF3 /* SAMTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A780BB8A1D7BFA3300D70BF3 /* SAMTextView.m */; };
+		A780BB921D7C175E00D70BF3 /* AddCalenderCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A780BB911D7C175E00D70BF3 /* AddCalenderCustomCell.swift */; };
 		A78D29DE1D4A699D00756F2A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A78D29DC1D4A699D00756F2A /* Main.storyboard */; };
 		A78D29E31D4A699D00756F2A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A78D29E21D4A699D00756F2A /* Assets.xcassets */; };
 		A78D29E61D4A699D00756F2A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A78D29E41D4A699D00756F2A /* LaunchScreen.storyboard */; };
@@ -39,15 +41,7 @@
 		A78D2A551D4A7A3D00756F2A /* IQToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78D2A441D4A7A3D00756F2A /* IQToolbar.swift */; };
 		A78D2A561D4A7A3D00756F2A /* IQUIView+IQKeyboardToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78D2A451D4A7A3D00756F2A /* IQUIView+IQKeyboardToolbar.swift */; };
 		A78D2A581D4A85B800756F2A /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78D2A571D4A85B800756F2A /* SignUpViewController.swift */; };
-		A7CC021A1D5EFF480018A428 /* AddBranchHeaderCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CC02181D5EFF480018A428 /* AddBranchHeaderCustomView.swift */; };
-		A7CC021B1D5EFF480018A428 /* AddBranchHeaderCustomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7CC02191D5EFF480018A428 /* AddBranchHeaderCustomView.xib */; };
 		A7CC021D1D5EFF520018A428 /* AddBranchAddressCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CC021C1D5EFF520018A428 /* AddBranchAddressCustomCell.swift */; };
-		A7CC021F1D5F870B0018A428 /* AddCalenderHeaderCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CC021E1D5F870B0018A428 /* AddCalenderHeaderCustomView.swift */; };
-		A7CC02211D5F871A0018A428 /* AddCalenderHeaderCustomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7CC02201D5F871A0018A428 /* AddCalenderHeaderCustomView.xib */; };
-		A7E6949F1D6055460042DAE9 /* ServicesOfferedCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E6949E1D6055460042DAE9 /* ServicesOfferedCustomView.swift */; };
-		A7E694A11D6055520042DAE9 /* ServicesOfferedCustomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7E694A01D6055520042DAE9 /* ServicesOfferedCustomView.xib */; };
-		A7E694A31D60A1C90042DAE9 /* AddResourceHeaderCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E694A21D60A1C90042DAE9 /* AddResourceHeaderCustomView.swift */; };
-		A7E694A51D60A1D40042DAE9 /* AddResourceHeaderCustomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7E694A41D60A1D40042DAE9 /* AddResourceHeaderCustomView.xib */; };
 		A7E694AA1D60A9E60042DAE9 /* BusinessLayerClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E694A91D60A9E60042DAE9 /* BusinessLayerClass.swift */; };
 		A7E694AC1D60AA910042DAE9 /* BaseBL.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E694AB1D60AA910042DAE9 /* BaseBL.swift */; };
 		A7E694AE1D60AA9E0042DAE9 /* HttpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E694AD1D60AA9E0042DAE9 /* HttpRequest.swift */; };
@@ -79,6 +73,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A780BB881D7BFA3200D70BF3 /* Appointments-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Appointments-Bridging-Header.h"; sourceTree = "<group>"; };
+		A780BB891D7BFA3300D70BF3 /* SAMTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMTextView.h; sourceTree = "<group>"; };
+		A780BB8A1D7BFA3300D70BF3 /* SAMTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMTextView.m; sourceTree = "<group>"; };
+		A780BB911D7C175E00D70BF3 /* AddCalenderCustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCalenderCustomCell.swift; sourceTree = "<group>"; };
 		A78D29D51D4A699D00756F2A /* Appointments.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Appointments.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A78D29DD1D4A699D00756F2A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A78D29E21D4A699D00756F2A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -117,15 +115,7 @@
 		A78D2A441D4A7A3D00756F2A /* IQToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IQToolbar.swift; sourceTree = "<group>"; };
 		A78D2A451D4A7A3D00756F2A /* IQUIView+IQKeyboardToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IQUIView+IQKeyboardToolbar.swift"; sourceTree = "<group>"; };
 		A78D2A571D4A85B800756F2A /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		A7CC02181D5EFF480018A428 /* AddBranchHeaderCustomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBranchHeaderCustomView.swift; sourceTree = "<group>"; };
-		A7CC02191D5EFF480018A428 /* AddBranchHeaderCustomView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddBranchHeaderCustomView.xib; sourceTree = "<group>"; };
 		A7CC021C1D5EFF520018A428 /* AddBranchAddressCustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBranchAddressCustomCell.swift; sourceTree = "<group>"; };
-		A7CC021E1D5F870B0018A428 /* AddCalenderHeaderCustomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCalenderHeaderCustomView.swift; sourceTree = "<group>"; };
-		A7CC02201D5F871A0018A428 /* AddCalenderHeaderCustomView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddCalenderHeaderCustomView.xib; sourceTree = "<group>"; };
-		A7E6949E1D6055460042DAE9 /* ServicesOfferedCustomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServicesOfferedCustomView.swift; sourceTree = "<group>"; };
-		A7E694A01D6055520042DAE9 /* ServicesOfferedCustomView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServicesOfferedCustomView.xib; sourceTree = "<group>"; };
-		A7E694A21D60A1C90042DAE9 /* AddResourceHeaderCustomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddResourceHeaderCustomView.swift; sourceTree = "<group>"; };
-		A7E694A41D60A1D40042DAE9 /* AddResourceHeaderCustomView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddResourceHeaderCustomView.xib; sourceTree = "<group>"; };
 		A7E694A91D60A9E60042DAE9 /* BusinessLayerClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessLayerClass.swift; sourceTree = "<group>"; };
 		A7E694AB1D60AA910042DAE9 /* BaseBL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseBL.swift; sourceTree = "<group>"; };
 		A7E694AD1D60AA9E0042DAE9 /* HttpRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpRequest.swift; sourceTree = "<group>"; };
@@ -258,8 +248,11 @@
 		A78D2A1E1D4A6D4500756F2A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A780BB891D7BFA3300D70BF3 /* SAMTextView.h */,
+				A780BB8A1D7BFA3300D70BF3 /* SAMTextView.m */,
 				A78D2A2F1D4A7A3D00756F2A /* IQKeyboardManagerSwift */,
 				A78D2A221D4A765400756F2A /* Fonts */,
+				A780BB881D7BFA3200D70BF3 /* Appointments-Bridging-Header.h */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -345,6 +338,7 @@
 			isa = PBXGroup;
 			children = (
 				A7CC021C1D5EFF520018A428 /* AddBranchAddressCustomCell.swift */,
+				A780BB911D7C175E00D70BF3 /* AddCalenderCustomCell.swift */,
 			);
 			path = CustomCells;
 			sourceTree = "<group>";
@@ -352,14 +346,6 @@
 		A7CC02171D5EFF3A0018A428 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
-				A7CC02181D5EFF480018A428 /* AddBranchHeaderCustomView.swift */,
-				A7CC02191D5EFF480018A428 /* AddBranchHeaderCustomView.xib */,
-				A7CC021E1D5F870B0018A428 /* AddCalenderHeaderCustomView.swift */,
-				A7CC02201D5F871A0018A428 /* AddCalenderHeaderCustomView.xib */,
-				A7E6949E1D6055460042DAE9 /* ServicesOfferedCustomView.swift */,
-				A7E694A01D6055520042DAE9 /* ServicesOfferedCustomView.xib */,
-				A7E694A21D60A1C90042DAE9 /* AddResourceHeaderCustomView.swift */,
-				A7E694A41D60A1D40042DAE9 /* AddResourceHeaderCustomView.xib */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -508,10 +494,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A7CC021B1D5EFF480018A428 /* AddBranchHeaderCustomView.xib in Resources */,
 				A78D2A501D4A7A3D00756F2A /* IQKeyboardManager.bundle in Resources */,
-				A7E694A51D60A1D40042DAE9 /* AddResourceHeaderCustomView.xib in Resources */,
-				A7CC02211D5F871A0018A428 /* AddCalenderHeaderCustomView.xib in Resources */,
 				A78D29E61D4A699D00756F2A /* LaunchScreen.storyboard in Resources */,
 				A78D29E31D4A699D00756F2A /* Assets.xcassets in Resources */,
 				A78D2A2D1D4A765400756F2A /* Roboto-Regular.ttf in Resources */,
@@ -520,7 +503,6 @@
 				A78D2A2A1D4A765400756F2A /* Roboto-Bold.ttf in Resources */,
 				A78D29DE1D4A699D00756F2A /* Main.storyboard in Resources */,
 				A78D2A291D4A765400756F2A /* Roboto-Black.ttf in Resources */,
-				A7E694A11D6055520042DAE9 /* ServicesOfferedCustomView.xib in Resources */,
 				A78D2A2E1D4A765400756F2A /* Roboto-Thin.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -548,7 +530,6 @@
 			files = (
 				A78D2A4F1D4A7A3D00756F2A /* IQKeyboardReturnKeyHandler.swift in Sources */,
 				A78D2A4E1D4A7A3D00756F2A /* IQKeyboardManager.swift in Sources */,
-				A7E694A31D60A1C90042DAE9 /* AddResourceHeaderCustomView.swift in Sources */,
 				A78D2A461D4A7A3D00756F2A /* IQNSArray+Sort.swift in Sources */,
 				A78D2A211D4A6D4500756F2A /* ViewController.swift in Sources */,
 				A7E694AE1D60AA9E0042DAE9 /* HttpRequest.swift in Sources */,
@@ -558,15 +539,14 @@
 				A78D2A481D4A7A3D00756F2A /* IQUITextFieldView+Additions.swift in Sources */,
 				A7F502E11D5AE1FE00D9A427 /* HomeViewController.swift in Sources */,
 				A78D2A4D1D4A7A3D00756F2A /* IQKeyboardManagerConstantsInternal.swift in Sources */,
-				A7CC021A1D5EFF480018A428 /* AddBranchHeaderCustomView.swift in Sources */,
 				A7E694AA1D60A9E60042DAE9 /* BusinessLayerClass.swift in Sources */,
+				A780BB8B1D7BFA3300D70BF3 /* SAMTextView.m in Sources */,
 				A78D2A4B1D4A7A3D00756F2A /* IQUIWindow+Hierarchy.swift in Sources */,
 				A78D2A561D4A7A3D00756F2A /* IQUIView+IQKeyboardToolbar.swift in Sources */,
-				A7CC021F1D5F870B0018A428 /* AddCalenderHeaderCustomView.swift in Sources */,
 				A78D2A1F1D4A6D4500756F2A /* AppDelegate.swift in Sources */,
-				A7E6949F1D6055460042DAE9 /* ServicesOfferedCustomView.swift in Sources */,
 				A78D2A491D4A7A3D00756F2A /* IQUIView+Hierarchy.swift in Sources */,
 				A7F502EA1D5B5A7200D9A427 /* AddBranchViewController.swift in Sources */,
+				A780BB921D7C175E00D70BF3 /* AddCalenderCustomCell.swift in Sources */,
 				A7CC021D1D5EFF520018A428 /* AddBranchAddressCustomCell.swift in Sources */,
 				A7F502F01D5B5AA800D9A427 /* ServiceOfferedViewController.swift in Sources */,
 				A78D2A521D4A7A3D00756F2A /* IQBarButtonItem.swift in Sources */,
@@ -726,11 +706,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Appointments/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Nikhil.Appointments;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Appointments/Resources/Appointments-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -739,11 +722,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Appointments/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Nikhil.Appointments;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Appointments/Resources/Appointments-Bridging-Header.h";
 			};
 			name = Release;
 		};

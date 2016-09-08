@@ -9,7 +9,9 @@
 import UIKit
 
 class AddSkillsViewController: BaseViewController {
-
+    @IBOutlet weak var btnViewList: UIButton!
+    @IBOutlet weak var tblSkills: UITableView!
+    @IBOutlet weak var scrlVwAddSkills: UIScrollView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -18,7 +20,6 @@ class AddSkillsViewController: BaseViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.hidden = false
-
         self.designNavBar("Add Skills")
         self.designTabBar()
         self.setSelected(4)
@@ -34,27 +35,60 @@ class AddSkillsViewController: BaseViewController {
         rightBarButtonItems.addSubview(btnNext)
         let bItem = UIBarButtonItem(customView:rightBarButtonItems)
         self.navigationItem.rightBarButtonItem = bItem
-        
+        scrlVwAddSkills.hidden = false
+        tblSkills.hidden = true
     }
     func btnNextClicked(sender : UIButton)
     {
         
+    }
+    
+    @IBAction func btnViewListClicked(sender: UIButton) {
+        sender.selected = !sender.selected
+        if sender.selected == true{
+            scrlVwAddSkills.hidden = true
+            tblSkills.hidden = false
+        }
+        else
+        {
+            scrlVwAddSkills.hidden = false
+            tblSkills.hidden = true
+        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+}
 
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+extension AddSkillsViewController : UITableViewDelegate, UITableViewDataSource
+{
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
     }
-    */
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let cell : AddBranchAddressCustomCell = tableView.dequeueReusableCellWithIdentifier("ADDRESSCELL") as! AddBranchAddressCustomCell
+        cell.configureCell()
+        return cell
+    }
+    
+}
 
+extension AddSkillsViewController : UITextFieldDelegate
+{
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        return true
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }

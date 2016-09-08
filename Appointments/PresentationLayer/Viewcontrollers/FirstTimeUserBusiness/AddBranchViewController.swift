@@ -10,22 +10,18 @@ import UIKit
 
 class AddBranchViewController: BaseViewController {
 
+    @IBOutlet weak var tblBranch: UITableView!
+    @IBOutlet weak var scrlVwAddBranch: UIScrollView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var btnViewList: UIButton!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
-        if let view = NSBundle.mainBundle().loadNibNamed("AddBranchHeaderCustomView", owner: nil , options: nil)[0] as? AddBranchHeaderCustomView
-        {
-            tableView.sectionHeaderHeight = 520
-            tableView.tableHeaderView = view
-        }
-        
         self.navigationController?.navigationBar.hidden = false
-
         self.designNavBar("Add Branch")
         self.designTabBar()
         self.setSelected(2)
@@ -41,14 +37,26 @@ class AddBranchViewController: BaseViewController {
         rightBarButtonItems.addSubview(btnNext)
         let bItem = UIBarButtonItem(customView:rightBarButtonItems)
         self.navigationItem.rightBarButtonItem = bItem
-        
-        
+        scrlVwAddBranch.hidden = false
+        tableView.hidden = true
     }
     func btnNextClicked(sender : UIButton)
     {
         
     }
 
+    @IBAction func btnViewListClicked(sender: UIButton) {
+        sender.selected = !sender.selected
+        if sender.selected == true{
+            scrlVwAddBranch.hidden = true
+            tableView.hidden = false
+        }
+        else
+        {
+            scrlVwAddBranch.hidden = false
+            tableView.hidden = true
+        }
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -63,6 +71,9 @@ extension AddBranchViewController : UITableViewDelegate, UITableViewDataSource
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
+    }
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 100
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
