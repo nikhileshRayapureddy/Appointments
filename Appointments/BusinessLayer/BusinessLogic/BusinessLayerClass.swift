@@ -52,6 +52,42 @@ func doUserLoginWithUserName(strUsername : String, strPassword : String){
             }
         }
     }
+    
+    func doSignUp(parameters : NSMutableDictionary){
+        let obj : HttpRequest = HttpRequest()
+        obj.tag = ParsingConstant.getLogin.rawValue
+        obj._serviceURL = NSString(format: "http://103.231.43.83:120/api/Login/") as String
+        obj.MethodNamee = "POST";
+        obj.serviceName = "CreateUser"
+        obj.params = parameters
+        
+        
+        obj.doGetSOAPResponse {(success : Bool) -> Void in
+            if !success
+            {
+                self.callBack.parsingError(SERVER_ERROR, withTag: obj.tag)
+            }
+                
+            else{
+                if obj.parsedDataDict.valueForKey("Success")?.integerValue == 0
+                {
+                    self.callBack.parsingFinished(obj.parsedDataDict, withTag:obj.tag)
+                }
+                else if obj.parsedDataDict.valueForKey("Success")?.integerValue == 2
+                {
+                    self.callBack.parsingError(obj.parsedDataDict.valueForKey("Message") as? String, withTag:obj.tag)
+                }
+                else
+                {
+                    let x = (obj.parsedDataDict.valueForKey("Message") != nil) ? obj.parsedDataDict.valueForKey("Message")  : SERVER_ERROR
+                    self.callBack?.parsingError(x as? String, withTag: obj.tag)
+                }
+            }
+        }
+    }
 }
+
+
+
 
 

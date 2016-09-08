@@ -57,6 +57,35 @@ class SignUpViewController: UIViewController {
         self.navigationController?.popViewControllerAnimated(true)
     }
     
+    func registerUser()
+    {
+        let dictParams : NSMutableDictionary! = NSMutableDictionary()
+        dictParams.setObject(txtFldFirstName.text!, forKey: "FirstName")
+        dictParams.setObject(txtFldLastName.text!, forKey: "LastName")
+        dictParams.setObject(txtFldEmail.text!, forKey: "EMail")
+        dictParams.setObject(txtFldPwd.text!, forKey: "Password")
+        dictParams.setObject("", forKey: "PrimaryPhone")
+        dictParams.setObject("", forKey: "Image")
+        dictParams.setObject("", forKey: "UserName")
+        dictParams.setObject(txtFldHouseNum.text!, forKey: "HouseNo")
+        dictParams.setObject(txtFldStreet.text!, forKey: "StreetName")
+        dictParams.setObject(txtFldTown.text!, forKey: "CityName")
+        dictParams.setObject(txtFldCountry.text!, forKey: "CountyName")
+        dictParams.setObject(txtFldPincode.text!, forKey: "PostalCode")
+        dictParams.setObject("", forKey: "DateOfBirth")
+        dictParams.setObject("", forKey: "Gender")
+        dictParams.setObject("", forKey: "UserTypeId")
+        dictParams.setObject("", forKey: "FirmId")
+        
+        app_delegate.showLoader("Loading...")
+        let layer = BusinessLayerClass()
+        layer.callBack = self
+        layer.doSignUp(dictParams)
+
+
+    }
+    
+
     @IBAction func btnNextClicked(sender: UIButton) {
         if sender.selected == true{
             if self.validateStep2Fields() == true{
@@ -187,4 +216,18 @@ class SignUpViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
 
+}
+
+extension SignUpViewController : ParserDelegate
+{
+    func parsingFinished(object: AnyObject?, withTag tag: NSInteger) {
+        app_delegate.removeloder()
+//        self.performSelectorOnMainThread(#selector(self.navigateToHome), withObject: nil, waitUntilDone: true)
+        
+    }
+    func parsingError(error: String?, withTag tag: NSInteger) {
+        app_delegate.removeloder()
+        self.showAlertWithMessage(error!, strTitle: "Failed!")
+    }
+   
 }
