@@ -53,6 +53,10 @@
 		A7F502EE1D5B5A9600D9A427 /* AddSkillsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F502ED1D5B5A9600D9A427 /* AddSkillsViewController.swift */; };
 		A7F502F01D5B5AA800D9A427 /* ServiceOfferedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F502EF1D5B5AA800D9A427 /* ServiceOfferedViewController.swift */; };
 		A7F502F21D5B5AB600D9A427 /* AddResourceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F502F11D5B5AB600D9A427 /* AddResourceViewController.swift */; };
+		CCE3227E1D869410000F819B /* SelectOptionsCustomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCE3227D1D869410000F819B /* SelectOptionsCustomView.xib */; };
+		CCE322831D869456000F819B /* SelectOptionsCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE322821D869456000F819B /* SelectOptionsCustomView.swift */; };
+		CCE60D801D88520B00915031 /* AddBusinessCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE60D7F1D88520B00915031 /* AddBusinessCustomCell.swift */; };
+		CCE60D831D88595B00915031 /* AddBusinessBO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE60D821D88595B00915031 /* AddBusinessBO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -127,6 +131,10 @@
 		A7F502ED1D5B5A9600D9A427 /* AddSkillsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSkillsViewController.swift; sourceTree = "<group>"; };
 		A7F502EF1D5B5AA800D9A427 /* ServiceOfferedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceOfferedViewController.swift; sourceTree = "<group>"; };
 		A7F502F11D5B5AB600D9A427 /* AddResourceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddResourceViewController.swift; sourceTree = "<group>"; };
+		CCE3227D1D869410000F819B /* SelectOptionsCustomView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectOptionsCustomView.xib; sourceTree = "<group>"; };
+		CCE322821D869456000F819B /* SelectOptionsCustomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectOptionsCustomView.swift; sourceTree = "<group>"; };
+		CCE60D7F1D88520B00915031 /* AddBusinessCustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBusinessCustomCell.swift; sourceTree = "<group>"; };
+		CCE60D821D88595B00915031 /* AddBusinessBO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBusinessBO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -227,8 +235,8 @@
 		A78D2A191D4A6D4500756F2A /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				CCE3227C1D869406000F819B /* CustomViews */,
 				A7CC02161D5EFF3A0018A428 /* CustomCells */,
-				A7CC02171D5EFF3A0018A428 /* CustomViews */,
 				A78D2A1C1D4A6D4500756F2A /* Viewcontrollers */,
 			);
 			path = PresentationLayer;
@@ -339,22 +347,16 @@
 			children = (
 				A7CC021C1D5EFF520018A428 /* AddBranchAddressCustomCell.swift */,
 				A780BB911D7C175E00D70BF3 /* AddCalenderCustomCell.swift */,
+				CCE60D7F1D88520B00915031 /* AddBusinessCustomCell.swift */,
 			);
 			path = CustomCells;
-			sourceTree = "<group>";
-		};
-		A7CC02171D5EFF3A0018A428 /* CustomViews */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = CustomViews;
 			sourceTree = "<group>";
 		};
 		A7E694A61D60A9D70042DAE9 /* BusinessLayer */ = {
 			isa = PBXGroup;
 			children = (
+				CCE60D811D88594C00915031 /* BusinessObjects */,
 				A7E694A71D60A9D70042DAE9 /* BusinessLogic */,
-				A7E694A81D60A9D70042DAE9 /* BusinessObjects */,
 			);
 			path = BusinessLayer;
 			sourceTree = "<group>";
@@ -369,13 +371,6 @@
 			path = BusinessLogic;
 			sourceTree = "<group>";
 		};
-		A7E694A81D60A9D70042DAE9 /* BusinessObjects */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = BusinessObjects;
-			sourceTree = "<group>";
-		};
 		A7F502DD1D5ADE3100D9A427 /* FirstTimeUserBusiness */ = {
 			isa = PBXGroup;
 			children = (
@@ -388,6 +383,23 @@
 				A7F502F11D5B5AB600D9A427 /* AddResourceViewController.swift */,
 			);
 			path = FirstTimeUserBusiness;
+			sourceTree = "<group>";
+		};
+		CCE3227C1D869406000F819B /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				CCE3227D1D869410000F819B /* SelectOptionsCustomView.xib */,
+				CCE322821D869456000F819B /* SelectOptionsCustomView.swift */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		CCE60D811D88594C00915031 /* BusinessObjects */ = {
+			isa = PBXGroup;
+			children = (
+				CCE60D821D88595B00915031 /* AddBusinessBO.swift */,
+			);
+			path = BusinessObjects;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -504,6 +516,7 @@
 				A78D29DE1D4A699D00756F2A /* Main.storyboard in Resources */,
 				A78D2A291D4A765400756F2A /* Roboto-Black.ttf in Resources */,
 				A78D2A2E1D4A765400756F2A /* Roboto-Thin.ttf in Resources */,
+				CCE3227E1D869410000F819B /* SelectOptionsCustomView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -554,10 +567,13 @@
 				A78D2A471D4A7A3D00756F2A /* IQUIScrollView+Additions.swift in Sources */,
 				A78D2A4A1D4A7A3D00756F2A /* IQUIViewController+Additions.swift in Sources */,
 				A78D2A581D4A85B800756F2A /* SignUpViewController.swift in Sources */,
+				CCE60D801D88520B00915031 /* AddBusinessCustomCell.swift in Sources */,
 				A78D2A4C1D4A7A3D00756F2A /* IQKeyboardManagerConstants.swift in Sources */,
+				CCE322831D869456000F819B /* SelectOptionsCustomView.swift in Sources */,
 				A78D2A541D4A7A3D00756F2A /* IQTitleBarButtonItem.swift in Sources */,
 				A7E694AC1D60AA910042DAE9 /* BaseBL.swift in Sources */,
 				A78D2A201D4A6D4500756F2A /* Appointments.xcdatamodeld in Sources */,
+				CCE60D831D88595B00915031 /* AddBusinessBO.swift in Sources */,
 				A78D2A511D4A7A3D00756F2A /* IQTextView.swift in Sources */,
 				A78D2A551D4A7A3D00756F2A /* IQToolbar.swift in Sources */,
 				A7F502F21D5B5AB600D9A427 /* AddResourceViewController.swift in Sources */,

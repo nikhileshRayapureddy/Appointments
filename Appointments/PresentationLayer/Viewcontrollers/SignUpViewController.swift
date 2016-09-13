@@ -89,7 +89,8 @@ class SignUpViewController: UIViewController {
     @IBAction func btnNextClicked(sender: UIButton) {
         if sender.selected == true{
             if self.validateStep2Fields() == true{
-                self.showCongratsMessage("You are successfully registered.", strTitle: "Congratulations!")
+//                self.showCongratsMessage("You are successfully registered.", strTitle: "Congratulations!")
+                registerUser()
                 print("Sign up clicked")
         }
 

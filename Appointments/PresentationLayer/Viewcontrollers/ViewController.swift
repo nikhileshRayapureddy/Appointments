@@ -32,7 +32,8 @@ class ViewController: BaseViewController,ParserDelegate {
     @IBAction func btnForgotPwdClicked(sender: UIButton) {
     }
     @IBAction func btnLoginClicked(sender: UIButton) {
-        self.navigateToHome()
+//        self.navigateToHome()
+        callLoginService()
     }
     
     @IBAction func btnSignUpClicked(sender: UIButton) {
@@ -49,6 +50,13 @@ class ViewController: BaseViewController,ParserDelegate {
     }
     func parsingFinished(object: AnyObject?, withTag tag: NSInteger) {
         app_delegate.removeloder()
+        
+        let dictResponse = object as! NSDictionary
+        let model = dictResponse.objectForKey("Model") as! NSDictionary
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setValue(model.objectForKey("UserId"), forKey: "USERID")
+        defaults.setValue(model.objectForKey("FirmId"), forKey: "FIRMID")
+        
         self.performSelectorOnMainThread(#selector(self.navigateToHome), withObject: nil, waitUntilDone: true)
         
     }
