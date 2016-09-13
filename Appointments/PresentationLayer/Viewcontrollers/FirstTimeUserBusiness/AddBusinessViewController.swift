@@ -93,7 +93,7 @@ class AddBusinessViewController: BaseViewController {
         dictParams.setObject(txtTown.text!, forKey: "Citynm")
         dictParams.setObject(txtCounty.text!, forKey: "Countynm")
         dictParams.setObject("", forKey: "AllowExtBook")
-        dictParams.setObject("", forKey: "EnablePayment")
+        dictParams.setObject("1", forKey: "EnablePayment")
         dictParams.setObject("", forKey: "ParentId")
         let layer = BusinessLayerClass()
         layer.callBack = self
@@ -227,7 +227,7 @@ extension AddBusinessViewController : ParserDelegate
         {
             businessBO.strBookingType = (dictBusiness.objectForKey("BookingType") as? String)!
         }
-        if ((dictBusiness["BookingType"]?.isKindOfClass(NSNull)) == false)
+        if ((dictBusiness["PostalCode"]?.isKindOfClass(NSNull)) == false)
         {
             businessBO.strPostalCode = (dictBusiness.objectForKey("PostalCode") as? String)!
         }
@@ -244,7 +244,7 @@ extension AddBusinessViewController : ParserDelegate
         {
             businessBO.strEnablePayment = (dictBusiness.objectForKey("EnablePayment") as? String)!
         }
-        if ((dictBusiness["EnablePayment"]?.isKindOfClass(NSNull)) == false)
+        if ((dictBusiness["ParentId"]?.isKindOfClass(NSNull)) == false)
         {
             let parentId = dictBusiness.objectForKey("ParentId") as? NSNumber
             businessBO.strParentId = (parentId?.stringValue)!

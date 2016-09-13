@@ -24,6 +24,7 @@ enum ParsingConstant : Int
     case getBusinessBookingTypes
     case addBusiness
     case getBusiness
+    case getListBranches
 }
 
 
