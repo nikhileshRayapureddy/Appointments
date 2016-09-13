@@ -8,10 +8,16 @@
 
 import UIKit
 
-class AddCalenderViewController: BaseViewController {
+class AddCalenderViewController: BaseViewController,UITextFieldDelegate {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var btnViewList: UIButton!
     @IBOutlet weak var scrlVwAddCalender: UIScrollView!
+    @IBOutlet weak var constVwDatePickerHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var btnDone: UIButton!
+    @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var vwDatePicker: UIView!
+    var currenttextFiled : UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,6 +44,12 @@ class AddCalenderViewController: BaseViewController {
         scrlVwAddCalender.hidden = false
         tableView.hidden = true
     }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        scrlVwAddCalender.contentSize = CGSizeMake(scrlVwAddCalender.frame.size.width, 720)
+        
+    }
+
     func btnNextClicked(sender : UIButton)
     {
         
@@ -101,16 +113,36 @@ extension AddCalenderViewController : UITableViewDelegate, UITableViewDataSource
         return cell
     }
     
-}
-
-extension AddCalenderViewController : UITextFieldDelegate
-{
-    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
-        return true
+    @IBAction func datePickerChanged(sender: UIDatePicker) {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "hh:mm a"
+        let strDate = dateFormatter.stringFromDate(datePicker.date)
+        currenttextFiled.text = strDate
     }
     
+    @IBAction func btnDoneClicked(sender: UIButton) {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "hh:mm a"
+        let strDate = dateFormatter.stringFromDate(datePicker.date)
+        currenttextFiled.text = strDate
+        constVwDatePickerHeight.constant = -250;
+    }
+    
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        currenttextFiled = textField
+        if textField.tag == 150
+        {
+            return true
+        }
+        else
+        {
+            constVwDatePickerHeight.constant = 0;
+            return false
+        }
+    }
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
+        currenttextFiled.resignFirstResponder()
         return true
     }
 }
+
