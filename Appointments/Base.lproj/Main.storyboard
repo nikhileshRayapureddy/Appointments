@@ -1163,6 +1163,9 @@
                                                 <state key="normal" title="SAVE">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="btnSaveClicked:" destination="aDh-cb-Iyo" eventType="touchUpInside" id="4mV-KI-n8A"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -1287,6 +1290,9 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
+                                            <outlet property="lblAddress" destination="N4D-a6-2gt" id="abg-gV-A17"/>
+                                            <outlet property="lblCity" destination="K82-NA-DTZ" id="cVA-qS-BB2"/>
+                                            <outlet property="lblName" destination="Nh7-k5-G0z" id="omB-TF-x3m"/>
                                             <outlet property="viewBg" destination="uRd-EF-rBP" id="GiU-mI-haF"/>
                                         </connections>
                                     </tableViewCell>
@@ -1333,6 +1339,13 @@
                         <outlet property="scrlVwAddBranch" destination="Brv-qc-Wso" id="X9W-9C-LUs"/>
                         <outlet property="tableView" destination="jdR-II-zNB" id="Xbl-hk-9Xj"/>
                         <outlet property="tblBranch" destination="jdR-II-zNB" id="Pwb-IP-7r8"/>
+                        <outlet property="txtBranchName" destination="CYL-FI-4O4" id="2lu-ii-KLT"/>
+                        <outlet property="txtCountry" destination="0AC-Ej-CEi" id="AJF-Wv-7tP"/>
+                        <outlet property="txtCounty" destination="5DC-hX-zDg" id="28B-R4-V8a"/>
+                        <outlet property="txtHouseName" destination="LHU-T4-TzZ" id="aBm-Bv-u0D"/>
+                        <outlet property="txtLocation" destination="fuU-XS-tm9" id="0aM-yE-hQY"/>
+                        <outlet property="txtStreet" destination="R5g-DW-y9C" id="FjS-P8-Wh1"/>
+                        <outlet property="txtTown" destination="yx2-rh-XfQ" id="nJA-M1-86T"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rh2-le-WT4" userLabel="First Responder" sceneMemberID="firstResponder"/>
