@@ -94,7 +94,7 @@ class AddBusinessViewController: BaseViewController {
         dictParams.setObject(txtCounty.text!, forKey: "Countynm")
         dictParams.setObject("", forKey: "AllowExtBook")
         dictParams.setObject("", forKey: "EnablePayment")
-        dictParams.setObject("1", forKey: "ParentId")
+        dictParams.setObject("", forKey: "ParentId")
         let layer = BusinessLayerClass()
         layer.callBack = self
         layer.addBusinessDetails(dictParams)
@@ -194,7 +194,7 @@ extension AddBusinessViewController : ParserDelegate
         else if tag == ParsingConstant.getBusiness.rawValue
         {
             app_delegate.removeloder()
-
+            parseBusinessData(object!)
         }
         else if tag == ParsingConstant.addBusiness.rawValue
         {
@@ -206,6 +206,60 @@ extension AddBusinessViewController : ParserDelegate
     func parsingError(error: String?, withTag tag: NSInteger) {
         app_delegate.removeloder()
         self.showAlert(error!, strTitle: "Failed!")
+    }
+    
+    func parseBusinessData(object : AnyObject)
+    {
+        let response = object as! NSDictionary
+        
+        let dictBusiness = response.objectForKey("Model") as! NSDictionary
+        let businessBO = AddBusinessBO()
+        let firmId = dictBusiness.objectForKey("FirmId") as? NSNumber
+        businessBO.strFirmId = (firmId?.stringValue)!
+        businessBO.strFirmName = (dictBusiness.objectForKey("FirmName") as? String)!
+        businessBO.strFirmEmail = (dictBusiness.objectForKey("FirmEmail") as? String)!
+        if ((dictBusiness["FirmLogo"]?.isKindOfClass(NSNull)) == false)
+        {
+            businessBO.strFirmLogo = (dictBusiness.objectForKey("FirmLogo") as? String)!
+        }
+        businessBO.strBusinessType = (dictBusiness.objectForKey("BusinessType") as? String)!
+        if ((dictBusiness["BookingType"]?.isKindOfClass(NSNull)) == false)
+        {
+            businessBO.strBookingType = (dictBusiness.objectForKey("BookingType") as? String)!
+        }
+        if ((dictBusiness["BookingType"]?.isKindOfClass(NSNull)) == false)
+        {
+            businessBO.strPostalCode = (dictBusiness.objectForKey("PostalCode") as? String)!
+        }
+        businessBO.strFirmPrimaryPhone = (dictBusiness.objectForKey("FirmPrimaryPhone") as? String)!
+        businessBO.strAddressLine1 = (dictBusiness.objectForKey("AddressLine1") as? String)!
+        businessBO.strAddressLine2 = (dictBusiness.objectForKey("AddressLine2") as? String)!
+        businessBO.strCitynm = (dictBusiness.objectForKey("Citynm") as? String)!
+        businessBO.strCountynm = (dictBusiness.objectForKey("Countynm") as? String)!
+        if ((dictBusiness["AllowExtBook"]?.isKindOfClass(NSNull)) == false)
+        {
+            businessBO.strAllowExtBook = (dictBusiness.objectForKey("AllowExtBook") as? String)!
+        }
+        if ((dictBusiness["EnablePayment"]?.isKindOfClass(NSNull)) == false)
+        {
+            businessBO.strEnablePayment = (dictBusiness.objectForKey("EnablePayment") as? String)!
+        }
+        if ((dictBusiness["EnablePayment"]?.isKindOfClass(NSNull)) == false)
+        {
+            let parentId = dictBusiness.objectForKey("ParentId") as? NSNumber
+            businessBO.strParentId = (parentId?.stringValue)!
+        }
+        
+        txtBusinessName.text = businessBO.strFirmName
+        btnBusinessTypes.setTitle(businessBO.strBusinessType, forState: UIControlState.Normal)
+        btnBookingType.setTitle(businessBO.strBookingType, forState: UIControlState.Normal)
+        txtEmail.text = businessBO.strFirmEmail
+        txtContactNumber.text = businessBO.strFirmPrimaryPhone
+        txtHouseName.text = businessBO.strAddressLine1
+        txtCounty.text = businessBO.strCountynm
+        txtStreet.text = businessBO.strAddressLine2
+        txtTown.text = businessBO.strCitynm
+        
     }
 }
 
