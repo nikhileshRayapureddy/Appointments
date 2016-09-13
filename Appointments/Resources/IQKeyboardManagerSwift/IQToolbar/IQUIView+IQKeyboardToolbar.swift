@@ -788,7 +788,10 @@ public extension UIView {
         if shouldShowPlaceholder == true {
             if self.respondsToSelector(Selector("placeholder")) {
                 let textField = self as AnyObject
-                title = textField.placeholder
+                if textField.placeholder != nil
+                {
+                    title = textField.placeholder
+                }
             }
         }
         
