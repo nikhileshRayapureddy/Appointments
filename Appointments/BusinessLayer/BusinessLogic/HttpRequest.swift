@@ -143,7 +143,7 @@ class HttpRequest
         }
         if self.params.count > 0
         {
-        for i in 0...self.params.count-1 {
+        for i in 1...self.params.count-1 {
             
             let object : AnyObject = self.params.objectForKey(keys[i])!;
             

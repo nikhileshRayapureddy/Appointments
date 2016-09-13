@@ -19,6 +19,11 @@ import Foundation
 enum ParsingConstant : Int
 {
     case getLogin = 1000
+    case getSignUp
+    case getBusinessTypes
+    case getBusinessBookingTypes
+    case addBusiness
+    case getBusiness
 }
 
 
