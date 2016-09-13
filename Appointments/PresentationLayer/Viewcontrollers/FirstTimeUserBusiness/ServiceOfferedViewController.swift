@@ -87,7 +87,7 @@ extension ServiceOfferedViewController : UITableViewDelegate, UITableViewDataSou
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell : AddBranchAddressCustomCell = tableView.dequeueReusableCellWithIdentifier("ADDRESSCELL") as! AddBranchAddressCustomCell
-        cell.configureCell()
+//        cell.configureCell()
         return cell
     }
     

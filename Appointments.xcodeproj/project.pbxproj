@@ -57,6 +57,7 @@
 		CCE322831D869456000F819B /* SelectOptionsCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE322821D869456000F819B /* SelectOptionsCustomView.swift */; };
 		CCE60D801D88520B00915031 /* AddBusinessCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE60D7F1D88520B00915031 /* AddBusinessCustomCell.swift */; };
 		CCE60D831D88595B00915031 /* AddBusinessBO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE60D821D88595B00915031 /* AddBusinessBO.swift */; };
+		CCE60D851D886B7B00915031 /* BranchBO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE60D841D886B7B00915031 /* BranchBO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,6 +136,7 @@
 		CCE322821D869456000F819B /* SelectOptionsCustomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectOptionsCustomView.swift; sourceTree = "<group>"; };
 		CCE60D7F1D88520B00915031 /* AddBusinessCustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBusinessCustomCell.swift; sourceTree = "<group>"; };
 		CCE60D821D88595B00915031 /* AddBusinessBO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBusinessBO.swift; sourceTree = "<group>"; };
+		CCE60D841D886B7B00915031 /* BranchBO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BranchBO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -398,6 +400,7 @@
 			isa = PBXGroup;
 			children = (
 				CCE60D821D88595B00915031 /* AddBusinessBO.swift */,
+				CCE60D841D886B7B00915031 /* BranchBO.swift */,
 			);
 			path = BusinessObjects;
 			sourceTree = "<group>";
@@ -567,6 +570,7 @@
 				A78D2A471D4A7A3D00756F2A /* IQUIScrollView+Additions.swift in Sources */,
 				A78D2A4A1D4A7A3D00756F2A /* IQUIViewController+Additions.swift in Sources */,
 				A78D2A581D4A85B800756F2A /* SignUpViewController.swift in Sources */,
+				CCE60D851D886B7B00915031 /* BranchBO.swift in Sources */,
 				CCE60D801D88520B00915031 /* AddBusinessCustomCell.swift in Sources */,
 				A78D2A4C1D4A7A3D00756F2A /* IQKeyboardManagerConstants.swift in Sources */,
 				CCE322831D869456000F819B /* SelectOptionsCustomView.swift in Sources */,

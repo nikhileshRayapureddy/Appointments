@@ -223,7 +223,7 @@ func doUserLoginWithUserName(strUsername : String, strPassword : String){
     func getListBranches()
     {
         let obj : HttpRequest = HttpRequest()
-        obj.tag = ParsingConstant.addBusiness.rawValue
+        obj.tag = ParsingConstant.getListBranches.rawValue
         obj._serviceURL = NSString(format: "http://103.231.43.83:120/api/business/ListBranches?firmId=4") as String
         obj.MethodNamee = "GET";
         obj.serviceName = ""
