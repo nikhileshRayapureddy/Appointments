@@ -55,7 +55,9 @@ class ViewController: BaseViewController,ParserDelegate {
         let model = dictResponse.objectForKey("Model") as! NSDictionary
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.setValue(model.objectForKey("UserId"), forKey: "USERID")
-        defaults.setValue(model.objectForKey("FirmId"), forKey: "FIRMID")
+        let firmId = model.objectForKey("FirmId") as? NSNumber
+        defaults.setValue((firmId?.stringValue)!, forKey: "FIRMID")
+        defaults.synchronize()
         
         self.performSelectorOnMainThread(#selector(self.navigateToHome), withObject: nil, waitUntilDone: true)
         

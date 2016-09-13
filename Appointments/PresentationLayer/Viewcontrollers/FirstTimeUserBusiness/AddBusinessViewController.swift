@@ -71,7 +71,9 @@ class AddBusinessViewController: BaseViewController {
     {
         txtBusinessName.text = dictBusiness.objectForKey("FirmName") as? String
         btnBusinessTypes.setTitle(dictBusiness.objectForKey("BusinessType") as? String, forState: UIControlState.Normal)
+        btnBusinessTypes.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         btnBookingType.setTitle(dictBusiness.objectForKey("BookingType") as? String, forState: UIControlState.Normal)
+        btnBookingType.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         txtEmail.text = dictBusiness.objectForKey("FirmEmail") as? String
         txtContactNumber.text = dictBusiness.objectForKey("FirmPrimaryPhone") as? String
         txtHouseName.text = dictBusiness.objectForKey("AddressLine1") as? String
@@ -80,7 +82,8 @@ class AddBusinessViewController: BaseViewController {
     func btnNextClicked(sender : UIButton)
     {
         let dictParams = NSMutableDictionary()
-        dictParams.setObject("", forKey: "FirmId")
+        let defaults = NSUserDefaults.standardUserDefaults()
+        dictParams.setObject(defaults.valueForKey("FIRMID")!, forKey: "FirmId")
         dictParams.setObject(txtBusinessName.text!, forKey: "FirmName")
         dictParams.setObject("", forKey: "FirmLogo")
         dictParams.setObject(btnBusinessTypes.titleLabel!.text!, forKey: "BusinessType")
@@ -249,16 +252,19 @@ extension AddBusinessViewController : ParserDelegate
             let parentId = dictBusiness.objectForKey("ParentId") as? NSNumber
             businessBO.strParentId = (parentId?.stringValue)!
         }
-        
-        txtBusinessName.text = businessBO.strFirmName
-        btnBusinessTypes.setTitle(businessBO.strBusinessType, forState: UIControlState.Normal)
-        btnBookingType.setTitle(businessBO.strBookingType, forState: UIControlState.Normal)
-        txtEmail.text = businessBO.strFirmEmail
-        txtContactNumber.text = businessBO.strFirmPrimaryPhone
-        txtHouseName.text = businessBO.strAddressLine1
-        txtCounty.text = businessBO.strCountynm
-        txtStreet.text = businessBO.strAddressLine2
-        txtTown.text = businessBO.strCitynm
+        dispatch_async(dispatch_get_main_queue()) { 
+            self.txtBusinessName.text = businessBO.strFirmName
+            self.btnBusinessTypes.setTitle(businessBO.strBusinessType, forState: UIControlState.Normal)
+            self.btnBusinessTypes.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+            self.btnBookingType.setTitle(businessBO.strBookingType, forState: UIControlState.Normal)
+            self.btnBookingType.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+            self.txtEmail.text = businessBO.strFirmEmail
+            self.txtContactNumber.text = businessBO.strFirmPrimaryPhone
+            self.txtHouseName.text = businessBO.strAddressLine1
+            self.txtCounty.text = businessBO.strCountynm
+            self.txtStreet.text = businessBO.strAddressLine2
+            self.txtTown.text = businessBO.strCitynm
+        }
         
     }
 }
@@ -290,6 +296,7 @@ extension AddBusinessViewController : SelectOptionsCustomView_Delegate
                 }
             }
             btnBookingType.setTitle(title, forState: UIControlState.Normal)
+            btnBookingType.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         }
         else if tag == OptionsSelection.BusinessTypes.rawValue
         {
@@ -307,6 +314,8 @@ extension AddBusinessViewController : SelectOptionsCustomView_Delegate
                 }
             }
             btnBusinessTypes.setTitle(title, forState: UIControlState.Normal)
+            btnBusinessTypes.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+
         }
     }
     
