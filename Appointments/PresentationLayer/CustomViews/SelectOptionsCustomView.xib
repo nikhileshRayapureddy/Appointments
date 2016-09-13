@@ -68,6 +68,7 @@
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
             <connections>
+                <outlet property="btnDone" destination="qd8-ae-lNe" id="EEG-FM-dXD"/>
                 <outlet property="btnDoneHeightConstraint" destination="Ei8-Bu-jGo" id="nFk-Fg-ycr"/>
                 <outlet property="tableView" destination="H0y-hX-byc" id="Pgh-gg-WDm"/>
                 <outlet property="viewPopUp" destination="qln-cl-Ch6" id="99f-UV-hkl"/>

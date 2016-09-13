@@ -27,6 +27,7 @@ class SelectOptionsCustomView: UIView {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var viewPopUp: UIView!
     
+    @IBOutlet weak var btnDone: UIButton!
     /*
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
@@ -72,7 +73,7 @@ class SelectOptionsCustomView: UIView {
             {
                 viewPopUpHeightConstraint.constant = CGFloat(arrTitles.count * 44)  + 50
             }
-
+            btnDone.hidden = false
         }
         else
         {
@@ -85,7 +86,7 @@ class SelectOptionsCustomView: UIView {
                 viewPopUpHeightConstraint.constant = CGFloat(arrTitles.count * 44)
             }
             btnDoneHeightConstraint.constant = 0
-            
+            btnDone.hidden = true
         }
         tableView.reloadData()
     }
