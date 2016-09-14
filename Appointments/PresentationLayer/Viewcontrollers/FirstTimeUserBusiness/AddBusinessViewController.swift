@@ -109,7 +109,7 @@ class AddBusinessViewController: BaseViewController {
         {
             view.frame = CGRectMake(0, -64, self.view.frame.size.width, self.view.frame.size.height+64)
             view.isMultipleSelection = false
-            view.viewTag = OptionsSelection.BusinessTypes.rawValue
+            view.viewTag = optionSelection.businessType.rawValue
             view.delegate = self
             view.arrTitles = arrBusinessTypes
             view.resizeView()
@@ -123,7 +123,7 @@ class AddBusinessViewController: BaseViewController {
         {
             view.frame = CGRectMake(0, -64, self.view.frame.size.width, self.view.frame.size.height+64)
             view.isMultipleSelection = false
-            view.viewTag = OptionsSelection.BookingTypes.rawValue
+            view.viewTag = optionSelection.bookingType.rawValue
             view.delegate = self
             view.arrTitles = arrBusinessBookingTypes
             view.resizeView()

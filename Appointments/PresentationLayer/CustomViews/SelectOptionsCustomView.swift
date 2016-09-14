@@ -8,6 +8,13 @@
 
 import UIKit
 
+enum optionSelection : Int
+{
+    case businessType = 3578
+    case bookingType
+    case skill
+}
+
 protocol SelectOptionsCustomView_Delegate {
     func removeSelectionOptionsPopup()
     func selectedOptions(arrSelected : NSMutableArray, withTag tag : Int)
@@ -101,10 +108,18 @@ extension SelectOptionsCustomView : UITableViewDelegate, UITableViewDataSource
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell : UITableViewCell = tableView.dequeueReusableCellWithIdentifier("OPTIONS")!
-        let dict = arrTitles.objectAtIndex(indexPath.row) as! NSDictionary
-        cell.textLabel?.text = dict.objectForKey("Name") as? String
+        if viewTag == optionSelection.skill.rawValue
+        {
+            let skill = arrTitles.objectAtIndex(indexPath.row) as! SkillsBO
+            cell.textLabel?.text = skill.strSkillName
+        }
+        else
+        {
+            let dict = arrTitles.objectAtIndex(indexPath.row) as! NSDictionary
+            cell.textLabel?.text = dict.objectForKey("Name") as? String
+        }
         cell.selectionStyle = UITableViewCellSelectionStyle.None
-      
+        
         if arrSelected.containsObject(indexPath) == true
         {
             cell.accessoryType = UITableViewCellAccessoryType.Checkmark
@@ -114,6 +129,7 @@ extension SelectOptionsCustomView : UITableViewDelegate, UITableViewDataSource
             cell.accessoryType = UITableViewCellAccessoryType.None
             
         }
+
         return cell
     }
     

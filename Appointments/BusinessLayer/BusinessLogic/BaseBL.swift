@@ -25,6 +25,10 @@ enum ParsingConstant : Int
     case addBusiness
     case getBusiness
     case getListBranches
+    case getListSkills
+    case getSkills
+    case addSkill
+    case updateSkill
 }
 
 

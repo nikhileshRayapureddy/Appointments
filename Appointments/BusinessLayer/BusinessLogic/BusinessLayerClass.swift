@@ -47,7 +47,14 @@ func doUserLoginWithUserName(strUsername : String, strPassword : String){
                 else
                 {
                     let x = (obj.parsedDataDict.valueForKey("Message") != nil) ? obj.parsedDataDict.valueForKey("Message")  : SERVER_ERROR
-                    self.callBack?.parsingError(x as? String, withTag: obj.tag)
+                    if ((obj.parsedDataDict["Message"]?.isKindOfClass(NSNull)) == false)
+                    {
+                        self.callBack?.parsingError(x as? String, withTag: obj.tag)
+                    }
+                    else
+                    {
+                        self.callBack.parsingError("", withTag: obj.tag)
+                    }
                 }
             }
         }
@@ -80,7 +87,14 @@ func doUserLoginWithUserName(strUsername : String, strPassword : String){
                 else
                 {
                     let x = (obj.parsedDataDict.valueForKey("Message") != nil) ? obj.parsedDataDict.valueForKey("Message")  : SERVER_ERROR
-                    self.callBack?.parsingError(x as? String, withTag: obj.tag)
+                    if ((obj.parsedDataDict["Message"]?.isKindOfClass(NSNull)) == false)
+                    {
+                        self.callBack?.parsingError(x as? String, withTag: obj.tag)
+                    }
+                    else
+                    {
+                        self.callBack.parsingError("", withTag: obj.tag)
+                    }
                 }
             }
         }
@@ -113,7 +127,14 @@ func doUserLoginWithUserName(strUsername : String, strPassword : String){
                 else
                 {
                     let x = (obj.parsedDataDict.valueForKey("Message") != nil) ? obj.parsedDataDict.valueForKey("Message")  : SERVER_ERROR
-                    self.callBack?.parsingError(x as? String, withTag: obj.tag)
+                    if ((obj.parsedDataDict["Message"]?.isKindOfClass(NSNull)) == false)
+                    {
+                        self.callBack?.parsingError(x as? String, withTag: obj.tag)
+                    }
+                    else
+                    {
+                        self.callBack.parsingError("", withTag: obj.tag)
+                    }
                 }
             }
         }
@@ -146,7 +167,14 @@ func doUserLoginWithUserName(strUsername : String, strPassword : String){
                 else
                 {
                     let x = (obj.parsedDataDict.valueForKey("Message") != nil) ? obj.parsedDataDict.valueForKey("Message")  : SERVER_ERROR
-                    self.callBack?.parsingError(x as? String, withTag: obj.tag)
+                    if ((obj.parsedDataDict["Message"]?.isKindOfClass(NSNull)) == false)
+                    {
+                        self.callBack?.parsingError(x as? String, withTag: obj.tag)
+                    }
+                    else
+                    {
+                        self.callBack.parsingError("", withTag: obj.tag)
+                    }
                 }
             }
         }
@@ -180,12 +208,101 @@ func doUserLoginWithUserName(strUsername : String, strPassword : String){
                 else
                 {
                     let x = (obj.parsedDataDict.valueForKey("Message") != nil) ? obj.parsedDataDict.valueForKey("Message")  : SERVER_ERROR
-                    self.callBack?.parsingError(x as? String, withTag: obj.tag)
+                    if ((obj.parsedDataDict["Message"]?.isKindOfClass(NSNull)) == false)
+                    {
+                        self.callBack?.parsingError(x as? String, withTag: obj.tag)
+                    }
+                    else
+                    {
+                        self.callBack.parsingError("", withTag: obj.tag)
+                    }
                 }
             }
         }
     }
     
+    func addSkill(dictParams : NSMutableDictionary)
+    {
+        let obj : HttpRequest = HttpRequest()
+        obj.tag = ParsingConstant.addSkill.rawValue
+        obj._serviceURL = NSString(format: "http://103.231.43.83:120/api/business/AddSkill") as String
+        obj.MethodNamee = "POST";
+        obj.serviceName = ""
+        obj.params = dictParams
+        
+        
+        obj.doGetSOAPResponse {(success : Bool) -> Void in
+            if !success
+            {
+                self.callBack.parsingError(SERVER_ERROR, withTag: obj.tag)
+            }
+                
+            else{
+                if obj.parsedDataDict.valueForKey("Success")?.integerValue == 0
+                {
+                    self.callBack.parsingFinished(obj.parsedDataDict, withTag:obj.tag)
+                }
+                else if obj.parsedDataDict.valueForKey("Success")?.integerValue == 2
+                {
+                    self.callBack.parsingError(obj.parsedDataDict.valueForKey("Message") as? String, withTag:obj.tag)
+                }
+                else
+                {
+                    let x = (obj.parsedDataDict.valueForKey("Message") != nil) ? obj.parsedDataDict.valueForKey("Message")  : SERVER_ERROR
+                    if ((obj.parsedDataDict["Message"]?.isKindOfClass(NSNull)) == false)
+                    {
+                        self.callBack?.parsingError(x as? String, withTag: obj.tag)
+                    }
+                    else
+                    {
+                        self.callBack.parsingError("", withTag: obj.tag)
+                    }
+                }
+            }
+        }
+    }
+    
+    func updateSkill(dictParams : NSMutableDictionary)
+    {
+        let obj : HttpRequest = HttpRequest()
+        obj.tag = ParsingConstant.updateSkill.rawValue
+        obj._serviceURL = NSString(format: "http://103.231.43.83:120/api/business/UpdateSkill") as String
+        obj.MethodNamee = "POST";
+        obj.serviceName = ""
+        obj.params = dictParams
+        
+        
+        obj.doGetSOAPResponse {(success : Bool) -> Void in
+            if !success
+            {
+                self.callBack.parsingError(SERVER_ERROR, withTag: obj.tag)
+            }
+                
+            else{
+                if obj.parsedDataDict.valueForKey("Success")?.integerValue == 0
+                {
+                    self.callBack.parsingFinished(obj.parsedDataDict, withTag:obj.tag)
+                }
+                else if obj.parsedDataDict.valueForKey("Success")?.integerValue == 2
+                {
+                    self.callBack.parsingError(obj.parsedDataDict.valueForKey("Message") as? String, withTag:obj.tag)
+                }
+                else
+                {
+                    let x = (obj.parsedDataDict.valueForKey("Message") != nil) ? obj.parsedDataDict.valueForKey("Message")  : SERVER_ERROR
+                    if ((obj.parsedDataDict["Message"]?.isKindOfClass(NSNull)) == false)
+                    {
+                        self.callBack?.parsingError(x as? String, withTag: obj.tag)
+                    }
+                    else
+                    {
+                        self.callBack.parsingError("", withTag: obj.tag)
+                    }
+                }
+            }
+        }
+    }
+
     func addResource(dictParams : NSMutableDictionary)
     {
         let obj : HttpRequest = HttpRequest()
@@ -214,7 +331,14 @@ func doUserLoginWithUserName(strUsername : String, strPassword : String){
                 else
                 {
                     let x = (obj.parsedDataDict.valueForKey("Message") != nil) ? obj.parsedDataDict.valueForKey("Message")  : SERVER_ERROR
-                    self.callBack?.parsingError(x as? String, withTag: obj.tag)
+                    if ((obj.parsedDataDict["Message"]?.isKindOfClass(NSNull)) == false)
+                    {
+                        self.callBack?.parsingError(x as? String, withTag: obj.tag)
+                    }
+                    else
+                    {
+                        self.callBack.parsingError("", withTag: obj.tag)
+                    }
                 }
             }
         }
@@ -224,7 +348,10 @@ func doUserLoginWithUserName(strUsername : String, strPassword : String){
     {
         let obj : HttpRequest = HttpRequest()
         obj.tag = ParsingConstant.getListBranches.rawValue
-        obj._serviceURL = NSString(format: "http://103.231.43.83:120/api/business/ListBranches?firmId=4") as String
+        let defualts = NSUserDefaults.standardUserDefaults()
+        let firmValue = defualts.valueForKey("FIRMID") as! NSInteger
+        
+        obj._serviceURL = NSString(format: "http://103.231.43.83:120/api/business/ListBranches?firmId=%d",firmValue) as String
         obj.MethodNamee = "GET";
         obj.serviceName = ""
         
@@ -247,7 +374,14 @@ func doUserLoginWithUserName(strUsername : String, strPassword : String){
                 else
                 {
                     let x = (obj.parsedDataDict.valueForKey("Message") != nil) ? obj.parsedDataDict.valueForKey("Message")  : SERVER_ERROR
-                    self.callBack?.parsingError(x as? String, withTag: obj.tag)
+                    if ((obj.parsedDataDict["Message"]?.isKindOfClass(NSNull)) == false)
+                    {
+                        self.callBack?.parsingError(x as? String, withTag: obj.tag)
+                    }
+                    else
+                    {
+                        self.callBack.parsingError("", withTag: obj.tag)
+                    }
                 }
             }
         }
@@ -257,7 +391,10 @@ func doUserLoginWithUserName(strUsername : String, strPassword : String){
     {
         let obj : HttpRequest = HttpRequest()
         obj.tag = ParsingConstant.addBusiness.rawValue
-        obj._serviceURL = NSString(format: "http://103.231.43.83:120/api/business/ListResource?firmId=4") as String
+        let defualts = NSUserDefaults.standardUserDefaults()
+        let firmValue = defualts.valueForKey("FIRMID") as! NSInteger
+
+        obj._serviceURL = NSString(format: "http://103.231.43.83:120/api/business/ListResource?firmId=%d",firmValue) as String
         obj.MethodNamee = "GET";
         obj.serviceName = ""
         
@@ -280,7 +417,14 @@ func doUserLoginWithUserName(strUsername : String, strPassword : String){
                 else
                 {
                     let x = (obj.parsedDataDict.valueForKey("Message") != nil) ? obj.parsedDataDict.valueForKey("Message")  : SERVER_ERROR
-                    self.callBack?.parsingError(x as? String, withTag: obj.tag)
+                    if ((obj.parsedDataDict["Message"]?.isKindOfClass(NSNull)) == false)
+                    {
+                        self.callBack?.parsingError(x as? String, withTag: obj.tag)
+                    }
+                    else
+                    {
+                        self.callBack.parsingError("", withTag: obj.tag)
+                    }
                 }
             }
         }
@@ -289,8 +433,11 @@ func doUserLoginWithUserName(strUsername : String, strPassword : String){
     func getListSkills()
     {
         let obj : HttpRequest = HttpRequest()
-        obj.tag = ParsingConstant.addBusiness.rawValue
-        obj._serviceURL = NSString(format: "http://103.231.43.83:120/api/business/ListSkill?firmId=1012") as String
+        obj.tag = ParsingConstant.getListSkills.rawValue
+        let defualts = NSUserDefaults.standardUserDefaults()
+        let firmValue = defualts.valueForKey("FIRMID") as! NSInteger
+
+        obj._serviceURL = NSString(format: "http://103.231.43.83:120/api/business/ListSkill?firmId=%d",firmValue) as String
         obj.MethodNamee = "GET";
         obj.serviceName = ""
         
@@ -313,7 +460,14 @@ func doUserLoginWithUserName(strUsername : String, strPassword : String){
                 else
                 {
                     let x = (obj.parsedDataDict.valueForKey("Message") != nil) ? obj.parsedDataDict.valueForKey("Message")  : SERVER_ERROR
-                    self.callBack?.parsingError(x as? String, withTag: obj.tag)
+                    if ((obj.parsedDataDict["Message"]?.isKindOfClass(NSNull)) == false)
+                    {
+                        self.callBack?.parsingError(x as? String, withTag: obj.tag)
+                    }
+                    else
+                    {
+                        self.callBack.parsingError("", withTag: obj.tag)
+                    }
                 }
             }
         }
@@ -323,7 +477,10 @@ func doUserLoginWithUserName(strUsername : String, strPassword : String){
     {
         let obj : HttpRequest = HttpRequest()
         obj.tag = ParsingConstant.addBusiness.rawValue
-        obj._serviceURL = NSString(format: "http://103.231.43.83:120/api/business/ListServiceOffered?firmId=1012") as String
+        let defualts = NSUserDefaults.standardUserDefaults()
+        let firmValue = defualts.valueForKey("FIRMID") as! NSInteger
+
+        obj._serviceURL = NSString(format: "http://103.231.43.83:120/api/business/ListServiceOffered?firmId=%d",firmValue) as String
         obj.MethodNamee = "GET";
         obj.serviceName = ""
         
@@ -346,7 +503,14 @@ func doUserLoginWithUserName(strUsername : String, strPassword : String){
                 else
                 {
                     let x = (obj.parsedDataDict.valueForKey("Message") != nil) ? obj.parsedDataDict.valueForKey("Message")  : SERVER_ERROR
-                    self.callBack?.parsingError(x as? String, withTag: obj.tag)
+                    if ((obj.parsedDataDict["Message"]?.isKindOfClass(NSNull)) == false)
+                    {
+                        self.callBack?.parsingError(x as? String, withTag: obj.tag)
+                    }
+                    else
+                    {
+                        self.callBack.parsingError("", withTag: obj.tag)
+                    }
                 }
             }
         }
@@ -356,7 +520,10 @@ func doUserLoginWithUserName(strUsername : String, strPassword : String){
     {
         let obj : HttpRequest = HttpRequest()
         obj.tag = ParsingConstant.getBusiness.rawValue
-        obj._serviceURL = NSString(format: "http://103.231.43.83:120/api/business/GetBusiness?firmId=4") as String
+        let defualts = NSUserDefaults.standardUserDefaults()
+        let firmValue = defualts.valueForKey("FIRMID") as! NSInteger
+
+        obj._serviceURL = NSString(format: "http://103.231.43.83:120/api/business/GetBusiness?firmId=%d",firmValue) as String
         obj.MethodNamee = "GET";
         obj.serviceName = ""
         
@@ -420,7 +587,14 @@ func doUserLoginWithUserName(strUsername : String, strPassword : String){
                 else
                 {
                     let x = (obj.parsedDataDict.valueForKey("Message") != nil) ? obj.parsedDataDict.valueForKey("Message")  : SERVER_ERROR
-                    self.callBack?.parsingError(x as? String, withTag: obj.tag)
+                    if ((obj.parsedDataDict["Message"]?.isKindOfClass(NSNull)) == false)
+                    {
+                        self.callBack?.parsingError(x as? String, withTag: obj.tag)
+                    }
+                    else
+                    {
+                        self.callBack.parsingError("", withTag: obj.tag)
+                    }
                 }
             }
         }
@@ -453,7 +627,14 @@ func doUserLoginWithUserName(strUsername : String, strPassword : String){
                 else
                 {
                     let x = (obj.parsedDataDict.valueForKey("Message") != nil) ? obj.parsedDataDict.valueForKey("Message")  : SERVER_ERROR
-                    self.callBack?.parsingError(x as? String, withTag: obj.tag)
+                    if ((obj.parsedDataDict["Message"]?.isKindOfClass(NSNull)) == false)
+                    {
+                        self.callBack?.parsingError(x as? String, withTag: obj.tag)
+                    }
+                    else
+                    {
+                        self.callBack.parsingError("", withTag: obj.tag)
+                    }
                 }
             }
         }
@@ -462,7 +643,7 @@ func doUserLoginWithUserName(strUsername : String, strPassword : String){
     func getSkills()
     {
         let obj : HttpRequest = HttpRequest()
-        obj.tag = ParsingConstant.addBusiness.rawValue
+        obj.tag = ParsingConstant.getSkills.rawValue
         obj._serviceURL = NSString(format: "http://103.231.43.83:120/api/business/GetSkill?skillId=2") as String
         obj.MethodNamee = "GET";
         obj.serviceName = ""
@@ -486,7 +667,14 @@ func doUserLoginWithUserName(strUsername : String, strPassword : String){
                 else
                 {
                     let x = (obj.parsedDataDict.valueForKey("Message") != nil) ? obj.parsedDataDict.valueForKey("Message")  : SERVER_ERROR
-                    self.callBack?.parsingError(x as? String, withTag: obj.tag)
+                    if ((obj.parsedDataDict["Message"]?.isKindOfClass(NSNull)) == false)
+                    {
+                        self.callBack?.parsingError(x as? String, withTag: obj.tag)
+                    }
+                    else
+                    {
+                        self.callBack.parsingError("", withTag: obj.tag)
+                    }
                 }
             }
         }

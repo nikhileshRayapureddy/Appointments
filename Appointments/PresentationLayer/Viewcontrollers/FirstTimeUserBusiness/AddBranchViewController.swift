@@ -49,7 +49,13 @@ class AddBranchViewController: BaseViewController {
         self.navigationItem.rightBarButtonItem = bItem
         scrlVwAddBranch.hidden = false
         tableView.hidden = true
+        tableView.estimatedRowHeight = 100
+        tableView.rowHeight = UITableViewAutomaticDimension
+        
+        
         getListOfBranches()
+        
+        
     }
     
     func getListOfBranches()
@@ -101,11 +107,6 @@ class AddBranchViewController: BaseViewController {
         dictParams.setObject("", forKey: "FirmId")
         dictParams.setObject(txtBranchName.text!, forKey: "FirmName")
         dictParams.setObject("", forKey: "FirmLogo")
-//        dictParams.setObject(btnBusinessTypes.titleLabel!.text!, forKey: "BusinessType")
-//        dictParams.setObject(btnBookingType.titleLabel!.text!, forKey: "BookingType")
-//        dictParams.setObject(txtEmail.text!, forKey: "FirmEmail")
-//        dictParams.setObject("", forKey: "PostalCode")
-//        dictParams.setObject(txtContactNumber.text!, forKey: "FirmPrimaryPhone")
         dictParams.setObject(txtHouseName.text!, forKey: "AddressLine1")
         dictParams.setObject(txtStreet.text!, forKey: "AddressLine2")
         dictParams.setObject(txtTown.text!, forKey: "Citynm")
@@ -138,9 +139,7 @@ extension AddBranchViewController : UITableViewDelegate, UITableViewDataSource
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 100
-    }
+
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell : AddBranchAddressCustomCell = tableView.dequeueReusableCellWithIdentifier("ADDRESSCELL") as! AddBranchAddressCustomCell
