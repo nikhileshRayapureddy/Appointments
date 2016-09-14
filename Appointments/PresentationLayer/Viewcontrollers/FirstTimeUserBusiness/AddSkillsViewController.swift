@@ -120,6 +120,7 @@ class AddSkillsViewController: BaseViewController {
     func bindDataFromList(skill : SkillsBO)
     {
         btnAddSkill.setTitle(skill.strSkillName, forState: UIControlState.Normal)
+        btnAddSkill.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         txtVwDescription.text = skill.strSkillNotes
         
         selectedSkillBO = skill
@@ -273,7 +274,7 @@ extension AddSkillsViewController : SelectOptionsCustomView_Delegate
                 }
             }
             btnAddSkill.setTitle(title, forState: UIControlState.Normal)
-            
+            btnAddSkill.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         }
     }
     

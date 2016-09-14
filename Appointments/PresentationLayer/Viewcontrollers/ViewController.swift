@@ -56,7 +56,7 @@ class ViewController: BaseViewController,ParserDelegate {
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.setValue(model.objectForKey("UserId"), forKey: "USERID")
         let firmId = model.objectForKey("FirmId") as? NSNumber
-        defaults.setValue((firmId?.stringValue)!, forKey: "FIRMID")
+        defaults.setValue(firmId?.integerValue, forKey: "FIRMID")
         defaults.synchronize()
         
         self.performSelectorOnMainThread(#selector(self.navigateToHome), withObject: nil, waitUntilDone: true)
