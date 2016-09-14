@@ -43,12 +43,27 @@ class ServiceOfferedViewController: BaseViewController,UITextFieldDelegate {
         self.navigationItem.rightBarButtonItem = bItem
         scrlVwSevicesOffered.hidden = false
         tableView.hidden = true
+        getListOfServices()
     }
     func btnNextClicked(sender : UIButton)
     {
         
     }
     
+    func getListOfServices()
+    {
+        app_delegate.showLoader("Loading...")
+        let layer = BusinessLayerClass()
+        layer.callBack = self
+        layer.getListServicesOffered()
+    }
+
+    func getServicesOffered()
+    {
+        let layer = BusinessLayerClass()
+        layer.callBack = self
+        layer.getServicesOffered()
+    }
     @IBAction func btnViewListClicked(sender: UIButton) {
         sender.selected = !sender.selected
         if sender.selected == true{
@@ -109,4 +124,20 @@ extension ServiceOfferedViewController : UITableViewDelegate, UITableViewDataSou
     }
 }
 
-
+extension ServiceOfferedViewController : ParserDelegate
+{
+    func parsingFinished(object: AnyObject?, withTag tag: NSInteger) {
+        if tag == ParsingConstant.getListServicesOffered.rawValue
+        {
+            getServicesOffered()
+        }
+        else if tag == ParsingConstant.getServicesOffered.rawValue
+        {
+            app_delegate.removeloder()
+        }
+    }
+    
+    func parsingError(error: String?, withTag tag: NSInteger) {
+        
+    }
+}
