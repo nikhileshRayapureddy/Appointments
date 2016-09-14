@@ -8,10 +8,17 @@
 
 import UIKit
 
-class AddResourceViewController: BaseViewController {
+class AddResourceViewController: BaseViewController,UITextFieldDelegate {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var btnViewList: UIButton!
     @IBOutlet weak var scrlVwAddAddResource: UIScrollView!
+    
+    @IBOutlet weak var btnWorkingPattern: UIButton!
+    @IBOutlet weak var txtPriority: UITextField!
+    @IBOutlet weak var txtFldSkillLevel: UITextField!
+    @IBOutlet weak var txtFldContactNumber: UITextField!
+    @IBOutlet weak var txtFldEmail: UITextField!
+    @IBOutlet weak var txtFldResourceName: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -77,11 +84,6 @@ extension AddResourceViewController : UITableViewDelegate, UITableViewDataSource
 //        cell.configureCell()
         return cell
     }
-    
-}
-
-extension AddResourceViewController : UITextFieldDelegate
-{
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         return true
     }
@@ -89,5 +91,8 @@ extension AddResourceViewController : UITextFieldDelegate
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+
+    @IBAction func btnWorkingPatternClicked(sender: UIButton) {
     }
 }
