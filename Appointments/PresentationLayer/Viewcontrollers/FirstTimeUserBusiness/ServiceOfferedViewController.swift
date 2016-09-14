@@ -13,6 +13,7 @@ class ServiceOfferedViewController: BaseViewController,UITextFieldDelegate {
     @IBOutlet weak var btnViewList: UIButton!
     @IBOutlet weak var scrlVwSevicesOffered: UIScrollView!
     
+    @IBOutlet weak var btnTwoMenJob: UIButton!
     @IBOutlet weak var txtFldDuration: UITextField!
     @IBOutlet weak var txtFldPrice: UITextField!
     @IBOutlet weak var btnSelectSkill: UIButton!
@@ -105,6 +106,9 @@ extension ServiceOfferedViewController : UITableViewDelegate, UITableViewDataSou
         return true
     }
 
+    @IBAction func btnTwoMenJobClicked(sender: UIButton) {
+        sender.selected = !sender.selected
+    }
     @IBAction func btnSelectSkillClicked(sender: UIButton) {
     }
 }
