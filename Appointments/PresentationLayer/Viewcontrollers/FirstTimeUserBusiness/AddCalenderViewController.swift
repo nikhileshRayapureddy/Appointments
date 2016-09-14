@@ -161,21 +161,34 @@ class AddCalenderViewController: BaseViewController,UITextFieldDelegate {
             tableView.hidden = true
         }
     }
-    func designWorkingHourLabelWithDay(day:String,startTime:String,endTime:String,fltWidth:CGFloat) -> UILabel
+    func designWorkingHourLabelWithDay(day:String,startTime:String,endTime:String,frame:CGRect) -> UILabel
     {
         let lblReturn = UILabel()
         lblReturn.backgroundColor = UIColor.clearColor()
         lblReturn.layer.borderColor = UIColor(red: 234.0/255.0, green: 234.0/255.0, blue: 232.0/255.0, alpha: 1.0).CGColor
         lblReturn.layer.borderWidth = 0.5
         lblReturn.font = UIFont(name: "Helvetica", size: 9)
-        let strTemp = " " + day + ":" + startTime + " to " + endTime
+        let strTemp = " " + day + " : " + startTime + " to " + endTime
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .Center
+
         let text : NSMutableAttributedString = NSMutableAttributedString(string: strTemp)
+        text.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, day.characters.count+2))
+
         text.addAttribute(NSForegroundColorAttributeName, value: UIColor.blackColor(), range: NSMakeRange(0, day.characters.count+2))
         text.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 183.0/255.0, green: 183.0/255.0, blue: 183.0/255.0, alpha: 1.0), range: NSMakeRange(day.characters.count+2,strTemp.characters.count - day.characters.count-2))
         lblReturn.attributedText = text
         let attributes = [NSFontAttributeName : UIFont.systemFontOfSize(9)]
-        let rect = strTemp.boundingRectWithSize(CGSizeMake(fltWidth, CGFloat.max), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: attributes, context: nil)
-        lblReturn.frame = CGRectMake(0, 0, rect.width-8, ceil(rect.height))
+        let rect = strTemp.boundingRectWithSize(CGSizeMake(frame.size.width, CGFloat.max), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: attributes, context: nil)
+        var yPos = frame.origin.y
+        var xPos = frame.origin.x
+        if frame.origin.x+rect.width-18 > frame.size.width
+        {
+            yPos += 17
+            xPos = 0
+        }
+            lblReturn.frame = CGRectMake(xPos, yPos, rect.width, 12)
 
         
         return lblReturn
@@ -203,13 +216,63 @@ extension AddCalenderViewController : UITableViewDelegate, UITableViewDataSource
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 100
+    }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell : AddCalenderCustomCell = tableView.dequeueReusableCellWithIdentifier("CALENDERCELL") as! AddCalenderCustomCell
         cell.configureCell()
         let BO : WorkPatternListBO = arrWorkingPatternList[indexPath.row]
         cell.lblPatternName.text = BO.strPatternName
-        cell.vwLblTimeBg.addSubview(self.designWorkingHourLabelWithDay("MON", startTime: "10:00", endTime: "05:00",fltWidth:cell.vwLblTimeBg.frame.size.width))
+        
+        var xPos = CGFloat(0)
+        var yPos = CGFloat(0)
+        
+        if BO.arrPatterns.count > 0
+        {
+            for i in 0...(BO.arrPatterns.count-1)
+            {
+                let workPatternBO = BO.arrPatterns[i]
+                var strDay = ""
+                if workPatternBO.strDayId == "1"
+                {
+                    strDay = "MON"
+                }
+                else if workPatternBO.strDayId == "2"
+                {
+                    strDay = "TUE"
+                }
+                else if workPatternBO.strDayId == "3"
+                {
+                    strDay = "WED"
+                }
+                else if workPatternBO.strDayId == "4"
+                {
+                    strDay = "THU"
+                }
+                else if workPatternBO.strDayId == "5"
+                {
+                    strDay = "FRI"
+                }
+                else if workPatternBO.strDayId == "6"
+                {
+                    strDay = "SAT"
+                }
+                else if workPatternBO.strDayId == "7"
+                {
+                    strDay = "SUN"
+                }
+                if strDay != ""
+                {
+                let lbl : UILabel = self.designWorkingHourLabelWithDay(strDay, startTime: workPatternBO.strFromTime, endTime: workPatternBO.strToTime,frame: CGRectMake(xPos, yPos, cell.vwLblTimeBg.frame.size.width, 12))
+                xPos = lbl.frame.origin.x + lbl.frame.size.width + 5
+                yPos = lbl.frame.origin.y
+                cell.vwLblTimeBg.addSubview(lbl)
+                }
+            }
+        }
+            
 
         return cell
     }
@@ -299,6 +362,16 @@ extension AddCalenderViewController : ParserDelegate
                 {
                     self.bindDataForWorkingPattern()
                 }
+                else
+                {
+                    for i in 1...7 {
+                        let txtFrom : UITextField = self.scrlVwAddCalender.viewWithTag(10*i) as! UITextField
+                        let txtTo : UITextField = self.scrlVwAddCalender.viewWithTag((10*i)+1) as! UITextField
+                        txtFrom.text = ""
+                        txtTo.text = ""
+                    }
+
+                }
                 self.btnBankHoliday.selected = self.selectedBO.isIsBankHoliday
                 self.txtFldPatternName.text = self.selectedBO.strPatternName
                 self.txtFldYear.text = self.selectedBO.strCalanderYear
@@ -315,18 +388,31 @@ extension AddCalenderViewController : ParserDelegate
             
             
             for dict in arrModel {
-                let workingPatternBO = WorkPatternListBO()
+                let workingPatternListBO = WorkPatternListBO()
                 let FirmId : NSNumber = dict.valueForKey("FirmId") as! NSNumber
-                workingPatternBO.strFirmId = String(FirmId.integerValue)
+                workingPatternListBO.strFirmId = String(FirmId.integerValue)
                 let FirmWPId : NSNumber = dict.valueForKey("FirmWPId") as! NSNumber
-                workingPatternBO.strFirmWPId = String(FirmWPId.integerValue)
+                workingPatternListBO.strFirmWPId = String(FirmWPId.integerValue)
                 let IsBankHoliday : NSNumber = dict.valueForKey("IsBankHoliday") as! NSNumber
-                workingPatternBO.isIsBankHoliday = Bool(IsBankHoliday.integerValue)
-                workingPatternBO.strPatternName = dict.valueForKey("PatternName") as! String
+                workingPatternListBO.isIsBankHoliday = Bool(IsBankHoliday.integerValue)
+                workingPatternListBO.strPatternName = dict.valueForKey("PatternName") as! String
                 let CalanderYear : NSNumber = dict.valueForKey("CalanderYear") as! NSNumber
-                workingPatternBO.strCalanderYear = String(CalanderYear.integerValue)
+                workingPatternListBO.strCalanderYear = String(CalanderYear.integerValue)
+                let arrModel = dict.valueForKey("Patterns") as! NSArray
+                for dict in arrModel {
+                    let workingPatternBO = WorkPatternBO()
+                    let DayId : NSNumber = dict.valueForKey("DayId") as! NSNumber
+                    workingPatternBO.strDayId = String(DayId.integerValue)
+                    let FirmWPId : NSNumber = dict.valueForKey("FirmWPId") as! NSNumber
+                    workingPatternBO.strFirmWPId = String(FirmWPId.integerValue)
+                    let WPId : NSNumber = dict.valueForKey("WPId") as! NSNumber
+                    workingPatternBO.strWPId = String(WPId.integerValue)
+                    workingPatternBO.strFromTime = dict.valueForKey("FromTime") as! String
+                    workingPatternBO.strToTime = dict.valueForKey("ToTime") as! String
+                    workingPatternListBO.arrPatterns.append(workingPatternBO)
+                }
 
-                arrWorkingPatternList.append(workingPatternBO)
+                arrWorkingPatternList.append(workingPatternListBO)
             }
             self.tableView.performSelectorOnMainThread(#selector(UITableView.reloadData), withObject: nil, waitUntilDone: true)
             
@@ -357,8 +443,12 @@ extension AddCalenderViewController : ParserDelegate
     }
     func bindDataForWorkingPattern()
     {
-        for i in 0...arrWorkingPattern.count-1 {
-            let tempBo = arrWorkingPattern[i] as WorkPatternBO
+        for i in 0...6 {
+            var tempBo = WorkPatternBO()
+            if i < arrWorkingPattern.count
+            {
+                tempBo = arrWorkingPattern[i] as WorkPatternBO
+            }
             if Int(tempBo.strDayId) == i+1
             {
                 let txtFrom : UITextField = scrlVwAddCalender.viewWithTag(10*(i+1)) as! UITextField
@@ -366,6 +456,14 @@ extension AddCalenderViewController : ParserDelegate
                 txtFrom.text = tempBo.strFromTime
                 txtTo.text = tempBo.strToTime
 
+            }
+            else
+            {
+                let txtFrom : UITextField = scrlVwAddCalender.viewWithTag(10*(i+1)) as! UITextField
+                let txtTo : UITextField = scrlVwAddCalender.viewWithTag((10*(i+1))+1) as! UITextField
+                txtFrom.text = ""
+                txtTo.text = ""
+                
             }
         }
 
