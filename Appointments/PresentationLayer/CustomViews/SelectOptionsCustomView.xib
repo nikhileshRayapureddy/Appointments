@@ -19,7 +19,7 @@
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qln-cl-Ch6">
-                    <rect key="frame" x="10" y="100" width="355" height="270"/>
+                    <rect key="frame" x="10" y="198" width="355" height="270"/>
                     <subviews>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="H0y-hX-byc">
                             <rect key="frame" x="0.0" y="0.0" width="355" height="220"/>
@@ -45,26 +45,28 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="270" id="82b-X3-DCX"/>
-                        <constraint firstItem="H0y-hX-byc" firstAttribute="top" secondItem="qln-cl-Ch6" secondAttribute="top" id="8aD-rV-5ao"/>
-                        <constraint firstItem="qd8-ae-lNe" firstAttribute="leading" secondItem="qln-cl-Ch6" secondAttribute="leading" id="K96-yU-DnZ"/>
+                        <constraint firstItem="H0y-hX-byc" firstAttribute="top" secondItem="qln-cl-Ch6" secondAttribute="top" id="9Mz-zr-WrG"/>
+                        <constraint firstItem="H0y-hX-byc" firstAttribute="leading" secondItem="qln-cl-Ch6" secondAttribute="leading" id="9i0-bv-8n0"/>
+                        <constraint firstAttribute="bottom" secondItem="qd8-ae-lNe" secondAttribute="bottom" id="Onn-8c-YX1"/>
+                        <constraint firstAttribute="trailing" secondItem="qd8-ae-lNe" secondAttribute="trailing" id="P6H-zT-D58"/>
+                        <constraint firstItem="qd8-ae-lNe" firstAttribute="leading" secondItem="qln-cl-Ch6" secondAttribute="leading" id="WLA-PA-ng7"/>
+                        <constraint firstAttribute="height" constant="270" id="hcH-89-zMG"/>
                         <constraint firstItem="qd8-ae-lNe" firstAttribute="top" secondItem="H0y-hX-byc" secondAttribute="bottom" id="lNy-WI-qeS"/>
-                        <constraint firstAttribute="trailing" secondItem="qd8-ae-lNe" secondAttribute="trailing" id="t7L-1n-kXO"/>
-                        <constraint firstAttribute="trailing" secondItem="H0y-hX-byc" secondAttribute="trailing" id="x28-bi-5Vp"/>
-                        <constraint firstItem="H0y-hX-byc" firstAttribute="leading" secondItem="qln-cl-Ch6" secondAttribute="leading" id="y3n-yZ-90L"/>
-                        <constraint firstAttribute="bottom" secondItem="qd8-ae-lNe" secondAttribute="bottom" id="ynk-14-AZo"/>
+                        <constraint firstAttribute="trailing" secondItem="H0y-hX-byc" secondAttribute="trailing" id="mfb-JN-n1l"/>
+                        <constraint firstAttribute="bottom" secondItem="qd8-ae-lNe" secondAttribute="bottom" id="wtS-fm-eRM"/>
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="uPG-Uv-m1R" secondAttribute="trailing" id="7Ah-JN-CmG"/>
-                <constraint firstItem="qln-cl-Ch6" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="100" id="Ckq-kq-1p0"/>
-                <constraint firstItem="qln-cl-Ch6" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="g7z-D7-erO"/>
+                <constraint firstAttribute="trailing" secondItem="qln-cl-Ch6" secondAttribute="trailing" constant="10" id="CWl-aY-WoX"/>
+                <constraint firstItem="qln-cl-Ch6" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="WJw-EP-mdo"/>
                 <constraint firstItem="uPG-Uv-m1R" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="gE5-Ho-pQg"/>
                 <constraint firstAttribute="bottom" secondItem="uPG-Uv-m1R" secondAttribute="bottom" id="h4L-xB-04K"/>
+                <constraint firstItem="qln-cl-Ch6" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="nMA-9t-Kl6"/>
                 <constraint firstItem="uPG-Uv-m1R" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="o74-Bu-8Ky"/>
-                <constraint firstAttribute="trailing" secondItem="qln-cl-Ch6" secondAttribute="trailing" constant="10" id="phP-6t-Wqa"/>
+                <constraint firstItem="qln-cl-Ch6" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="wir-C7-d0B"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
             <connections>
@@ -72,7 +74,7 @@
                 <outlet property="btnDoneHeightConstraint" destination="Ei8-Bu-jGo" id="nFk-Fg-ycr"/>
                 <outlet property="tableView" destination="H0y-hX-byc" id="Pgh-gg-WDm"/>
                 <outlet property="viewPopUp" destination="qln-cl-Ch6" id="99f-UV-hkl"/>
-                <outlet property="viewPopUpHeightConstraint" destination="82b-X3-DCX" id="5vx-dV-MNq"/>
+                <outlet property="viewPopUpHeightConstraint" destination="hcH-89-zMG" id="JMb-vN-kKT"/>
             </connections>
             <point key="canvasLocation" x="387.5" y="153.5"/>
         </view>

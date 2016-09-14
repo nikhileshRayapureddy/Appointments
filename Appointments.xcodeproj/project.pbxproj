@@ -58,6 +58,8 @@
 		CCE60D801D88520B00915031 /* AddBusinessCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE60D7F1D88520B00915031 /* AddBusinessCustomCell.swift */; };
 		CCE60D831D88595B00915031 /* AddBusinessBO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE60D821D88595B00915031 /* AddBusinessBO.swift */; };
 		CCE60D851D886B7B00915031 /* BranchBO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE60D841D886B7B00915031 /* BranchBO.swift */; };
+		CCE60D871D88F61E00915031 /* SkillListCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE60D861D88F61E00915031 /* SkillListCustomCell.swift */; };
+		CCE60D891D88F74C00915031 /* SkillsBO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE60D881D88F74C00915031 /* SkillsBO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -137,6 +139,8 @@
 		CCE60D7F1D88520B00915031 /* AddBusinessCustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBusinessCustomCell.swift; sourceTree = "<group>"; };
 		CCE60D821D88595B00915031 /* AddBusinessBO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBusinessBO.swift; sourceTree = "<group>"; };
 		CCE60D841D886B7B00915031 /* BranchBO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BranchBO.swift; sourceTree = "<group>"; };
+		CCE60D861D88F61E00915031 /* SkillListCustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillListCustomCell.swift; sourceTree = "<group>"; };
+		CCE60D881D88F74C00915031 /* SkillsBO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillsBO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -350,6 +354,7 @@
 				A7CC021C1D5EFF520018A428 /* AddBranchAddressCustomCell.swift */,
 				A780BB911D7C175E00D70BF3 /* AddCalenderCustomCell.swift */,
 				CCE60D7F1D88520B00915031 /* AddBusinessCustomCell.swift */,
+				CCE60D861D88F61E00915031 /* SkillListCustomCell.swift */,
 			);
 			path = CustomCells;
 			sourceTree = "<group>";
@@ -401,6 +406,7 @@
 			children = (
 				CCE60D821D88595B00915031 /* AddBusinessBO.swift */,
 				CCE60D841D886B7B00915031 /* BranchBO.swift */,
+				CCE60D881D88F74C00915031 /* SkillsBO.swift */,
 			);
 			path = BusinessObjects;
 			sourceTree = "<group>";
@@ -572,7 +578,9 @@
 				A78D2A581D4A85B800756F2A /* SignUpViewController.swift in Sources */,
 				CCE60D851D886B7B00915031 /* BranchBO.swift in Sources */,
 				CCE60D801D88520B00915031 /* AddBusinessCustomCell.swift in Sources */,
+				CCE60D891D88F74C00915031 /* SkillsBO.swift in Sources */,
 				A78D2A4C1D4A7A3D00756F2A /* IQKeyboardManagerConstants.swift in Sources */,
+				CCE60D871D88F61E00915031 /* SkillListCustomCell.swift in Sources */,
 				CCE322831D869456000F819B /* SelectOptionsCustomView.swift in Sources */,
 				A78D2A541D4A7A3D00756F2A /* IQTitleBarButtonItem.swift in Sources */,
 				A7E694AC1D60AA910042DAE9 /* BaseBL.swift in Sources */,
