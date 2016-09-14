@@ -8,10 +8,16 @@
 
 import UIKit
 
-class ServiceOfferedViewController: BaseViewController {
+class ServiceOfferedViewController: BaseViewController,UITextFieldDelegate {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var btnViewList: UIButton!
     @IBOutlet weak var scrlVwSevicesOffered: UIScrollView!
+    
+    @IBOutlet weak var txtFldDuration: UITextField!
+    @IBOutlet weak var txtFldPrice: UITextField!
+    @IBOutlet weak var btnSelectSkill: UIButton!
+    @IBOutlet weak var txtFldDesc: UITextField!
+    @IBOutlet weak var txtFldServiceType: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -90,11 +96,6 @@ extension ServiceOfferedViewController : UITableViewDelegate, UITableViewDataSou
 //        cell.configureCell()
         return cell
     }
-    
-}
-
-extension ServiceOfferedViewController : UITextFieldDelegate
-{
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         return true
     }
@@ -103,5 +104,9 @@ extension ServiceOfferedViewController : UITextFieldDelegate
         textField.resignFirstResponder()
         return true
     }
+
+    @IBAction func btnSelectSkillClicked(sender: UIButton) {
+    }
 }
+
 
