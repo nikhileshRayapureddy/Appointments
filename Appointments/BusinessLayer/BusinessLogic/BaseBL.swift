@@ -29,6 +29,10 @@ enum ParsingConstant : Int
     case getSkills
     case addSkill
     case updateSkill
+    case addWorkingPattern
+    case getWorkingPattern
+    case getWorkingPatternList
+
 }
 
 
