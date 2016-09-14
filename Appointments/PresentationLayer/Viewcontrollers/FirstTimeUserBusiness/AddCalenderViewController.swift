@@ -14,10 +14,40 @@ class AddCalenderViewController: BaseViewController,UITextFieldDelegate {
     @IBOutlet weak var scrlVwAddCalender: UIScrollView!
     @IBOutlet weak var constVwDatePickerHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var txtFldYear: UITextField!
+    @IBOutlet weak var txtFldPatternName: UITextField!
     @IBOutlet weak var btnDone: UIButton!
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var vwDatePicker: UIView!
     var currenttextFiled : UITextField!
+    var MinDate : NSDate!
+    @IBOutlet weak var txtFldMonFrom: UITextField!
+    @IBOutlet weak var txtFldMonTo: UITextField!
+    
+    @IBOutlet weak var txtFldTueFrom: UITextField!
+    @IBOutlet weak var txtFldTueTo: UITextField!
+    
+    @IBOutlet weak var txtFldWedFrom: UITextField!
+    @IBOutlet weak var txtFldWedTo: UITextField!
+    
+    @IBOutlet weak var txtFldThurFrom: UITextField!
+    @IBOutlet weak var txtFldThurTo: UITextField!
+    
+    @IBOutlet weak var txtFldFriFrom: UITextField!
+    @IBOutlet weak var txtFldFriTo: UITextField!
+    
+    @IBOutlet weak var txtFldSatFrom: UITextField!
+    @IBOutlet weak var txtFldSatTo: UITextField!
+    
+    @IBOutlet weak var txtFldSunFrom: UITextField!
+    @IBOutlet weak var txtFldSunTo: UITextField!
+    
+    @IBOutlet weak var btnBankHoliday: UIButton!
+    
+    var arrWorkingPatternList = [WorkPatternListBO]()
+    var arrWorkingPattern = [WorkPatternBO]()
+    
+    var selectedBO = WorkPatternListBO()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -49,17 +79,81 @@ class AddCalenderViewController: BaseViewController,UITextFieldDelegate {
         scrlVwAddCalender.contentSize = CGSizeMake(scrlVwAddCalender.frame.size.width, 720)
         
     }
+    func getAllWorkingPatterns()
+    {
+        app_delegate.showLoader("")
+        let layer = BusinessLayerClass()
+        layer.callBack = self
+        layer.getAllWorkingPatterns()
+    }
+    func getWorkingPatternsWithID(strID : String)
+    {
+        app_delegate.showLoader("")
+       let layer = BusinessLayerClass()
+        layer.callBack = self
+        layer.getDetailsForWorkingPatternWithID(strID)
+    }
 
     func btnNextClicked(sender : UIButton)
     {
-        
+        self.addWorkingPattern()
     }
-    
+    func addWorkingPattern()
+    {
+        app_delegate.showLoader("")
+       let dictParams = NSMutableDictionary()
+        let defaults = NSUserDefaults.standardUserDefaults()
+        dictParams.setObject(defaults.valueForKey("FIRMID")!, forKey: "FirmId")
+        dictParams.setObject(txtFldPatternName.text!, forKey: "PatternName")
+        var isUpdate = false
+        if selectedBO.strFirmWPId != ""
+        {
+            isUpdate = true
+            dictParams.setObject(selectedBO.strFirmWPId, forKey: "FirmWPId")
+        }
+        var arrDict = [NSDictionary]()
+        
+        for i in 1...7 {
+            let dict = NSMutableDictionary()
+            let DayId : Int = Int(i)
+            dict.setObject(String(DayId), forKey: "DayId")
+            
+            let txtFrom : UITextField = scrlVwAddCalender.viewWithTag(10*i) as! UITextField
+            let txtTo : UITextField = scrlVwAddCalender.viewWithTag((10*i)+1) as! UITextField
+            dict.setObject(txtFrom.text!, forKey: "FromTime")
+            dict.setObject(txtTo.text!, forKey: "ToTime")
+            arrDict.append(dict)
+        }
+        var dataString : String = ""
+        let txtYear : UITextField = scrlVwAddCalender.viewWithTag(151) as! UITextField
+        do {
+            let data = try NSJSONSerialization.dataWithJSONObject(arrDict, options:[])
+            dataString = NSString(data: data, encoding: NSUTF8StringEncoding)! as String
+            
+        } catch {
+            print("JSON serialization failed:  \(error)")
+        }
+        dictParams.setObject(dataString, forKey: "Patterns")
+        dictParams.setObject(txtYear.text!, forKey: "CalanderYear")
+        if btnBankHoliday.selected == true
+        {
+            dictParams.setObject("true", forKey: "IsBankHoliday")
+        }
+        else
+        {
+            dictParams.setObject("false", forKey: "IsBankHoliday")
+        }
+        
+        let layer = BusinessLayerClass()
+        layer.callBack = self
+        layer.addOrUpdateWorkPattern(dictParams, isUpdate: isUpdate)
+    }
     @IBAction func btnViewListClicked(sender: UIButton) {
         sender.selected = !sender.selected
         if sender.selected == true{
             scrlVwAddCalender.hidden = true
             tableView.hidden = false
+            self.getAllWorkingPatterns()
         }
         else
         {
@@ -87,6 +181,10 @@ class AddCalenderViewController: BaseViewController,UITextFieldDelegate {
         return lblReturn
     }
 
+    @IBAction func btnBankHolidayClicked(sender: UIButton) {
+        sender.selected = !sender.selected
+        
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -99,7 +197,7 @@ class AddCalenderViewController: BaseViewController,UITextFieldDelegate {
 extension AddCalenderViewController : UITableViewDelegate, UITableViewDataSource
 {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return arrWorkingPatternList.count
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -109,33 +207,59 @@ extension AddCalenderViewController : UITableViewDelegate, UITableViewDataSource
         
         let cell : AddCalenderCustomCell = tableView.dequeueReusableCellWithIdentifier("CALENDERCELL") as! AddCalenderCustomCell
         cell.configureCell()
+        let BO : WorkPatternListBO = arrWorkingPatternList[indexPath.row]
+        cell.lblPatternName.text = BO.strPatternName
         cell.vwLblTimeBg.addSubview(self.designWorkingHourLabelWithDay("MON", startTime: "10:00", endTime: "05:00",fltWidth:cell.vwLblTimeBg.frame.size.width))
+
         return cell
+    }
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        selectedBO = arrWorkingPatternList[indexPath.row]
+        self.getWorkingPatternsWithID(selectedBO.strFirmWPId)
     }
     
     @IBAction func datePickerChanged(sender: UIDatePicker) {
         let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "hh:mm a"
+        dateFormatter.dateFormat = "HH:mm"
         let strDate = dateFormatter.stringFromDate(datePicker.date)
+        if currenttextFiled.tag % 10 == 0
+        {
+            MinDate = datePicker.date
+        }
+        else
+        {
+            MinDate = nil
+        }
         currenttextFiled.text = strDate
     }
     
     @IBAction func btnDoneClicked(sender: UIButton) {
         let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "hh:mm a"
+        dateFormatter.dateFormat = "HH:mm"
         let strDate = dateFormatter.stringFromDate(datePicker.date)
+        if currenttextFiled.tag % 10 == 0
+        {
+            MinDate = datePicker.date
+        }
+        else
+        {
+            MinDate = nil
+        }
         currenttextFiled.text = strDate
         constVwDatePickerHeight.constant = -250;
     }
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         currenttextFiled = textField
-        if textField.tag == 150
+        if textField.tag == 151 || textField == txtFldPatternName
         {
+            
             return true
         }
         else
         {
+            datePicker.minimumDate = MinDate
             constVwDatePickerHeight.constant = 0;
             return false
         }
@@ -143,6 +267,108 @@ extension AddCalenderViewController : UITableViewDelegate, UITableViewDataSource
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         currenttextFiled.resignFirstResponder()
         return true
+    }
+}
+extension AddCalenderViewController : ParserDelegate
+{
+    func parsingFinished(object: AnyObject?, withTag tag: NSInteger) {
+        app_delegate.removeloder()
+        if tag == ParsingConstant.getWorkingPattern.rawValue
+        {
+            let response = object as! NSDictionary
+            print(response)
+            arrWorkingPattern.removeAll()
+            let arrModel = response.valueForKey("Model") as! NSArray
+            for dict in arrModel {
+                let workingPatternBO = WorkPatternBO()
+                let DayId : NSNumber = dict.valueForKey("DayId") as! NSNumber
+                workingPatternBO.strDayId = String(DayId.integerValue)
+                let FirmWPId : NSNumber = dict.valueForKey("FirmWPId") as! NSNumber
+                workingPatternBO.strFirmWPId = String(FirmWPId.integerValue)
+                let WPId : NSNumber = dict.valueForKey("WPId") as! NSNumber
+                workingPatternBO.strWPId = String(WPId.integerValue)
+                workingPatternBO.strFromTime = dict.valueForKey("FromTime") as! String
+                workingPatternBO.strToTime = dict.valueForKey("ToTime") as! String
+                arrWorkingPattern.append(workingPatternBO)
+            }
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                self.btnViewListClicked(self.btnViewList)
+
+                if self.arrWorkingPattern.count > 0
+                {
+                    self.bindDataForWorkingPattern()
+                }
+                self.btnBankHoliday.selected = self.selectedBO.isIsBankHoliday
+                self.txtFldPatternName.text = self.selectedBO.strPatternName
+                self.txtFldYear.text = self.selectedBO.strCalanderYear
+            }
+
+        }
+        else if tag == ParsingConstant.getWorkingPatternList.rawValue
+        {
+            let response = object as! NSDictionary
+            print(response)
+            
+            arrWorkingPatternList.removeAll()
+            let arrModel = response.valueForKey("Model") as! NSArray
+            
+            
+            for dict in arrModel {
+                let workingPatternBO = WorkPatternListBO()
+                let FirmId : NSNumber = dict.valueForKey("FirmId") as! NSNumber
+                workingPatternBO.strFirmId = String(FirmId.integerValue)
+                let FirmWPId : NSNumber = dict.valueForKey("FirmWPId") as! NSNumber
+                workingPatternBO.strFirmWPId = String(FirmWPId.integerValue)
+                let IsBankHoliday : NSNumber = dict.valueForKey("IsBankHoliday") as! NSNumber
+                workingPatternBO.isIsBankHoliday = Bool(IsBankHoliday.integerValue)
+                workingPatternBO.strPatternName = dict.valueForKey("PatternName") as! String
+                let CalanderYear : NSNumber = dict.valueForKey("CalanderYear") as! NSNumber
+                workingPatternBO.strCalanderYear = String(CalanderYear.integerValue)
+
+                arrWorkingPatternList.append(workingPatternBO)
+            }
+            self.tableView.performSelectorOnMainThread(#selector(UITableView.reloadData), withObject: nil, waitUntilDone: true)
+            
+        }
+        else if tag == ParsingConstant.addWorkingPattern.rawValue
+        {
+            self.showAlert("Working Pattern saved Successfully.", strTitle: "Success!")
+            dispatch_async(dispatch_get_main_queue()) {
+                for i in 1...7 {
+                    let txtFrom : UITextField = self.scrlVwAddCalender.viewWithTag(10*i) as! UITextField
+                    let txtTo : UITextField = self.scrlVwAddCalender.viewWithTag((10*i)+1) as! UITextField
+                    txtFrom.text = ""
+                    txtTo.text = ""
+                }
+                self.txtFldPatternName.text = ""
+                self.btnBankHoliday.selected = false
+                self.txtFldYear.text = ""
+            }
+
+
+        }
+        
+        
+    }
+    func parsingError(error: String?, withTag tag: NSInteger) {
+        app_delegate.removeloder()
+        self.showAlert(error!, strTitle: "Failed!")
+    }
+    func bindDataForWorkingPattern()
+    {
+        for i in 0...arrWorkingPattern.count-1 {
+            let tempBo = arrWorkingPattern[i] as WorkPatternBO
+            if Int(tempBo.strDayId) == i+1
+            {
+                let txtFrom : UITextField = scrlVwAddCalender.viewWithTag(10*(i+1)) as! UITextField
+                let txtTo : UITextField = scrlVwAddCalender.viewWithTag((10*(i+1))+1) as! UITextField
+                txtFrom.text = tempBo.strFromTime
+                txtTo.text = tempBo.strToTime
+
+            }
+        }
+
     }
 }
 

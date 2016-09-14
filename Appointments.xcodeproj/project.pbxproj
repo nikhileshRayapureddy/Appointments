@@ -45,6 +45,8 @@
 		A7E694AA1D60A9E60042DAE9 /* BusinessLayerClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E694A91D60A9E60042DAE9 /* BusinessLayerClass.swift */; };
 		A7E694AC1D60AA910042DAE9 /* BaseBL.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E694AB1D60AA910042DAE9 /* BaseBL.swift */; };
 		A7E694AE1D60AA9E0042DAE9 /* HttpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E694AD1D60AA9E0042DAE9 /* HttpRequest.swift */; };
+		A7E7B2011D89AFC800A17422 /* WorkPatternBO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E7B2001D89AFC800A17422 /* WorkPatternBO.swift */; };
+		A7E7B2031D89AFD300A17422 /* WorkPatternListBO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E7B2021D89AFD300A17422 /* WorkPatternListBO.swift */; };
 		A7F502DF1D5AE1D700D9A427 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F502DE1D5AE1D700D9A427 /* BaseViewController.swift */; };
 		A7F502E11D5AE1FE00D9A427 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F502E01D5AE1FE00D9A427 /* HomeViewController.swift */; };
 		A7F502E81D5B5A6400D9A427 /* AddBusinessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F502E71D5B5A6400D9A427 /* AddBusinessViewController.swift */; };
@@ -126,6 +128,8 @@
 		A7E694A91D60A9E60042DAE9 /* BusinessLayerClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessLayerClass.swift; sourceTree = "<group>"; };
 		A7E694AB1D60AA910042DAE9 /* BaseBL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseBL.swift; sourceTree = "<group>"; };
 		A7E694AD1D60AA9E0042DAE9 /* HttpRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpRequest.swift; sourceTree = "<group>"; };
+		A7E7B2001D89AFC800A17422 /* WorkPatternBO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkPatternBO.swift; sourceTree = "<group>"; };
+		A7E7B2021D89AFD300A17422 /* WorkPatternListBO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkPatternListBO.swift; sourceTree = "<group>"; };
 		A7F502DE1D5AE1D700D9A427 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		A7F502E01D5AE1FE00D9A427 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		A7F502E71D5B5A6400D9A427 /* AddBusinessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBusinessViewController.swift; sourceTree = "<group>"; };
@@ -407,6 +411,8 @@
 				CCE60D821D88595B00915031 /* AddBusinessBO.swift */,
 				CCE60D841D886B7B00915031 /* BranchBO.swift */,
 				CCE60D881D88F74C00915031 /* SkillsBO.swift */,
+				A7E7B2001D89AFC800A17422 /* WorkPatternBO.swift */,
+				A7E7B2021D89AFD300A17422 /* WorkPatternListBO.swift */,
 			);
 			path = BusinessObjects;
 			sourceTree = "<group>";
@@ -551,6 +557,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A78D2A4F1D4A7A3D00756F2A /* IQKeyboardReturnKeyHandler.swift in Sources */,
+				A7E7B2011D89AFC800A17422 /* WorkPatternBO.swift in Sources */,
 				A78D2A4E1D4A7A3D00756F2A /* IQKeyboardManager.swift in Sources */,
 				A78D2A461D4A7A3D00756F2A /* IQNSArray+Sort.swift in Sources */,
 				A78D2A211D4A6D4500756F2A /* ViewController.swift in Sources */,
@@ -589,6 +596,7 @@
 				A78D2A511D4A7A3D00756F2A /* IQTextView.swift in Sources */,
 				A78D2A551D4A7A3D00756F2A /* IQToolbar.swift in Sources */,
 				A7F502F21D5B5AB600D9A427 /* AddResourceViewController.swift in Sources */,
+				A7E7B2031D89AFD300A17422 /* WorkPatternListBO.swift in Sources */,
 				A7F502EC1D5B5A8500D9A427 /* AddCalenderViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

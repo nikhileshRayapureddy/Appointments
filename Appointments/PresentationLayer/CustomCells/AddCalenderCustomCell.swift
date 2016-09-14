@@ -11,7 +11,7 @@ import UIKit
 class AddCalenderCustomCell: UITableViewCell {
     @IBOutlet var viewBg: UIView!
     @IBOutlet var vwLblTimeBg: UIView!
-
+    @IBOutlet weak var lblPatternName: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
