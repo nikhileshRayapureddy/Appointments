@@ -44,6 +44,7 @@ class AddCalenderViewController: BaseViewController,UITextFieldDelegate {
     
     @IBOutlet weak var btnBankHoliday: UIButton!
     
+    @IBOutlet weak var btnSave: UIButton!
     var arrWorkingPatternList = [WorkPatternListBO]()
     var arrWorkingPattern = [WorkPatternBO]()
     
@@ -197,6 +198,9 @@ class AddCalenderViewController: BaseViewController,UITextFieldDelegate {
     @IBAction func btnBankHolidayClicked(sender: UIButton) {
         sender.selected = !sender.selected
         
+    }
+    @IBAction func btnSaveClicked(sender: UIButton) {
+        self.btnNextClicked(UIButton())
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

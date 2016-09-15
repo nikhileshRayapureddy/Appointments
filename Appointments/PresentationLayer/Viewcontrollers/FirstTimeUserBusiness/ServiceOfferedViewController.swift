@@ -53,7 +53,6 @@ class ServiceOfferedViewController: BaseViewController,UITextFieldDelegate {
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableViewAutomaticDimension
 
-        getListOfServices()
     }
     func btnNextClicked(sender : UIButton)
     {
@@ -82,6 +81,7 @@ class ServiceOfferedViewController: BaseViewController,UITextFieldDelegate {
         if sender.selected == true{
             scrlVwSevicesOffered.hidden = true
             tableView.hidden = false
+            self.getListOfServices()
         }
         else
         {
@@ -231,6 +231,7 @@ extension ServiceOfferedViewController : ParserDelegate
         if tag == ParsingConstant.getListServicesOffered.rawValue
         {
             app_delegate.removeloder()
+            arrServicesList.removeAllObjects()
             let response = object as! NSDictionary
             let models = response.objectForKey("Model")
             if ((models?.isKindOfClass(NSArray)) == true)
@@ -277,8 +278,8 @@ extension ServiceOfferedViewController : ParserDelegate
                 arrServicesList.addObject(service)
 
             }
-            
-            getListSkills()
+            tableView.performSelectorOnMainThread(#selector(UITableView.reloadData), withObject: nil, waitUntilDone: true)
+            self.getListSkills()
         }
         else if tag == ParsingConstant.getListSkills.rawValue
         {
@@ -317,6 +318,12 @@ extension ServiceOfferedViewController : ParserDelegate
                 
                 arrSkillsList.addObject(skillBO)
             }
+        }
+        else
+        {
+            dispatch_async(dispatch_get_main_queue(), { 
+                self.bindDataFromList(ServiceBO())
+            })
         }
     }
     

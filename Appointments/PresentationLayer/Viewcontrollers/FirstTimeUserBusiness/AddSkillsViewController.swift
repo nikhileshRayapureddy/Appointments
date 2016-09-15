@@ -16,6 +16,8 @@ class AddSkillsViewController: BaseViewController {
     var selectedSkillBO = SkillsBO()
     @IBOutlet weak var txtVwDescription: SAMTextView!
     @IBOutlet weak var txtSkillName: UITextField!
+    
+    @IBOutlet weak var btnSave: UIButton!
     var arrSkillsList = NSMutableArray()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +46,6 @@ class AddSkillsViewController: BaseViewController {
         self.navigationItem.rightBarButtonItem = bItem
         scrlVwAddSkills.hidden = false
         tblSkills.hidden = true
-        getListSkills()
     }
     
     func getListSkills()
@@ -63,7 +64,7 @@ class AddSkillsViewController: BaseViewController {
         dictParams.setObject(txtVwDescription.text, forKey: "Notes")
         let defualts = NSUserDefaults.standardUserDefaults()
         let firmValue = defualts.valueForKey("FIRMID") as! NSInteger
-        dictParams.setValue(firmValue, forKey: "FirmId")
+        dictParams.setValue(String(firmValue), forKey: "FirmId")
         let layer = BusinessLayerClass()
         layer.callBack = self
 
@@ -84,7 +85,7 @@ class AddSkillsViewController: BaseViewController {
         if sender.selected == true{
             scrlVwAddSkills.hidden = true
             tblSkills.hidden = false
-            tblSkills.reloadData()
+            getListSkills()
         }
         else
         {
@@ -102,6 +103,9 @@ class AddSkillsViewController: BaseViewController {
         selectedSkillBO = skill
     }
 
+    @IBAction func btnSaveClicked(sender: UIButton) {
+        self.btnNextClicked(UIButton())
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -159,6 +163,7 @@ extension AddSkillsViewController : ParserDelegate
 
         if tag == ParsingConstant.getListSkills.rawValue
         {
+            arrSkillsList.removeAllObjects()
             let response = object as! NSDictionary
             let models = response.objectForKey("Model")
             if ((models?.isKindOfClass(NSArray)) == true)
@@ -194,6 +199,14 @@ extension AddSkillsViewController : ParserDelegate
                 
                 arrSkillsList.addObject(skillBO)
             }
+            tblSkills.performSelectorOnMainThread(#selector(UITableView.reloadData), withObject: nil, waitUntilDone: true)
+        }
+        else
+        {
+            dispatch_async(dispatch_get_main_queue(), { 
+                self.txtSkillName.text = ""
+                self.txtVwDescription.text = ""
+            })
         }
     }
 }

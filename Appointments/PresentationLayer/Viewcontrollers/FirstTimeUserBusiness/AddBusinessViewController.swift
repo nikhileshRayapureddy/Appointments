@@ -83,7 +83,15 @@ class AddBusinessViewController: BaseViewController {
     {
         let dictParams = NSMutableDictionary()
         let defaults = NSUserDefaults.standardUserDefaults()
-        dictParams.setObject(defaults.valueForKey("FIRMID")!, forKey: "FirmId")
+        let firmValue = defaults.valueForKey("FIRMID") as! NSInteger
+        if firmValue != 0
+        {
+            dictParams.setObject(String (firmValue), forKey: "FirmId")
+        }
+        else
+        {
+            dictParams.setObject("", forKey: "ParentId")
+        }
         dictParams.setObject(txtBusinessName.text!, forKey: "FirmName")
         dictParams.setObject("", forKey: "FirmLogo")
         dictParams.setObject(btnBusinessTypes.titleLabel!.text!, forKey: "BusinessType")
@@ -97,7 +105,6 @@ class AddBusinessViewController: BaseViewController {
         dictParams.setObject(txtCounty.text!, forKey: "Countynm")
         dictParams.setObject("", forKey: "AllowExtBook")
         dictParams.setObject("1", forKey: "EnablePayment")
-        dictParams.setObject("", forKey: "ParentId")
         let layer = BusinessLayerClass()
         layer.callBack = self
         layer.addBusinessDetails(dictParams)
@@ -280,7 +287,7 @@ extension AddBusinessViewController : SelectOptionsCustomView_Delegate
         viewSelectOptions.delegate =  nil
         viewSelectOptions.removeFromSuperview()
         
-        if tag == OptionsSelection.BookingTypes.rawValue
+        if tag == optionSelection.bookingType.rawValue
         {
             var title = ""
             for indexPath in arrSelected
@@ -298,7 +305,7 @@ extension AddBusinessViewController : SelectOptionsCustomView_Delegate
             btnBookingType.setTitle(title, forState: UIControlState.Normal)
             btnBookingType.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         }
-        else if tag == OptionsSelection.BusinessTypes.rawValue
+        else if tag == optionSelection.businessType.rawValue
         {
             var title = ""
             for indexPath in arrSelected

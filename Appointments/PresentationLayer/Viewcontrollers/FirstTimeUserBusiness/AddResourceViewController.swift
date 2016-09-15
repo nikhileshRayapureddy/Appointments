@@ -107,14 +107,14 @@ class AddResourceViewController: BaseViewController,UITextFieldDelegate {
         var skillString = ""
         for indexPath in arrSelectedWorkingPatternList
         {
-            let dict = arrWorkingPatternList.objectAtIndex(indexPath.row) as! SkillsBO
+            let dict = arrWorkingPatternList.objectAtIndex(indexPath.row) as! WorkPatternListBO
             if skillString.characters.count == 0
             {
-                skillString = dict.strSkillId
+                skillString = dict.strFirmWPId
             }
             else
             {
-                skillString = String(format: "%@,%@", skillString,dict.strSkillId)
+                skillString = String(format: "%@,%@", skillString,dict.strFirmWPId)
             }
         }
         dictParams.setObject(skillString, forKey: "WPId")
@@ -134,6 +134,7 @@ class AddResourceViewController: BaseViewController,UITextFieldDelegate {
             dictParams.setObject(selectedReourceBO.strResourceType, forKey: "ResourceType")
             dictParams.setObject(selectedReourceBO.strCapacity, forKey: "Capacity")
             dictParams.setObject(selectedReourceBO.strSkillString, forKey: "SkillString")
+            dictParams.setObject(selectedReourceBO.strResourceId, forKey: "ResourceId")
             layer.updateResource(dictParams)
         }
         
