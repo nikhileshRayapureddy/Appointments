@@ -476,7 +476,7 @@ func doUserLoginWithUserName(strUsername : String, strPassword : String){
     func getListServicesOffered()
     {
         let obj : HttpRequest = HttpRequest()
-        obj.tag = ParsingConstant.addBusiness.rawValue
+        obj.tag = ParsingConstant.getListServicesOffered.rawValue
         let defualts = NSUserDefaults.standardUserDefaults()
         let firmValue = defualts.valueForKey("FIRMID") as! NSInteger
 
@@ -603,7 +603,7 @@ func doUserLoginWithUserName(strUsername : String, strPassword : String){
     func getServicesOffered()
     {
         let obj : HttpRequest = HttpRequest()
-        obj.tag = ParsingConstant.addBusiness.rawValue
+        obj.tag = ParsingConstant.getServicesOffered.rawValue
         obj._serviceURL = NSString(format: "http://103.231.43.83:120/api/business/GetServiceOffered?serviceId=14") as String
         obj.MethodNamee = "GET";
         obj.serviceName = ""
