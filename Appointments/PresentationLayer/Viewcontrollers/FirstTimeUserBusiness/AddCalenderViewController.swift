@@ -183,7 +183,7 @@ class AddCalenderViewController: BaseViewController,UITextFieldDelegate {
         let rect = strTemp.boundingRectWithSize(CGSizeMake(frame.size.width, CGFloat.max), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: attributes, context: nil)
         var yPos = frame.origin.y
         var xPos = frame.origin.x
-        if frame.origin.x+rect.width-18 > frame.size.width
+        if frame.origin.x+rect.width+5 > frame.size.width
         {
             yPos += 17
             xPos = 0
@@ -217,7 +217,7 @@ extension AddCalenderViewController : UITableViewDelegate, UITableViewDataSource
         return 1
     }
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 100
+            return 120
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
