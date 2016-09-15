@@ -679,4 +679,136 @@ func doUserLoginWithUserName(strUsername : String, strPassword : String){
             }
         }
     }
+    
+    func addOrUpdateWorkPattern(dictParams : NSMutableDictionary , isUpdate : Bool)
+    {
+        let obj : HttpRequest = HttpRequest()
+        obj.tag = ParsingConstant.addWorkingPattern.rawValue
+        if isUpdate == false
+        {
+            obj._serviceURL = NSString(format: "http://103.231.43.83:120/api/business/AddWorkPattern") as String
+        }
+        else
+        {
+            obj._serviceURL = NSString(format: "http://103.231.43.83:120/api/business/UpdateWorkPattern") as String
+        }
+        obj.MethodNamee = "POST";
+        obj.serviceName = ""
+        obj.params = dictParams
+        
+        
+        obj.doGetSOAPResponse {(success : Bool) -> Void in
+            if !success
+            {
+                self.callBack.parsingError(SERVER_ERROR, withTag: obj.tag)
+            }
+                
+            else{
+                if obj.parsedDataDict.valueForKey("Success")?.integerValue == 0
+                {
+                    self.callBack.parsingFinished(obj.parsedDataDict, withTag:obj.tag)
+                }
+                else if obj.parsedDataDict.valueForKey("Success")?.integerValue == 2
+                {
+                    self.callBack.parsingError(obj.parsedDataDict.valueForKey("Message") as? String, withTag:obj.tag)
+                }
+                else
+                {
+                    let x = (obj.parsedDataDict.valueForKey("Message") != nil) ? obj.parsedDataDict.valueForKey("Message")  : SERVER_ERROR
+                    if ((obj.parsedDataDict["Message"]?.isKindOfClass(NSNull)) == false)
+                    {
+                        self.callBack?.parsingError(x as? String, withTag: obj.tag)
+                    }
+                    else
+                    {
+                        self.callBack.parsingError("", withTag: obj.tag)
+                    }
+                }
+            }
+        }
+    }
+    func getAllWorkingPatterns()
+    {
+        let obj : HttpRequest = HttpRequest()
+        obj.tag = ParsingConstant.getWorkingPatternList.rawValue
+        let defualts = NSUserDefaults.standardUserDefaults()
+        let firmValue = defualts.valueForKey("FIRMID") as! NSInteger
+        
+        obj._serviceURL = NSString(format: "http://103.231.43.83:120/api/business/ListFirmWorkPattern?firmId=%d",firmValue) as String
+        obj.MethodNamee = "GET";
+        obj.serviceName = ""
+        
+        
+        obj.doGetSOAPResponse {(success : Bool) -> Void in
+            if !success
+            {
+                self.callBack.parsingError(SERVER_ERROR, withTag: obj.tag)
+            }
+                
+            else{
+                if obj.parsedDataDict.valueForKey("Success")?.integerValue == 0
+                {
+                    self.callBack.parsingFinished(obj.parsedDataDict, withTag:obj.tag)
+                }
+                else if obj.parsedDataDict.valueForKey("Success")?.integerValue == 2
+                {
+                    self.callBack.parsingError(obj.parsedDataDict.valueForKey("Message") as? String, withTag:obj.tag)
+                }
+                else
+                {
+                    let x = (obj.parsedDataDict.valueForKey("Message") != nil) ? obj.parsedDataDict.valueForKey("Message")  : SERVER_ERROR
+                    if ((obj.parsedDataDict["Message"]?.isKindOfClass(NSNull)) == false)
+                    {
+                        self.callBack?.parsingError(x as? String, withTag: obj.tag)
+                    }
+                    else
+                    {
+                        self.callBack.parsingError("", withTag: obj.tag)
+                    }
+                    
+                }
+            }
+        }
+    }
+    func getDetailsForWorkingPatternWithID(strID : String)
+    {
+        let obj : HttpRequest = HttpRequest()
+        obj.tag = ParsingConstant.getWorkingPattern.rawValue
+        obj._serviceURL = NSString(format: "http://103.231.43.83:120/api/business/ListWorkPattern?firmWorkPatternId=%@",strID) as String
+        obj.MethodNamee = "GET";
+        obj.serviceName = ""
+        
+        
+        obj.doGetSOAPResponse {(success : Bool) -> Void in
+            if !success
+            {
+                self.callBack.parsingError(SERVER_ERROR, withTag: obj.tag)
+            }
+                
+            else{
+                if obj.parsedDataDict.valueForKey("Success")?.integerValue == 0
+                {
+                    self.callBack.parsingFinished(obj.parsedDataDict, withTag:obj.tag)
+                }
+                else if obj.parsedDataDict.valueForKey("Success")?.integerValue == 2
+                {
+                    self.callBack.parsingError(obj.parsedDataDict.valueForKey("Message") as? String, withTag:obj.tag)
+                }
+                else
+                {
+                    let x = (obj.parsedDataDict.valueForKey("Message") != nil) ? obj.parsedDataDict.valueForKey("Message")  : SERVER_ERROR
+                    if ((obj.parsedDataDict["Message"]?.isKindOfClass(NSNull)) == false)
+                    {
+                        self.callBack?.parsingError(x as? String, withTag: obj.tag)
+                    }
+                    else
+                    {
+                        self.callBack.parsingError("", withTag: obj.tag)
+                    }
+                    
+                }
+            }
+        }
+    }
+
 }
