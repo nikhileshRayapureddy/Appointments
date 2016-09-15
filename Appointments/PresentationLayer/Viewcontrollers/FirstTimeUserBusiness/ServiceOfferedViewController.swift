@@ -14,11 +14,7 @@ class ServiceOfferedViewController: BaseViewController,UITextFieldDelegate {
     @IBOutlet weak var scrlVwSevicesOffered: UIScrollView!
     
     @IBOutlet weak var btnTwoMenJob: UIButton!
-    @IBOutlet weak var txtFldDuration: UITextField!
-    @IBOutlet weak var txtFldPrice: UITextField!
     @IBOutlet weak var btnSelectSkill: UIButton!
-    @IBOutlet weak var txtFldDesc: UITextField!
-    @IBOutlet weak var txtFldServiceType: UITextField!
     @IBOutlet weak var txtServiceType: UITextField!
     @IBOutlet weak var txtServiceDescription: UITextField!
     @IBOutlet weak var txtPrice: UITextField!

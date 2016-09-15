@@ -1246,7 +1246,7 @@
                                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o8a-hf-bQm">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="New york New york New york New york New york New york " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o8a-hf-bQm">
                                                             <rect key="frame" x="8" y="53" width="42" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -2692,10 +2692,6 @@
                         <outlet property="scrlVwSevicesOffered" destination="FpQ-g6-r5u" id="YGO-Pj-ZnT"/>
                         <outlet property="tableView" destination="ejA-wA-PUf" id="LXX-lN-kFp"/>
                         <outlet property="txtDuration" destination="ZTp-3o-BeV" id="nP2-Xv-rix"/>
-                        <outlet property="txtFldDesc" destination="y9A-hN-E1z" id="svx-d4-bDo"/>
-                        <outlet property="txtFldDuration" destination="ZTp-3o-BeV" id="QHv-pG-aJp"/>
-                        <outlet property="txtFldPrice" destination="kut-p9-3KB" id="kke-lY-b3L"/>
-                        <outlet property="txtFldServiceType" destination="3Tp-ah-Pv5" id="sTm-1O-Nof"/>
                         <outlet property="txtPrice" destination="kut-p9-3KB" id="qbM-dc-lIC"/>
                         <outlet property="txtServiceDescription" destination="y9A-hN-E1z" id="e2d-QZ-YQD"/>
                         <outlet property="txtServiceType" destination="3Tp-ah-Pv5" id="Pv9-iC-XVj"/>
