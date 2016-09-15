@@ -52,12 +52,6 @@ class AddBranchViewController: BaseViewController {
         self.navigationItem.rightBarButtonItem = bItem
         scrlVwAddBranch.hidden = false
         tableView.hidden = true
-       
-        
-        
-        getListOfBranches()
-        
-        
     }
     
     func getListOfBranches()
@@ -78,8 +72,7 @@ class AddBranchViewController: BaseViewController {
         if sender.selected == true{
             scrlVwAddBranch.hidden = true
             tableView.hidden = false
-            tableView.reloadData()
-
+            self.getListOfBranches()
         }
         else
         {
@@ -100,7 +93,8 @@ class AddBranchViewController: BaseViewController {
         txtStreet.text = branchDetails.strAddressLine2
         txtTown.text = branchDetails.strCitynm
         txtCounty.text = branchDetails.strCountynm
-        
+        txtLocation.text = ""
+        txtCountry.text = ""
         selectedBranchBO = branchDetails
     }
     @IBAction func btnSaveClicked(sender: UIButton) {
@@ -185,6 +179,7 @@ extension AddBranchViewController : ParserDelegate
         if tag == ParsingConstant.getListBranches.rawValue
         {
             app_delegate.removeloder()
+            arrBranchesList.removeAllObjects()
             let response = object as! NSDictionary
             let models = response.objectForKey("Model")
             if ((models?.isKindOfClass(NSArray)) == true)
@@ -276,6 +271,12 @@ extension AddBranchViewController : ParserDelegate
                 arrBranchesList.addObject(branchBO)
             }
             
+            
+            tableView.performSelectorOnMainThread(#selector(UITableView.reloadData), withObject: nil, waitUntilDone: true)
+        }
+        else
+        {
+            self.performSelectorOnMainThread(#selector(self.bindDataFromList), withObject: BranchBO(), waitUntilDone: true)
         }
     }
 }

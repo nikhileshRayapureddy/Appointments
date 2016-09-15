@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="dro-oh-2Gr">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="dro-oh-2Gr">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -1588,6 +1588,9 @@
                                                 <state key="normal" title="SAVE">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="btnSaveClicked:" destination="Ztd-ct-JYI" eventType="touchUpInside" id="nTf-HB-SVA"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -1807,6 +1810,7 @@
                     <connections>
                         <outlet property="btnBankHoliday" destination="DYP-87-hog" id="ejq-Or-ytN"/>
                         <outlet property="btnDone" destination="sgb-t1-P3s" id="F9o-lT-Scu"/>
+                        <outlet property="btnSave" destination="5kg-sX-AZV" id="txa-7m-dkC"/>
                         <outlet property="btnViewList" destination="Edw-8C-vTE" id="xKe-Ft-4Bd"/>
                         <outlet property="constVwDatePickerHeight" destination="dal-xU-oua" id="uPi-Vp-9Bp"/>
                         <outlet property="datePicker" destination="K5g-pn-UtD" id="0Jx-bG-IPB"/>
@@ -3440,6 +3444,20 @@
                                             <constraint firstAttribute="trailing" secondItem="saU-Pk-iws" secondAttribute="trailing" id="aKS-gr-frG"/>
                                         </constraints>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="upB-jL-Xku">
+                                        <rect key="frame" x="15" y="262" width="345" height="40"/>
+                                        <color key="backgroundColor" red="0.2274509804" green="0.61568627450000002" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="viQ-vs-EHO"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                        <state key="normal" title="SAVE">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="btnSaveClicked:" destination="sFi-QO-NTO" eventType="touchUpInside" id="Dvn-ZI-QtQ"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="Vfc-TS-43U" firstAttribute="leading" secondItem="GOM-nB-bhp" secondAttribute="leading" constant="15" id="0O0-oe-KsO"/>
@@ -3449,8 +3467,11 @@
                                     <constraint firstItem="UBw-TK-Lbx" firstAttribute="leading" secondItem="GOM-nB-bhp" secondAttribute="leading" id="Bae-Q5-zdo"/>
                                     <constraint firstItem="Tn3-vd-AVh" firstAttribute="top" secondItem="GOM-nB-bhp" secondAttribute="top" constant="20" id="CBz-sk-0SR"/>
                                     <constraint firstItem="UBw-TK-Lbx" firstAttribute="centerX" secondItem="Tn3-vd-AVh" secondAttribute="centerX" id="JEK-MT-VKa"/>
+                                    <constraint firstItem="upB-jL-Xku" firstAttribute="leading" secondItem="GOM-nB-bhp" secondAttribute="leading" constant="15" id="Qqq-op-b7a"/>
                                     <constraint firstItem="ugJ-ce-WnJ" firstAttribute="top" secondItem="Vfc-TS-43U" secondAttribute="bottom" constant="10" id="dQV-os-NqC"/>
+                                    <constraint firstItem="upB-jL-Xku" firstAttribute="top" secondItem="ugJ-ce-WnJ" secondAttribute="bottom" constant="20" id="hTs-JI-DmW"/>
                                     <constraint firstItem="UBw-TK-Lbx" firstAttribute="top" secondItem="GOM-nB-bhp" secondAttribute="top" id="lqB-15-RhD"/>
+                                    <constraint firstAttribute="trailing" secondItem="upB-jL-Xku" secondAttribute="trailing" constant="15" id="oYg-BW-8p3"/>
                                     <constraint firstItem="Vfc-TS-43U" firstAttribute="leading" secondItem="ugJ-ce-WnJ" secondAttribute="leading" id="tMP-ym-ZOJ"/>
                                     <constraint firstItem="Vfc-TS-43U" firstAttribute="top" secondItem="Tn3-vd-AVh" secondAttribute="bottom" constant="34" id="tTW-Nt-ZbL"/>
                                     <constraint firstItem="Tn3-vd-AVh" firstAttribute="centerX" secondItem="Vfc-TS-43U" secondAttribute="centerX" id="u8L-1x-eN5"/>
@@ -3490,6 +3511,7 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="btnSave" destination="upB-jL-Xku" id="3lJ-5P-Qsw"/>
                         <outlet property="btnViewList" destination="Cud-Ft-UBt" id="gaP-Ii-VKF"/>
                         <outlet property="scrlVwAddSkills" destination="GOM-nB-bhp" id="let-pk-Wkw"/>
                         <outlet property="tblSkills" destination="8lf-Qq-ITh" id="che-eN-vtS"/>
