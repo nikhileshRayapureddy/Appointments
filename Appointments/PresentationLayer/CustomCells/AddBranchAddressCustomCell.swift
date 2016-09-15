@@ -31,8 +31,7 @@ class AddBranchAddressCustomCell: UITableViewCell {
         let branchDetails = arrBranches.objectAtIndex(indexPath.row) as! BranchBO
         lblName.text = branchDetails.strFirmName
         lblCity.text = branchDetails.strCitynm
-        lblAddress.text = String(format: "%@,%@,%@", branchDetails.strAddressLine1,branchDetails.strAddressLine2,branchDetails.strCountynm)
-        
+        lblAddress.text = String(format: "%@,%@,%@", branchDetails.strAddressLine1,branchDetails.strAddressLine2,branchDetails.strCountynm)        
     }
-
+    
 }

@@ -28,6 +28,9 @@ class AddBranchViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        tableView.estimatedRowHeight = 90
+        tableView.rowHeight = UITableViewAutomaticDimension
+
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -75,9 +78,6 @@ class AddBranchViewController: BaseViewController {
         if sender.selected == true{
             scrlVwAddBranch.hidden = true
             tableView.hidden = false
-            tableView.estimatedRowHeight = 150
-            tableView.rowHeight = UITableViewAutomaticDimension
-
             tableView.reloadData()
 
         }
@@ -275,6 +275,7 @@ extension AddBranchViewController : ParserDelegate
                 
                 arrBranchesList.addObject(branchBO)
             }
+            
         }
     }
 }

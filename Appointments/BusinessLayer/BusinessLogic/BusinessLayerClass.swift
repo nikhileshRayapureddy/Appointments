@@ -385,6 +385,7 @@ func doUserLoginWithUserName(strUsername : String, strPassword : String){
         }
     }
 
+    
     func addResource(dictParams : NSMutableDictionary)
     {
         let obj : HttpRequest = HttpRequest()
@@ -425,7 +426,48 @@ func doUserLoginWithUserName(strUsername : String, strPassword : String){
             }
         }
     }
-    
+
+    func updateResource(dictParams : NSMutableDictionary)
+    {
+        let obj : HttpRequest = HttpRequest()
+        obj.tag = ParsingConstant.addBusiness.rawValue
+        obj._serviceURL = NSString(format: "http://103.231.43.83:120/api/business/UpdateResource") as String
+        obj.MethodNamee = "POST";
+        obj.serviceName = ""
+        obj.params = dictParams
+        
+        
+        obj.doGetSOAPResponse {(success : Bool) -> Void in
+            if !success
+            {
+                self.callBack.parsingError(SERVER_ERROR, withTag: obj.tag)
+            }
+                
+            else{
+                if obj.parsedDataDict.valueForKey("Success")?.integerValue == 0
+                {
+                    self.callBack.parsingFinished(obj.parsedDataDict, withTag:obj.tag)
+                }
+                else if obj.parsedDataDict.valueForKey("Success")?.integerValue == 2
+                {
+                    self.callBack.parsingError(obj.parsedDataDict.valueForKey("Message") as? String, withTag:obj.tag)
+                }
+                else
+                {
+                    let x = (obj.parsedDataDict.valueForKey("Message") != nil) ? obj.parsedDataDict.valueForKey("Message")  : SERVER_ERROR
+                    if ((obj.parsedDataDict["Message"]?.isKindOfClass(NSNull)) == false)
+                    {
+                        self.callBack?.parsingError(x as? String, withTag: obj.tag)
+                    }
+                    else
+                    {
+                        self.callBack.parsingError("", withTag: obj.tag)
+                    }
+                }
+            }
+        }
+    }
+
     func getListBranches()
     {
         let obj : HttpRequest = HttpRequest()
@@ -472,7 +514,7 @@ func doUserLoginWithUserName(strUsername : String, strPassword : String){
     func getListResources()
     {
         let obj : HttpRequest = HttpRequest()
-        obj.tag = ParsingConstant.addBusiness.rawValue
+        obj.tag = ParsingConstant.getListResource.rawValue
         let defualts = NSUserDefaults.standardUserDefaults()
         let firmValue = defualts.valueForKey("FIRMID") as! NSInteger
 

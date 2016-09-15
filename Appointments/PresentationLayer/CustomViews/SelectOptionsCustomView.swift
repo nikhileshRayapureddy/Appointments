@@ -13,6 +13,7 @@ enum optionSelection : Int
     case businessType = 3578
     case bookingType
     case skill
+    case workingPattern
 }
 
 protocol SelectOptionsCustomView_Delegate {
@@ -112,6 +113,11 @@ extension SelectOptionsCustomView : UITableViewDelegate, UITableViewDataSource
         {
             let skill = arrTitles.objectAtIndex(indexPath.row) as! SkillsBO
             cell.textLabel?.text = skill.strSkillName
+        }
+        else if viewTag == optionSelection.workingPattern.rawValue
+        {
+            let pattern = arrTitles.objectAtIndex(indexPath.row) as! WorkPatternListBO
+            cell.textLabel?.text = pattern.strPatternName
         }
         else
         {
