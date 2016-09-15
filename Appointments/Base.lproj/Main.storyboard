@@ -1266,11 +1266,10 @@
                                                             <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="101 Hudon Street Suite 2202 Jersey City,New Jersey 07424 U.S.A" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N4D-a6-2gt">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="101 Hudon Street Suite 2202 Jersey City,New Jersey 07424 U.S.A" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N4D-a6-2gt">
                                                             <rect key="frame" x="91" y="46" width="256" height="43"/>
                                                             <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="13"/>
                                                             <color key="textColor" red="0.39215686274509803" green="0.396078431372549" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2370,7 +2369,7 @@
                                                             <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="101 Hudon Street Suite 2202 Jersey City,New Jersey 07424 U.S.A" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hcf-jD-AuE">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="101 Hudon Street Suite 2202 Jersey City,New Jersey 07424 U.S.A" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hcf-jD-AuE">
                                                             <rect key="frame" x="91" y="46" width="256" height="43"/>
                                                             <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
                                                             <color key="textColor" red="0.3921568627" green="0.39607843139999999" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -2748,10 +2747,10 @@
                         <outlet property="btnViewList" destination="nC7-Ny-skv" id="kJE-PW-Nej"/>
                         <outlet property="scrlVwSevicesOffered" destination="FpQ-g6-r5u" id="YGO-Pj-ZnT"/>
                         <outlet property="tableView" destination="ejA-wA-PUf" id="LXX-lN-kFp"/>
-                        <outlet property="txtFldDesc" destination="y9A-hN-E1z" id="svx-d4-bDo"/>
-                        <outlet property="txtFldDuration" destination="ZTp-3o-BeV" id="QHv-pG-aJp"/>
-                        <outlet property="txtFldPrice" destination="kut-p9-3KB" id="kke-lY-b3L"/>
-                        <outlet property="txtFldServiceType" destination="3Tp-ah-Pv5" id="sTm-1O-Nof"/>
+                        <outlet property="txtDuration" destination="ZTp-3o-BeV" id="nP2-Xv-rix"/>
+                        <outlet property="txtPrice" destination="kut-p9-3KB" id="qbM-dc-lIC"/>
+                        <outlet property="txtServiceDescription" destination="y9A-hN-E1z" id="e2d-QZ-YQD"/>
+                        <outlet property="txtServiceType" destination="3Tp-ah-Pv5" id="Pv9-iC-XVj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hJZ-66-zax" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2814,7 +2813,7 @@
                                                             <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="101 Hudon Street Suite 2202 Jersey City,New Jersey 07424 U.S.A" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9pt-ZG-oXF">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="101 Hudon Street Suite 2202 Jersey City,New Jersey 07424 U.S.A" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9pt-ZG-oXF">
                                                             <rect key="frame" x="91" y="46" width="256" height="43"/>
                                                             <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
                                                             <color key="textColor" red="0.3921568627" green="0.39607843139999999" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
