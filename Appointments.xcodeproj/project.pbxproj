@@ -62,6 +62,8 @@
 		CCE60D851D886B7B00915031 /* BranchBO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE60D841D886B7B00915031 /* BranchBO.swift */; };
 		CCE60D871D88F61E00915031 /* SkillListCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE60D861D88F61E00915031 /* SkillListCustomCell.swift */; };
 		CCE60D891D88F74C00915031 /* SkillsBO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE60D881D88F74C00915031 /* SkillsBO.swift */; };
+		CCE60D8B1D8A45AD00915031 /* ServiceBO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE60D8A1D8A45AD00915031 /* ServiceBO.swift */; };
+		CCE60D8D1D8A4CAE00915031 /* ServicesOfferedCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE60D8C1D8A4CAE00915031 /* ServicesOfferedCustomCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -145,6 +147,8 @@
 		CCE60D841D886B7B00915031 /* BranchBO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BranchBO.swift; sourceTree = "<group>"; };
 		CCE60D861D88F61E00915031 /* SkillListCustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillListCustomCell.swift; sourceTree = "<group>"; };
 		CCE60D881D88F74C00915031 /* SkillsBO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillsBO.swift; sourceTree = "<group>"; };
+		CCE60D8A1D8A45AD00915031 /* ServiceBO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceBO.swift; sourceTree = "<group>"; };
+		CCE60D8C1D8A4CAE00915031 /* ServicesOfferedCustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServicesOfferedCustomCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -359,6 +363,7 @@
 				A780BB911D7C175E00D70BF3 /* AddCalenderCustomCell.swift */,
 				CCE60D7F1D88520B00915031 /* AddBusinessCustomCell.swift */,
 				CCE60D861D88F61E00915031 /* SkillListCustomCell.swift */,
+				CCE60D8C1D8A4CAE00915031 /* ServicesOfferedCustomCell.swift */,
 			);
 			path = CustomCells;
 			sourceTree = "<group>";
@@ -413,6 +418,7 @@
 				CCE60D881D88F74C00915031 /* SkillsBO.swift */,
 				A7E7B2001D89AFC800A17422 /* WorkPatternBO.swift */,
 				A7E7B2021D89AFD300A17422 /* WorkPatternListBO.swift */,
+				CCE60D8A1D8A45AD00915031 /* ServiceBO.swift */,
 			);
 			path = BusinessObjects;
 			sourceTree = "<group>";
@@ -592,6 +598,8 @@
 				A78D2A541D4A7A3D00756F2A /* IQTitleBarButtonItem.swift in Sources */,
 				A7E694AC1D60AA910042DAE9 /* BaseBL.swift in Sources */,
 				A78D2A201D4A6D4500756F2A /* Appointments.xcdatamodeld in Sources */,
+				CCE60D8D1D8A4CAE00915031 /* ServicesOfferedCustomCell.swift in Sources */,
+				CCE60D8B1D8A45AD00915031 /* ServiceBO.swift in Sources */,
 				CCE60D831D88595B00915031 /* AddBusinessBO.swift in Sources */,
 				A78D2A511D4A7A3D00756F2A /* IQTextView.swift in Sources */,
 				A78D2A551D4A7A3D00756F2A /* IQToolbar.swift in Sources */,

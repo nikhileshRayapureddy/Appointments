@@ -14,10 +14,9 @@ class AddSkillsViewController: BaseViewController {
     @IBOutlet weak var scrlVwAddSkills: UIScrollView!
     var viewSelectOptions = SelectOptionsCustomView()
     var selectedSkillBO = SkillsBO()
-    @IBOutlet weak var btnAddSkill: UIButton!
     @IBOutlet weak var txtVwDescription: SAMTextView!
+    @IBOutlet weak var txtSkillName: UITextField!
     var arrSkillsList = NSMutableArray()
-    var arrSkills = NSMutableArray()
     override func viewDidLoad() {
         super.viewDidLoad()
         txtVwDescription.placeholder = "Description"
@@ -45,44 +44,22 @@ class AddSkillsViewController: BaseViewController {
         self.navigationItem.rightBarButtonItem = bItem
         scrlVwAddSkills.hidden = false
         tblSkills.hidden = true
-        getSkills()
+        getListSkills()
     }
     
     func getListSkills()
     {
+        app_delegate.showLoader("Loading...")
         let layer = BusinessLayerClass()
         layer.callBack = self
         layer.getListSkills()
 
     }
-    
-    @IBAction func btnAddSkillClicked(sender: UIButton) {
-        
-        if let view : SelectOptionsCustomView = NSBundle.mainBundle().loadNibNamed("SelectOptionsCustomView", owner: nil, options: nil)[0] as? SelectOptionsCustomView
-        {
-            view.frame = CGRectMake(0, -64, self.view.frame.size.width, self.view.frame.size.height+64)
-            view.isMultipleSelection = false
-            view.viewTag = optionSelection.skill.rawValue
-            view.delegate = self
-            view.arrTitles = arrSkills
-            view.resizeView()
-            viewSelectOptions = view
-            self.view.addSubview(view)
-        }
-        
-    }
-    func getSkills()
-    {
-        app_delegate.showLoader("Loading...")
-        let layer = BusinessLayerClass()
-        layer.callBack = self
-        layer.getSkills()
-        
-    }
+
     func btnNextClicked(sender : UIButton)
     {
         let dictParams = NSMutableDictionary()
-        dictParams.setObject((btnAddSkill.titleLabel?.text)!, forKey: "SkillName")
+        dictParams.setObject(txtSkillName.text!, forKey: "SkillName")
         dictParams.setObject(txtVwDescription.text, forKey: "Notes")
         let defualts = NSUserDefaults.standardUserDefaults()
         let firmValue = defualts.valueForKey("FIRMID") as! NSInteger
@@ -119,8 +96,7 @@ class AddSkillsViewController: BaseViewController {
 
     func bindDataFromList(skill : SkillsBO)
     {
-        btnAddSkill.setTitle(skill.strSkillName, forState: UIControlState.Normal)
-        btnAddSkill.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+        txtSkillName.text = skill.strSkillName
         txtVwDescription.text = skill.strSkillNotes
         
         selectedSkillBO = skill
@@ -153,7 +129,7 @@ extension AddSkillsViewController : UITableViewDelegate, UITableViewDataSource
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         btnViewListClicked(btnViewList)
-        bindDataFromList(arrSkills.objectAtIndex(indexPath.row) as! SkillsBO)
+        bindDataFromList(arrSkillsList.objectAtIndex(indexPath.row) as! SkillsBO)
     }
     
 }
@@ -219,66 +195,5 @@ extension AddSkillsViewController : ParserDelegate
                 arrSkillsList.addObject(skillBO)
             }
         }
-        else if tag == ParsingConstant.getSkills.rawValue
-        {
-            getListSkills()
-            let response = object as! NSDictionary
-            let models = response.objectForKey("Model")
-            if models?.isKindOfClass(NSArray) == true
-            {
-                
-            }
-            else
-            {
-                let dictModel = models as! NSDictionary
-                let skillBO = SkillsBO()
-                
-                let firmId = dictModel.objectForKey("FirmId") as? NSNumber
-                skillBO.strFirmId = (firmId?.stringValue)!
-                let skillId = dictModel.objectForKey("SkillId") as? NSNumber
-                skillBO.strSkillId = (skillId?.stringValue)!
-                
-                skillBO.strSkillName = (dictModel.objectForKey("SkillName") as? String)!
-                skillBO.strSkillNotes = (dictModel.objectForKey("Notes") as? String)!
-                
-                arrSkills.addObject(skillBO)
-            }
-        }
-    }
-}
-
-extension AddSkillsViewController : SelectOptionsCustomView_Delegate
-{
-    func removeSelectionOptionsPopup() {
-        viewSelectOptions.delegate =  nil
-        viewSelectOptions.removeFromSuperview()
-    }
-    
-    func selectedOptions(arrSelected: NSMutableArray, withTag tag: Int) {
-        viewSelectOptions.delegate =  nil
-        viewSelectOptions.removeFromSuperview()
-        
-        if tag == optionSelection.skill.rawValue
-        {
-            var title = ""
-            for indexPath in arrSelected
-            {
-                let skill = arrSkills.objectAtIndex(indexPath.row) as! SkillsBO
-                if title.characters.count == 0
-                {
-                    title = skill.strSkillName
-                }
-                else
-                {
-                    title = String(format: "%@,%@", title,skill.strSkillName)
-                }
-            }
-            btnAddSkill.setTitle(title, forState: UIControlState.Normal)
-            btnAddSkill.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
-        }
-    }
-    
-    func showAlertWithMessage(message: String) {
-        showAlert(message, strTitle: "Alert")
     }
 }

@@ -303,6 +303,88 @@ func doUserLoginWithUserName(strUsername : String, strPassword : String){
         }
     }
 
+    func addService(dictParams : NSMutableDictionary)
+    {
+        let obj : HttpRequest = HttpRequest()
+        obj.tag = ParsingConstant.addService.rawValue
+        obj._serviceURL = NSString(format: "http://103.231.43.83:120/api/business/AddServiceOffered") as String
+        obj.MethodNamee = "POST";
+        obj.serviceName = ""
+        obj.params = dictParams
+        
+        
+        obj.doGetSOAPResponse {(success : Bool) -> Void in
+            if !success
+            {
+                self.callBack.parsingError(SERVER_ERROR, withTag: obj.tag)
+            }
+                
+            else{
+                if obj.parsedDataDict.valueForKey("Success")?.integerValue == 0
+                {
+                    self.callBack.parsingFinished(obj.parsedDataDict, withTag:obj.tag)
+                }
+                else if obj.parsedDataDict.valueForKey("Success")?.integerValue == 2
+                {
+                    self.callBack.parsingError(obj.parsedDataDict.valueForKey("Message") as? String, withTag:obj.tag)
+                }
+                else
+                {
+                    let x = (obj.parsedDataDict.valueForKey("Message") != nil) ? obj.parsedDataDict.valueForKey("Message")  : SERVER_ERROR
+                    if ((obj.parsedDataDict["Message"]?.isKindOfClass(NSNull)) == false)
+                    {
+                        self.callBack?.parsingError(x as? String, withTag: obj.tag)
+                    }
+                    else
+                    {
+                        self.callBack.parsingError("", withTag: obj.tag)
+                    }
+                }
+            }
+        }
+    }
+    
+    func updateService(dictParams : NSMutableDictionary)
+    {
+        let obj : HttpRequest = HttpRequest()
+        obj.tag = ParsingConstant.updateService.rawValue
+        obj._serviceURL = NSString(format: "http://103.231.43.83:120/api/business/UpdateServiceOffered") as String
+        obj.MethodNamee = "POST";
+        obj.serviceName = ""
+        obj.params = dictParams
+        
+        
+        obj.doGetSOAPResponse {(success : Bool) -> Void in
+            if !success
+            {
+                self.callBack.parsingError(SERVER_ERROR, withTag: obj.tag)
+            }
+                
+            else{
+                if obj.parsedDataDict.valueForKey("Success")?.integerValue == 0
+                {
+                    self.callBack.parsingFinished(obj.parsedDataDict, withTag:obj.tag)
+                }
+                else if obj.parsedDataDict.valueForKey("Success")?.integerValue == 2
+                {
+                    self.callBack.parsingError(obj.parsedDataDict.valueForKey("Message") as? String, withTag:obj.tag)
+                }
+                else
+                {
+                    let x = (obj.parsedDataDict.valueForKey("Message") != nil) ? obj.parsedDataDict.valueForKey("Message")  : SERVER_ERROR
+                    if ((obj.parsedDataDict["Message"]?.isKindOfClass(NSNull)) == false)
+                    {
+                        self.callBack?.parsingError(x as? String, withTag: obj.tag)
+                    }
+                    else
+                    {
+                        self.callBack.parsingError("", withTag: obj.tag)
+                    }
+                }
+            }
+        }
+    }
+
     func addResource(dictParams : NSMutableDictionary)
     {
         let obj : HttpRequest = HttpRequest()

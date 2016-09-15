@@ -19,6 +19,16 @@ class ServiceOfferedViewController: BaseViewController,UITextFieldDelegate {
     @IBOutlet weak var btnSelectSkill: UIButton!
     @IBOutlet weak var txtFldDesc: UITextField!
     @IBOutlet weak var txtFldServiceType: UITextField!
+    @IBOutlet weak var txtServiceType: UITextField!
+    @IBOutlet weak var txtServiceDescription: UITextField!
+    @IBOutlet weak var txtPrice: UITextField!
+    @IBOutlet weak var txtDuration: UITextField!
+    
+    var arrSkillsList = NSMutableArray()
+    var arrServicesList = NSMutableArray()
+    var viewSelectOptions = SelectOptionsCustomView()
+    var arrSelectedSkills = NSMutableArray()
+    var selectedServiceBO = ServiceBO()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,6 +54,9 @@ class ServiceOfferedViewController: BaseViewController,UITextFieldDelegate {
         self.navigationItem.rightBarButtonItem = bItem
         scrlVwSevicesOffered.hidden = false
         tableView.hidden = true
+        tableView.estimatedRowHeight = 100
+        tableView.rowHeight = UITableViewAutomaticDimension
+
         getListOfServices()
     }
     func btnNextClicked(sender : UIButton)
@@ -59,12 +72,15 @@ class ServiceOfferedViewController: BaseViewController,UITextFieldDelegate {
         layer.getListServicesOffered()
     }
 
-    func getServicesOffered()
+    func getListSkills()
     {
         let layer = BusinessLayerClass()
         layer.callBack = self
-        layer.getServicesOffered()
+        layer.getListSkills()
+        
     }
+    
+
     @IBAction func btnViewListClicked(sender: UIButton) {
         sender.selected = !sender.selected
         if sender.selected == true{
@@ -75,6 +91,7 @@ class ServiceOfferedViewController: BaseViewController,UITextFieldDelegate {
         {
             scrlVwSevicesOffered.hidden = false
             tableView.hidden = true
+            bindDataFromList(ServiceBO())
         }
     }
 
@@ -93,14 +110,79 @@ class ServiceOfferedViewController: BaseViewController,UITextFieldDelegate {
         // Pass the selected object to the new view controller.
     }
     */
-
+    func bindDataFromList(service : ServiceBO)
+    {
+        txtServiceType.text = service.strServiceName
+        txtServiceDescription.text = service.strDescription
+        btnSelectSkill.setTitle(service.strSkillString, forState: UIControlState.Normal)
+        btnSelectSkill.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+        if service.strFirmId.characters.count == 0
+        {
+            txtPrice.text = ""
+            txtDuration.text = ""
+            btnTwoMenJob.selected = false
+        }
+        else
+        {
+            txtPrice.text = String (format: "%lf", service.Price)
+            txtDuration.text = String (format: "%lf", service.Duration)
+            btnTwoMenJob.selected = service.isTwoManJob
+        }
+        selectedServiceBO = service
+    }
+    @IBAction func btnSaveClicked(sender: UIButton) {
+        
+        let dictParams = NSMutableDictionary()
+        let defualts = NSUserDefaults.standardUserDefaults()
+        dictParams.setObject(txtServiceType.text!, forKey: "ServiceName")
+        dictParams.setObject(txtServiceDescription.text!, forKey: "Description")
+        dictParams.setObject(txtPrice.text!, forKey: "Price")
+        dictParams.setObject(txtDuration.text!, forKey: "Duration")
+        let firmValue = defualts.valueForKey("FIRMID") as! NSInteger
+        
+        dictParams.setObject(String (firmValue), forKey: "FirmId")
+        if btnTwoMenJob.selected == true
+        {
+            dictParams.setObject("true", forKey: "TwoManJob")
+        }
+        else
+        {
+            dictParams.setObject("false", forKey: "TwoManJob")
+        }
+        
+        var skillString = ""
+        for indexPath in arrSelectedSkills
+        {
+            let dict = arrSkillsList.objectAtIndex(indexPath.row) as! SkillsBO
+            if skillString.characters.count == 0
+            {
+                skillString = dict.strSkillId
+            }
+            else
+            {
+                skillString = String(format: "%@,%@", skillString,dict.strSkillId)
+            }
+        }
+        dictParams.setObject(skillString, forKey: "SkillString")
+        let layer = BusinessLayerClass()
+        layer.callBack = self
+        if selectedServiceBO.strFirmId.characters.count == 0
+        {
+            layer.addService(dictParams)
+        }
+        else
+        {
+            layer.updateService(dictParams)
+        }
+        
+    }
 }
 
 
 extension ServiceOfferedViewController : UITableViewDelegate, UITableViewDataSource
 {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return arrServicesList.count
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -108,10 +190,18 @@ extension ServiceOfferedViewController : UITableViewDelegate, UITableViewDataSou
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell : AddBranchAddressCustomCell = tableView.dequeueReusableCellWithIdentifier("ADDRESSCELL") as! AddBranchAddressCustomCell
-//        cell.configureCell()
+        let cell : ServicesOfferedCustomCell = tableView.dequeueReusableCellWithIdentifier("SERVICECELL") as! ServicesOfferedCustomCell
+        cell.configureCell(indexPath, anddata: arrServicesList)
+        cell.selectionStyle = UITableViewCellSelectionStyle.None
         return cell
     }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        btnViewListClicked(btnViewList)
+        bindDataFromList(arrServicesList.objectAtIndex(indexPath.row) as! ServiceBO)
+    }
+    
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         return true
     }
@@ -125,6 +215,17 @@ extension ServiceOfferedViewController : UITableViewDelegate, UITableViewDataSou
         sender.selected = !sender.selected
     }
     @IBAction func btnSelectSkillClicked(sender: UIButton) {
+        if let view : SelectOptionsCustomView = NSBundle.mainBundle().loadNibNamed("SelectOptionsCustomView", owner: nil, options: nil)[0] as? SelectOptionsCustomView
+        {
+            view.frame = CGRectMake(0, -64, self.view.frame.size.width, self.view.frame.size.height+64)
+            view.isMultipleSelection = false
+            view.viewTag = optionSelection.skill.rawValue
+            view.delegate = self
+            view.arrTitles = arrSkillsList
+            view.resizeView()
+            viewSelectOptions = view
+            self.view.addSubview(view)
+        }
     }
 }
 
@@ -133,15 +234,136 @@ extension ServiceOfferedViewController : ParserDelegate
     func parsingFinished(object: AnyObject?, withTag tag: NSInteger) {
         if tag == ParsingConstant.getListServicesOffered.rawValue
         {
-            getServicesOffered()
-        }
-        else if tag == ParsingConstant.getServicesOffered.rawValue
-        {
             app_delegate.removeloder()
+            let response = object as! NSDictionary
+            let models = response.objectForKey("Model")
+            if ((models?.isKindOfClass(NSArray)) == true)
+            {
+                let modelsArray = models as! NSArray
+                for dict in modelsArray
+                {
+                    let dictModel = dict as! NSDictionary
+                    let service = ServiceBO()
+                    let firmId = dictModel.objectForKey("FirmId") as? NSNumber
+                    service.strFirmId = (firmId?.stringValue)!
+                    let serviceId = dictModel.objectForKey("ServiceId") as? NSNumber
+                    service.strServiceId = (serviceId?.stringValue)!
+                    service.strServiceName = (dictModel.objectForKey("ServiceName") as? String)!
+                    service.strDescription = (dictModel.objectForKey("Description") as? String)!
+                    service.Price = (dictModel.objectForKey("Price") as? Double)!
+                    service.Duration = (dictModel.objectForKey("Duration") as? Int)!
+                    service.isTwoManJob = (dictModel.objectForKey("TwoManJob") as? Bool)!
+                    if ((dictModel["SkillString"]?.isKindOfClass(NSNull)) == false)
+                    {
+                        service.strSkillString = (dictModel.objectForKey("SkillString") as? String)!
+                    }
+                    arrServicesList.addObject(service)
+                }
+                
+            }
+            else
+            {
+                let dictModel = models as! NSDictionary
+                let service = ServiceBO()
+                let firmId = dictModel.objectForKey("FirmId") as? NSNumber
+                service.strFirmId = (firmId?.stringValue)!
+                let serviceId = dictModel.objectForKey("ServiceId") as? NSNumber
+                service.strServiceId = (serviceId?.stringValue)!
+                service.strServiceName = (dictModel.objectForKey("ServiceName") as? String)!
+                service.strDescription = (dictModel.objectForKey("Description") as? String)!
+                service.Price = (dictModel.objectForKey("Price") as? Double)!
+                service.Duration = (dictModel.objectForKey("Duration") as? Int)!
+                service.isTwoManJob = (dictModel.objectForKey("TwoManJob") as? Bool)!
+                if ((dictModel["SkillString"]?.isKindOfClass(NSNull)) == false)
+                {
+                    service.strSkillString = (dictModel.objectForKey("SkillString") as? String)!
+                }
+                arrServicesList.addObject(service)
+
+            }
+            
+            getListSkills()
+        }
+        else if tag == ParsingConstant.getListSkills.rawValue
+        {
+            let response = object as! NSDictionary
+            let models = response.objectForKey("Model")
+            if ((models?.isKindOfClass(NSArray)) == true)
+            {
+                let modelsArray = models as! NSArray
+                for dict in modelsArray
+                {
+                    let dictModel = dict as! NSDictionary
+                    let skillBO = SkillsBO()
+                    
+                    let firmId = dictModel.objectForKey("FirmId") as? NSNumber
+                    skillBO.strFirmId = (firmId?.stringValue)!
+                    let skillId = dictModel.objectForKey("SkillId") as? NSNumber
+                    skillBO.strSkillId = (skillId?.stringValue)!
+                    
+                    skillBO.strSkillName = (dictModel.objectForKey("SkillName") as? String)!
+                    skillBO.strSkillNotes = (dictModel.objectForKey("Notes") as? String)!
+                    arrSkillsList.addObject(skillBO)
+                }
+            }
+            else
+            {
+                let dictModel = models as! NSDictionary
+                let skillBO = SkillsBO()
+                
+                let firmId = dictModel.objectForKey("FirmId") as? NSNumber
+                skillBO.strFirmId = (firmId?.stringValue)!
+                let skillId = dictModel.objectForKey("SkillId") as? NSNumber
+                skillBO.strSkillId = (skillId?.stringValue)!
+                
+                skillBO.strSkillName = (dictModel.objectForKey("SkillName") as? String)!
+                skillBO.strSkillNotes = (dictModel.objectForKey("Notes") as? String)!
+                
+                arrSkillsList.addObject(skillBO)
+            }
         }
     }
     
     func parsingError(error: String?, withTag tag: NSInteger) {
+        app_delegate.removeloder()
+        self.showAlert(error!, strTitle: "Failed!")
         
+    }
+}
+
+extension ServiceOfferedViewController : SelectOptionsCustomView_Delegate
+{
+    func removeSelectionOptionsPopup() {
+        viewSelectOptions.delegate =  nil
+        viewSelectOptions.removeFromSuperview()
+    }
+    
+    func selectedOptions(arrSelected: NSMutableArray, withTag tag: Int) {
+        viewSelectOptions.delegate =  nil
+        viewSelectOptions.removeFromSuperview()
+        
+        if tag == optionSelection.skill.rawValue
+        {
+            arrSelectedSkills.addObjectsFromArray(arrSelected as [AnyObject])
+            var title = ""
+            for indexPath in arrSelected
+            {
+                let dict = arrSkillsList.objectAtIndex(indexPath.row) as! SkillsBO
+                if title.characters.count == 0
+                {
+                    title = dict.strSkillName
+                }
+                else
+                {
+                    title = String(format: "%@,%@", title,dict.strSkillName)
+                }
+            }
+            btnSelectSkill.setTitle(title, forState: UIControlState.Normal)
+            btnSelectSkill.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+        }
+    }
+    
+    func showAlertWithMessage(message: String) {
+        showAlert(message, strTitle: "Alert")
     }
 }
