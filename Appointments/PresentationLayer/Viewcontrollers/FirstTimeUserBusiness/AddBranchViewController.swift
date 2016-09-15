@@ -49,8 +49,7 @@ class AddBranchViewController: BaseViewController {
         self.navigationItem.rightBarButtonItem = bItem
         scrlVwAddBranch.hidden = false
         tableView.hidden = true
-        tableView.estimatedRowHeight = 100
-        tableView.rowHeight = UITableViewAutomaticDimension
+       
         
         
         getListOfBranches()
@@ -76,6 +75,9 @@ class AddBranchViewController: BaseViewController {
         if sender.selected == true{
             scrlVwAddBranch.hidden = true
             tableView.hidden = false
+            tableView.estimatedRowHeight = 150
+            tableView.rowHeight = UITableViewAutomaticDimension
+
             tableView.reloadData()
 
         }
@@ -154,6 +156,9 @@ extension AddBranchViewController : UITableViewDelegate, UITableViewDataSource
         bindDataFromList(arrBranchesList.objectAtIndex(indexPath.row) as! BranchBO)
     }
     
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
 }
 
 extension AddBranchViewController : UITextFieldDelegate
