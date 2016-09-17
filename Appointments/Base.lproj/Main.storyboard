@@ -349,7 +349,7 @@
                                 <rect key="frame" x="0.0" y="75" width="375" height="592"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DdK-0j-qFg">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="592"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="720"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="twK-Lv-Uzv">
                                                 <rect key="frame" x="138" y="25" width="98" height="97"/>
@@ -665,7 +665,7 @@
                                             <constraint firstItem="Isr-fG-vc3" firstAttribute="leading" secondItem="DdK-0j-qFg" secondAttribute="leading" constant="29" id="4BV-lB-DUH"/>
                                             <constraint firstAttribute="trailing" secondItem="uLh-kA-9M8" secondAttribute="trailing" constant="15" id="5Ef-Dm-bt1"/>
                                             <constraint firstItem="dv2-Ao-oKl" firstAttribute="top" secondItem="hUf-LN-D4O" secondAttribute="bottom" constant="10" id="67R-w2-oQi"/>
-                                            <constraint firstAttribute="height" constant="592" id="6ma-kx-Fxm"/>
+                                            <constraint firstAttribute="height" constant="720" id="6ma-kx-Fxm"/>
                                             <constraint firstAttribute="trailing" secondItem="bke-pH-yUW" secondAttribute="trailing" constant="15" id="72u-t5-lbr"/>
                                             <constraint firstAttribute="trailing" secondItem="5bs-sl-BBI" secondAttribute="trailing" constant="15" id="86j-86-k4r"/>
                                             <constraint firstItem="85f-EW-9LC" firstAttribute="leading" secondItem="DdK-0j-qFg" secondAttribute="leading" constant="29" id="8g8-cO-zvu"/>

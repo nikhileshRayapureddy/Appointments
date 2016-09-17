@@ -43,7 +43,7 @@ class AddBusinessViewController: BaseViewController,UITextFieldDelegate {
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        scrlVw.contentSize = CGSizeMake(scrlVw.frame.size.width, 700)
+        scrlVw.contentSize = CGSizeMake(scrlVw.frame.size.width, 750)
 
     }
     override func viewWillAppear(animated: Bool) {
@@ -137,7 +137,10 @@ class AddBusinessViewController: BaseViewController,UITextFieldDelegate {
     }
     
     @IBAction func btnBusinessTypesClicked(sender: UIButton) {
-        currenttextField.resignFirstResponder()
+        if currenttextField != nil
+        {
+            currenttextField.resignFirstResponder()
+        }
         if let view : SelectOptionsCustomView = NSBundle.mainBundle().loadNibNamed("SelectOptionsCustomView", owner: nil, options: nil)[0] as? SelectOptionsCustomView
         {
             view.frame = CGRectMake(0, -64, self.view.frame.size.width, self.view.frame.size.height+64)
@@ -151,8 +154,12 @@ class AddBusinessViewController: BaseViewController,UITextFieldDelegate {
         }
         
     }
-    @IBAction func btnBookingTypeClicked(sender: UIButton) {
+    @IBAction func btnBookingTypeClicked(sender: UIButton)
+    {
+        if currenttextField != nil
+        {
          currenttextField.resignFirstResponder()
+        }
         if let view : SelectOptionsCustomView = NSBundle.mainBundle().loadNibNamed("SelectOptionsCustomView", owner: nil, options: nil)[0] as? SelectOptionsCustomView
         {
             view.frame = CGRectMake(0, -64, self.view.frame.size.width, self.view.frame.size.height+64)
@@ -179,9 +186,9 @@ class AddBusinessViewController: BaseViewController,UITextFieldDelegate {
             dictParams.setObject("", forKey: "ParentId")
         }
         dictParams.setObject(txtBusinessName.text!, forKey: "FirmName")
-        dictParams.setObject("", forKey: "FirmLogo")
-        dictParams.setObject(btnBusinessTypes.titleLabel!.text!, forKey: "BusinessType")
-        dictParams.setObject(btnBookingType.titleLabel!.text!, forKey: "BookingType")
+        dictParams.setObject("asd", forKey: "FirmLogo")
+        dictParams.setObject("2", forKey: "BusinessType")
+        dictParams.setObject("2", forKey: "BookingType")
         dictParams.setObject(txtEmail.text!, forKey: "FirmEmail")
         dictParams.setObject("", forKey: "PostalCode")
         dictParams.setObject(txtContactNumber.text!, forKey: "FirmPrimaryPhone")
@@ -193,7 +200,7 @@ class AddBusinessViewController: BaseViewController,UITextFieldDelegate {
         dictParams.setObject("1", forKey: "EnablePayment")
         let layer = BusinessLayerClass()
         layer.callBack = self
-        layer.addBusinessDetails(dictParams)
+        layer.UpdateBusinessDetails(dictParams)
     }
     func getBusinessTypes()
     {
@@ -257,6 +264,10 @@ extension AddBusinessViewController : ParserDelegate
         else if tag == ParsingConstant.addBusiness.rawValue
         {
             isSaved = true
+            
+            dispatch_async(dispatch_get_main_queue(), { 
+//                self.showAlertWithMessage("")
+            })
         }
         
         

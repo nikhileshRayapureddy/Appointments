@@ -1,4 +1,4 @@
-//
+    //
 //  AddResourceViewController.swift
 //  Appointments
 //
@@ -144,7 +144,10 @@ class AddResourceViewController: BaseViewController,UITextFieldDelegate {
     }
 
     @IBAction func btnViewListClicked(sender: UIButton) {
+        if currenttextField != nil
+        {
         currenttextField.resignFirstResponder()
+        }
 
         sender.selected = !sender.selected
         if sender.selected == true{
@@ -352,8 +355,11 @@ extension AddResourceViewController : ParserDelegate
                    
                     let WPId = dictModel.objectForKey("WPId") as? NSNumber
                     resource.strWPId = (WPId?.stringValue)!
-                    
-                    resource.strCapacity = (dictModel.objectForKey("Capacity") as? String)!
+                    if ((dictModel["Capacity"]?.isKindOfClass(NSNull)) == false)
+                    {
+                        resource.strCapacity = (dictModel.objectForKey("Capacity") as? String)!
+                    }
+
                     resource.strEmail = (dictModel.objectForKey("EMail") as? String)!
 
                     let skillLevel = dictModel.objectForKey("SkillLevel") as? NSNumber
