@@ -30,6 +30,8 @@ class ServiceOfferedViewController: BaseViewController,UITextFieldDelegate {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        self.getListSkills()
+
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -258,7 +260,10 @@ extension ServiceOfferedViewController : UITableViewDelegate, UITableViewDataSou
         sender.selected = !sender.selected
     }
     @IBAction func btnSelectSkillClicked(sender: UIButton) {
+        if currenttextField != nil
+        {
         currenttextField.resignFirstResponder()
+        }
         if let view : SelectOptionsCustomView = NSBundle.mainBundle().loadNibNamed("SelectOptionsCustomView", owner: nil, options: nil)[0] as? SelectOptionsCustomView
         {
             view.frame = CGRectMake(0, -64, self.view.frame.size.width, self.view.frame.size.height+64)
@@ -327,7 +332,6 @@ extension ServiceOfferedViewController : ParserDelegate
 
             }
             tableView.performSelectorOnMainThread(#selector(UITableView.reloadData), withObject: nil, waitUntilDone: true)
-            self.getListSkills()
         }
         else if tag == ParsingConstant.getListSkills.rawValue
         {

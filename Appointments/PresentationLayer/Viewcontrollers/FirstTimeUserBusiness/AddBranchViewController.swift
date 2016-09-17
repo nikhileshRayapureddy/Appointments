@@ -151,7 +151,9 @@ class AddBranchViewController: BaseViewController {
         dictParams.setObject(txtCounty.text!, forKey: "Countynm")
         dictParams.setObject("", forKey: "AllowExtBook")
         dictParams.setObject("1", forKey: "EnablePayment")
-        dictParams.setObject("1", forKey: "ParentId")
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let firmValue = defaults.valueForKey("FIRMID") as! NSInteger
+        dictParams.setObject(String (firmValue), forKey: "ParentId")
         
         
         if selectedBranchBO.strFirmId.characters.count == 0
@@ -234,12 +236,20 @@ extension AddBranchViewController : ParserDelegate
                     let firmId = dictModel.objectForKey("FirmId") as? NSNumber
                     branchBO.strFirmId = (firmId?.stringValue)!
                     branchBO.strFirmName = (dictModel.objectForKey("FirmName") as? String)!
-                    branchBO.strFirmEmail = (dictModel.objectForKey("FirmEmail") as? String)!
+                    if ((dictModel["FirmEmail"]?.isKindOfClass(NSNull)) == false)
+                    {
+                        branchBO.strFirmEmail = (dictModel.objectForKey("FirmEmail") as? String)!
+                    }
+
                     if ((dictModel["FirmLogo"]?.isKindOfClass(NSNull)) == false)
                     {
                         branchBO.strFirmLogo = (dictModel.objectForKey("FirmLogo") as? String)!
                     }
-                    branchBO.strBusinessType = (dictModel.objectForKey("BusinessType") as? String)!
+                    if ((dictModel["BusinessType"]?.isKindOfClass(NSNull)) == false)
+                    {
+                        branchBO.strBusinessType = (dictModel.objectForKey("BusinessType") as? String)!
+                    }
+
                     if ((dictModel["BookingType"]?.isKindOfClass(NSNull)) == false)
                     {
                         branchBO.strBookingType = (dictModel.objectForKey("BookingType") as? String)!
@@ -248,11 +258,27 @@ extension AddBranchViewController : ParserDelegate
                     {
                         branchBO.strPostalCode = (dictModel.objectForKey("PostalCode") as? String)!
                     }
-                    branchBO.strFirmPrimaryPhone = (dictModel.objectForKey("FirmPrimaryPhone") as? String)!
-                    branchBO.strAddressLine1 = (dictModel.objectForKey("AddressLine1") as? String)!
-                    branchBO.strAddressLine2 = (dictModel.objectForKey("AddressLine2") as? String)!
-                    branchBO.strCitynm = (dictModel.objectForKey("Citynm") as? String)!
-                    branchBO.strCountynm = (dictModel.objectForKey("Countynm") as? String)!
+                    if ((dictModel["FirmPrimaryPhone"]?.isKindOfClass(NSNull)) == false)
+                    {
+                        branchBO.strFirmPrimaryPhone = (dictModel.objectForKey("FirmPrimaryPhone") as? String)!
+                    }
+                    if ((dictModel["AddressLine1"]?.isKindOfClass(NSNull)) == false)
+                    {
+                        branchBO.strAddressLine1 = (dictModel.objectForKey("AddressLine1") as? String)!
+                    }
+                    if ((dictModel["AddressLine2"]?.isKindOfClass(NSNull)) == false)
+                    {
+                        branchBO.strAddressLine2 = (dictModel.objectForKey("AddressLine2") as? String)!
+                    }
+                    if ((dictModel["Citynm"]?.isKindOfClass(NSNull)) == false)
+                    {
+                        branchBO.strCitynm = (dictModel.objectForKey("Citynm") as? String)!
+                    }
+                    if ((dictModel["Countynm"]?.isKindOfClass(NSNull)) == false)
+                    {
+                        branchBO.strCountynm = (dictModel.objectForKey("Countynm") as? String)!
+                    }
+
                     if ((dictModel["AllowExtBook"]?.isKindOfClass(NSNull)) == false)
                     {
                         branchBO.strAllowExtBook = (dictModel.objectForKey("AllowExtBook") as? String)!

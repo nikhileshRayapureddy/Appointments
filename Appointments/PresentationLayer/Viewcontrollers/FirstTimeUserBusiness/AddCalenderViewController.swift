@@ -147,7 +147,8 @@ class AddCalenderViewController: BaseViewController,UITextFieldDelegate {
         app_delegate.showLoader("")
        let dictParams = NSMutableDictionary()
         let defaults = NSUserDefaults.standardUserDefaults()
-        dictParams.setObject(defaults.valueForKey("FIRMID")!, forKey: "FirmId")
+        let firmValue = defaults.valueForKey("FIRMID") as! NSInteger
+        dictParams.setObject(String (firmValue), forKey: "FirmId")
         dictParams.setObject(txtFldPatternName.text!, forKey: "PatternName")
         var isUpdate = false
         if selectedBO.strFirmWPId != ""
@@ -368,7 +369,10 @@ extension AddCalenderViewController : UITableViewDelegate, UITableViewDataSource
         }
         else
         {
+            if currenttextFiled != nil
+            {
             currenttextFiled.resignFirstResponder()
+            }
             datePicker.minimumDate = MinDate
             constVwDatePickerHeight.constant = 0;
             currenttextFiled = textField
