@@ -89,7 +89,6 @@ class SignUpViewController: UIViewController {
     @IBAction func btnNextClicked(sender: UIButton) {
         if sender.selected == true{
             if self.validateStep2Fields() == true{
-//                self.showCongratsMessage("You are successfully registered.", strTitle: "Congratulations!")
                 registerUser()
                 print("Sign up clicked")
         }
@@ -223,7 +222,38 @@ extension SignUpViewController : ParserDelegate
 {
     func parsingFinished(object: AnyObject?, withTag tag: NSInteger) {
         app_delegate.removeloder()
-//        self.performSelectorOnMainThread(#selector(self.navigateToHome), withObject: nil, waitUntilDone: true)
+        
+        dispatch_async(dispatch_get_main_queue()) { 
+            
+        let alert = UIAlertController(title: "Success!", message: "You have been registered successfully.", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:{
+            action in
+            var isVcPresent = false
+            var VC : UIViewController!
+            
+            for vc in (self.navigationController?.viewControllers)!
+            {
+                if vc.isKindOfClass(HomeViewController)
+                {
+                    isVcPresent = true
+                    VC = vc
+                }
+            }
+            if isVcPresent == true
+            {
+                self.navigationController?.popToViewController(VC, animated: true)
+            }
+            else
+            {
+                let vc : HomeViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("HomeViewController") as! HomeViewController
+                self.navigationController!.pushViewController(vc, animated: true)
+                
+            }
+        } ))
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+        }
+
         
     }
     func parsingError(error: String?, withTag tag: NSInteger) {

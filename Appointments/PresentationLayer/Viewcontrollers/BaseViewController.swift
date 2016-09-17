@@ -38,11 +38,13 @@ class BaseViewController: UIViewController {
         {
             let btnTitle : UIButton = UIButton(type: UIButtonType.Custom)
             
-            btnTitle.frame =  CGRectMake(0, 0, 180,24)
+            btnTitle.frame =  CGRectMake(0, 0, 300,24)
             btnTitle.setTitle(title, forState: UIControlState.Normal)
             btnTitle.setTitle(title, forState: UIControlState.Highlighted)
             btnTitle.setTitle(title, forState: UIControlState.Selected)
+            btnTitle.titleLabel?.textAlignment = NSTextAlignment.Center
             btnTitle.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+//            btnTitle.backgroundColor = UIColor.whiteColor()
             self.navigationItem.titleView = btnTitle
         }
     }

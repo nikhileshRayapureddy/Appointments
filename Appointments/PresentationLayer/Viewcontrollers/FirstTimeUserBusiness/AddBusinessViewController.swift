@@ -15,7 +15,7 @@ enum OptionsSelection : Int
 }
 
 
-class AddBusinessViewController: BaseViewController {
+class AddBusinessViewController: BaseViewController,UITextFieldDelegate {
 
     @IBOutlet weak var btnBookingType: UIButton!
     @IBOutlet weak var btnBusinessTypes: UIButton!
@@ -29,19 +29,21 @@ class AddBusinessViewController: BaseViewController {
     @IBOutlet weak var txtContactNumber: UITextField!
     @IBOutlet weak var txtEmail: UITextField!
     @IBOutlet weak var txtBusinessName: UITextField!
-    @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var btnSave: UIButton!
+    var currenttextField : UITextField!
     var arrBusinessTypes : NSMutableArray! = NSMutableArray()
     var arrBusinessBookingTypes : NSMutableArray! = NSMutableArray()
     var viewSelectOptions = SelectOptionsCustomView()
     var arrSelectedOptions = NSMutableArray()
+    var isSaved = false
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        scrlVw.contentSize = CGSizeMake(scrlVw.frame.size.width, 580)
+        scrlVw.contentSize = CGSizeMake(scrlVw.frame.size.width, 700)
 
     }
     override func viewWillAppear(animated: Bool) {
@@ -53,20 +55,60 @@ class AddBusinessViewController: BaseViewController {
         self.designTabBar()
         self.setSelected(1)
         let btnNext : UIButton = UIButton(type: UIButtonType.Custom)
-        btnNext.frame =  CGRectMake(0, 0, 90,44)
+        btnNext.frame =  CGRectMake(0, 0, 50,44)
         btnNext.setTitle("Next", forState: UIControlState.Normal)
         btnNext.setTitle("Next", forState: UIControlState.Highlighted)
         btnNext.setTitle("Next", forState: UIControlState.Selected)
         btnNext.addTarget(self, action: #selector(self.btnNextClicked(_:)), forControlEvents: .TouchUpInside)
         btnNext.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-        let rightBarButtonItems = UIView()
-        rightBarButtonItems.frame = CGRectMake(ScreenWidth - 90, 0, 90, 44)
+        btnNext.titleLabel?.textAlignment = NSTextAlignment.Right
+       let rightBarButtonItems = UIView()
+        rightBarButtonItems.frame = CGRectMake(ScreenWidth - 90, 0, 50, 44)
         rightBarButtonItems.addSubview(btnNext)
         let bItem = UIBarButtonItem(customView:rightBarButtonItems)
         self.navigationItem.rightBarButtonItem = bItem
+  
+        let btnHome : UIButton = UIButton(type: UIButtonType.Custom)
+        btnHome.frame =  CGRectMake(0, 0, 50,44)
+        btnHome.setTitle("Home", forState: UIControlState.Normal)
+        btnHome.setTitle("Home", forState: UIControlState.Highlighted)
+        btnHome.setTitle("Home", forState: UIControlState.Selected)
+        btnHome.addTarget(self, action: #selector(self.btnHomeClicked(_:)), forControlEvents: .TouchUpInside)
+        btnHome.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        let leftBarButtonItems = UIView()
+        leftBarButtonItems.frame = CGRectMake(ScreenWidth - 90, 0, 50, 44)
+        leftBarButtonItems.addSubview(btnHome)
+        let bLeftItem = UIBarButtonItem(customView:leftBarButtonItems)
+        self.navigationItem.leftBarButtonItem = bLeftItem
+
+
         getBusinessTypes()
     }
-    
+    func btnHomeClicked(sender : UIButton)
+    {
+        var isVcPresent = false
+        var VC : UIViewController!
+        
+        for vc in (self.navigationController?.viewControllers)!
+        {
+            if vc.isKindOfClass(HomeViewController)
+            {
+                isVcPresent = true
+                VC = vc
+            }
+        }
+        if isVcPresent == true
+        {
+            self.navigationController?.popToViewController(VC, animated: true)
+        }
+        else
+        {
+            let vc : HomeViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("HomeViewController") as! HomeViewController
+            self.navigationController!.pushViewController(vc, animated: true)
+            
+        }
+    }
+
     func bindBusinessData(dictBusiness : NSDictionary)
     {
         txtBusinessName.text = dictBusiness.objectForKey("FirmName") as? String
@@ -81,6 +123,50 @@ class AddBusinessViewController: BaseViewController {
     
     func btnNextClicked(sender : UIButton)
     {
+        if isSaved == true
+        {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewControllerWithIdentifier("AddBranchViewController") as! AddBranchViewController
+            self.navigationController?.pushViewController(vc, animated: false)
+        }
+        else
+        {
+            self.showAlertWithMessage("Please Add business to continue.")
+        }
+        
+    }
+    
+    @IBAction func btnBusinessTypesClicked(sender: UIButton) {
+        currenttextField.resignFirstResponder()
+        if let view : SelectOptionsCustomView = NSBundle.mainBundle().loadNibNamed("SelectOptionsCustomView", owner: nil, options: nil)[0] as? SelectOptionsCustomView
+        {
+            view.frame = CGRectMake(0, -64, self.view.frame.size.width, self.view.frame.size.height+64)
+            view.isMultipleSelection = false
+            view.viewTag = optionSelection.businessType.rawValue
+            view.delegate = self
+            view.arrTitles = arrBusinessTypes
+            view.resizeView()
+            viewSelectOptions = view
+            self.view.addSubview(view)
+        }
+        
+    }
+    @IBAction func btnBookingTypeClicked(sender: UIButton) {
+         currenttextField.resignFirstResponder()
+        if let view : SelectOptionsCustomView = NSBundle.mainBundle().loadNibNamed("SelectOptionsCustomView", owner: nil, options: nil)[0] as? SelectOptionsCustomView
+        {
+            view.frame = CGRectMake(0, -64, self.view.frame.size.width, self.view.frame.size.height+64)
+            view.isMultipleSelection = false
+            view.viewTag = optionSelection.bookingType.rawValue
+            view.delegate = self
+            view.arrTitles = arrBusinessBookingTypes
+            view.resizeView()
+            viewSelectOptions = view
+            self.view.addSubview(view)
+        }
+    }
+    
+    @IBAction func btnSaveClicked(sender: UIButton) {
         let dictParams = NSMutableDictionary()
         let defaults = NSUserDefaults.standardUserDefaults()
         let firmValue = defaults.valueForKey("FIRMID") as! NSInteger
@@ -109,52 +195,6 @@ class AddBusinessViewController: BaseViewController {
         layer.callBack = self
         layer.addBusinessDetails(dictParams)
     }
-    
-    @IBAction func btnBusinessTypesClicked(sender: UIButton) {
-        
-        if let view : SelectOptionsCustomView = NSBundle.mainBundle().loadNibNamed("SelectOptionsCustomView", owner: nil, options: nil)[0] as? SelectOptionsCustomView
-        {
-            view.frame = CGRectMake(0, -64, self.view.frame.size.width, self.view.frame.size.height+64)
-            view.isMultipleSelection = false
-            view.viewTag = optionSelection.businessType.rawValue
-            view.delegate = self
-            view.arrTitles = arrBusinessTypes
-            view.resizeView()
-            viewSelectOptions = view
-            self.view.addSubview(view)
-        }
-        
-    }
-    @IBAction func btnBookingTypeClicked(sender: UIButton) {
-        if let view : SelectOptionsCustomView = NSBundle.mainBundle().loadNibNamed("SelectOptionsCustomView", owner: nil, options: nil)[0] as? SelectOptionsCustomView
-        {
-            view.frame = CGRectMake(0, -64, self.view.frame.size.width, self.view.frame.size.height+64)
-            view.isMultipleSelection = false
-            view.viewTag = optionSelection.bookingType.rawValue
-            view.delegate = self
-            view.arrTitles = arrBusinessBookingTypes
-            view.resizeView()
-            viewSelectOptions = view
-            self.view.addSubview(view)
-        }
-    }
-    @IBAction func btnViewListClicked(sender: UIButton) {
-        
-        if sender.selected == true
-        {
-            scrlVw.hidden = false
-            tableView.hidden = true
-
-        }
-        else
-        {
-            scrlVw.hidden = true
-            tableView.hidden = false
-            
-        }
-        sender.selected = !sender.selected
-        
-    }
     func getBusinessTypes()
     {
         app_delegate.showLoader("Loading...")
@@ -177,6 +217,14 @@ class AddBusinessViewController: BaseViewController {
         layer.getBusiness()
     }
 
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        currenttextField = textField
+        return true
+    }
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        currenttextField.resignFirstResponder()
+        return true
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -208,7 +256,7 @@ extension AddBusinessViewController : ParserDelegate
         }
         else if tag == ParsingConstant.addBusiness.rawValue
         {
-            
+            isSaved = true
         }
         
         
@@ -226,6 +274,15 @@ extension AddBusinessViewController : ParserDelegate
         let businessBO = AddBusinessBO()
         let firmId = dictBusiness.objectForKey("FirmId") as? NSNumber
         businessBO.strFirmId = (firmId?.stringValue)!
+        
+        if businessBO.strFirmId == ""
+        {
+            isSaved = false
+        }
+        else
+        {
+            isSaved = true
+        }
         businessBO.strFirmName = (dictBusiness.objectForKey("FirmName") as? String)!
         businessBO.strFirmEmail = (dictBusiness.objectForKey("FirmEmail") as? String)!
         if ((dictBusiness["FirmLogo"]?.isKindOfClass(NSNull)) == false)
