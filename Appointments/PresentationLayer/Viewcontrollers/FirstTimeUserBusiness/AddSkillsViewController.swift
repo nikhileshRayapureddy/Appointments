@@ -33,21 +33,60 @@ class AddSkillsViewController: BaseViewController {
         self.designTabBar()
         self.setSelected(4)
         let btnNext : UIButton = UIButton(type: UIButtonType.Custom)
-        btnNext.frame =  CGRectMake(0, 0, 90,44)
+        btnNext.frame =  CGRectMake(0, 0, 50,44)
         btnNext.setTitle("Next", forState: UIControlState.Normal)
         btnNext.setTitle("Next", forState: UIControlState.Highlighted)
         btnNext.setTitle("Next", forState: UIControlState.Selected)
         btnNext.addTarget(self, action: #selector(self.btnNextClicked(_:)), forControlEvents: .TouchUpInside)
         btnNext.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        btnNext.titleLabel?.textAlignment = NSTextAlignment.Right
         let rightBarButtonItems = UIView()
-        rightBarButtonItems.frame = CGRectMake(ScreenWidth - 90, 0, 90, 44)
+        rightBarButtonItems.frame = CGRectMake(ScreenWidth - 90, 0, 50, 44)
         rightBarButtonItems.addSubview(btnNext)
         let bItem = UIBarButtonItem(customView:rightBarButtonItems)
         self.navigationItem.rightBarButtonItem = bItem
+
+        
+        let btnHome : UIButton = UIButton(type: UIButtonType.Custom)
+        btnHome.frame =  CGRectMake(0, 0, 50,44)
+        btnHome.setTitle("Home", forState: UIControlState.Normal)
+        btnHome.setTitle("Home", forState: UIControlState.Highlighted)
+        btnHome.setTitle("Home", forState: UIControlState.Selected)
+        btnHome.addTarget(self, action: #selector(self.btnHomeClicked(_:)), forControlEvents: .TouchUpInside)
+        btnHome.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        let leftBarButtonItems = UIView()
+        leftBarButtonItems.frame = CGRectMake(ScreenWidth - 90, 0, 50, 44)
+        leftBarButtonItems.addSubview(btnHome)
+        let bLeftItem = UIBarButtonItem(customView:leftBarButtonItems)
+        self.navigationItem.leftBarButtonItem = bLeftItem
         scrlVwAddSkills.hidden = false
         tblSkills.hidden = true
     }
-    
+    func btnHomeClicked(sender : UIButton)
+    {
+        var isVcPresent = false
+        var VC : UIViewController!
+        
+        for vc in (self.navigationController?.viewControllers)!
+        {
+            if vc.isKindOfClass(HomeViewController)
+            {
+                isVcPresent = true
+                VC = vc
+            }
+        }
+        if isVcPresent == true
+        {
+            self.navigationController?.popToViewController(VC, animated: true)
+        }
+        else
+        {
+            let vc : HomeViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("HomeViewController") as! HomeViewController
+            self.navigationController!.pushViewController(vc, animated: true)
+            
+        }
+    }
+
     func getListSkills()
     {
         app_delegate.showLoader("Loading...")
@@ -59,24 +98,13 @@ class AddSkillsViewController: BaseViewController {
 
     func btnNextClicked(sender : UIButton)
     {
-        let dictParams = NSMutableDictionary()
-        dictParams.setObject(txtSkillName.text!, forKey: "SkillName")
-        dictParams.setObject(txtVwDescription.text, forKey: "Notes")
-        let defualts = NSUserDefaults.standardUserDefaults()
-        let firmValue = defualts.valueForKey("FIRMID") as! NSInteger
-        dictParams.setValue(String(firmValue), forKey: "FirmId")
-        let layer = BusinessLayerClass()
-        layer.callBack = self
-
-        if selectedSkillBO.strSkillId.characters.count == 0
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier("ServiceOfferedViewController") as! ServiceOfferedViewController
+        if self.navigationController!.visibleViewController?.isKindOfClass(ServiceOfferedViewController) == true
         {
-            layer.addSkill(dictParams)
+            return
         }
-        else
-        {
-            dictParams.setObject(selectedSkillBO.strSkillId, forKey: "SkillId")
-            layer.updateSkill(dictParams)
-        }
+        self.navigationController?.pushViewController(vc, animated: false)
 
     }
     
@@ -104,7 +132,25 @@ class AddSkillsViewController: BaseViewController {
     }
 
     @IBAction func btnSaveClicked(sender: UIButton) {
-        self.btnNextClicked(UIButton())
+        let dictParams = NSMutableDictionary()
+        dictParams.setObject(txtSkillName.text!, forKey: "SkillName")
+        dictParams.setObject(txtVwDescription.text, forKey: "Notes")
+        let defualts = NSUserDefaults.standardUserDefaults()
+        let firmValue = defualts.valueForKey("FIRMID") as! NSInteger
+        dictParams.setValue(String(firmValue), forKey: "FirmId")
+        let layer = BusinessLayerClass()
+        layer.callBack = self
+        
+        if selectedSkillBO.strSkillId.characters.count == 0
+        {
+            layer.addSkill(dictParams)
+        }
+        else
+        {
+            dictParams.setObject(selectedSkillBO.strSkillId, forKey: "SkillId")
+            layer.updateSkill(dictParams)
+        }
+        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

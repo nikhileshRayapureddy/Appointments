@@ -61,20 +61,60 @@ class AddCalenderViewController: BaseViewController,UITextFieldDelegate {
         self.designTabBar()
         self.setSelected(3)
         let btnNext : UIButton = UIButton(type: UIButtonType.Custom)
-        btnNext.frame =  CGRectMake(0, 0, 90,44)
+        btnNext.frame =  CGRectMake(0, 0, 50,44)
         btnNext.setTitle("Next", forState: UIControlState.Normal)
         btnNext.setTitle("Next", forState: UIControlState.Highlighted)
         btnNext.setTitle("Next", forState: UIControlState.Selected)
         btnNext.addTarget(self, action: #selector(self.btnNextClicked(_:)), forControlEvents: .TouchUpInside)
         btnNext.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        btnNext.titleLabel?.textAlignment = NSTextAlignment.Right
         let rightBarButtonItems = UIView()
-        rightBarButtonItems.frame = CGRectMake(ScreenWidth - 90, 0, 90, 44)
+        rightBarButtonItems.frame = CGRectMake(ScreenWidth - 90, 0, 50, 44)
         rightBarButtonItems.addSubview(btnNext)
         let bItem = UIBarButtonItem(customView:rightBarButtonItems)
         self.navigationItem.rightBarButtonItem = bItem
+
+        
+        let btnHome : UIButton = UIButton(type: UIButtonType.Custom)
+        btnHome.frame =  CGRectMake(0, 0, 50,44)
+        btnHome.setTitle("Home", forState: UIControlState.Normal)
+        btnHome.setTitle("Home", forState: UIControlState.Highlighted)
+        btnHome.setTitle("Home", forState: UIControlState.Selected)
+        btnHome.addTarget(self, action: #selector(self.btnHomeClicked(_:)), forControlEvents: .TouchUpInside)
+        btnHome.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        let leftBarButtonItems = UIView()
+        leftBarButtonItems.frame = CGRectMake(ScreenWidth - 90, 0, 50, 44)
+        leftBarButtonItems.addSubview(btnHome)
+        let bLeftItem = UIBarButtonItem(customView:leftBarButtonItems)
+        self.navigationItem.leftBarButtonItem = bLeftItem
         scrlVwAddCalender.hidden = false
         tableView.hidden = true
     }
+    func btnHomeClicked(sender : UIButton)
+    {
+        var isVcPresent = false
+        var VC : UIViewController!
+        
+        for vc in (self.navigationController?.viewControllers)!
+        {
+            if vc.isKindOfClass(HomeViewController)
+            {
+                isVcPresent = true
+                VC = vc
+            }
+        }
+        if isVcPresent == true
+        {
+            self.navigationController?.popToViewController(VC, animated: true)
+        }
+        else
+        {
+            let vc : HomeViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("HomeViewController") as! HomeViewController
+            self.navigationController!.pushViewController(vc, animated: true)
+            
+        }
+    }
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         scrlVwAddCalender.contentSize = CGSizeMake(scrlVwAddCalender.frame.size.width, 720)
@@ -97,7 +137,10 @@ class AddCalenderViewController: BaseViewController,UITextFieldDelegate {
 
     func btnNextClicked(sender : UIButton)
     {
-        self.addWorkingPattern()
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier("AddSkillsViewController") as! AddSkillsViewController
+        self.navigationController?.pushViewController(vc, animated: false)
+
     }
     func addWorkingPattern()
     {
@@ -200,7 +243,7 @@ class AddCalenderViewController: BaseViewController,UITextFieldDelegate {
         
     }
     @IBAction func btnSaveClicked(sender: UIButton) {
-        self.btnNextClicked(UIButton())
+        self.addWorkingPattern()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -318,16 +361,18 @@ extension AddCalenderViewController : UITableViewDelegate, UITableViewDataSource
     }
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
-        currenttextFiled = textField
         if textField.tag == 151 || textField == txtFldPatternName
         {
-            
+            currenttextFiled = textField
             return true
         }
         else
         {
+            currenttextFiled.resignFirstResponder()
             datePicker.minimumDate = MinDate
             constVwDatePickerHeight.constant = 0;
+            currenttextFiled = textField
+
             return false
         }
     }

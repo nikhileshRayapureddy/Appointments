@@ -23,7 +23,8 @@ class AddResourceViewController: BaseViewController,UITextFieldDelegate {
     var arrSelectedWorkingPatternList = NSMutableArray()
     var viewSelectOptions = SelectOptionsCustomView()
     var selectedReourceBO = ResourceBO()
-    
+    var currenttextField : UITextField!
+
     var arrResourcesList = NSMutableArray()
     
     override func viewDidLoad() {
@@ -39,24 +40,91 @@ class AddResourceViewController: BaseViewController,UITextFieldDelegate {
         self.designTabBar()
         self.setSelected(6)
         let btnNext : UIButton = UIButton(type: UIButtonType.Custom)
-        btnNext.frame =  CGRectMake(0, 0, 90,44)
-        btnNext.setTitle("Next", forState: UIControlState.Normal)
-        btnNext.setTitle("Next", forState: UIControlState.Highlighted)
-        btnNext.setTitle("Next", forState: UIControlState.Selected)
+        btnNext.frame =  CGRectMake(0, 0, 50,44)
+        btnNext.setTitle("Save", forState: UIControlState.Normal)
+        btnNext.setTitle("Save", forState: UIControlState.Highlighted)
+        btnNext.setTitle("Save", forState: UIControlState.Selected)
         btnNext.addTarget(self, action: #selector(self.btnNextClicked(_:)), forControlEvents: .TouchUpInside)
         btnNext.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        btnNext.titleLabel?.textAlignment = NSTextAlignment.Right
         let rightBarButtonItems = UIView()
-        rightBarButtonItems.frame = CGRectMake(ScreenWidth - 90, 0, 90, 44)
+        rightBarButtonItems.frame = CGRectMake(ScreenWidth - 90, 0, 50, 44)
         rightBarButtonItems.addSubview(btnNext)
         let bItem = UIBarButtonItem(customView:rightBarButtonItems)
         self.navigationItem.rightBarButtonItem = bItem
+
+        
+        let btnHome : UIButton = UIButton(type: UIButtonType.Custom)
+        btnHome.frame =  CGRectMake(0, 0, 50,44)
+        btnHome.setTitle("Home", forState: UIControlState.Normal)
+        btnHome.setTitle("Home", forState: UIControlState.Highlighted)
+        btnHome.setTitle("Home", forState: UIControlState.Selected)
+        btnHome.addTarget(self, action: #selector(self.btnHomeClicked(_:)), forControlEvents: .TouchUpInside)
+        btnHome.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        let leftBarButtonItems = UIView()
+        leftBarButtonItems.frame = CGRectMake(ScreenWidth - 90, 0, 50, 44)
+        leftBarButtonItems.addSubview(btnHome)
+        let bLeftItem = UIBarButtonItem(customView:leftBarButtonItems)
+        self.navigationItem.leftBarButtonItem = bLeftItem
         scrlVwAddAddResource.hidden = false
         tableView.hidden = true
         getAllWorkingPatterns()
     }
+    func btnHomeClicked(sender : UIButton)
+    {
+        var isVcPresent = false
+        var VC : UIViewController!
+        
+        for vc in (self.navigationController?.viewControllers)!
+        {
+            if vc.isKindOfClass(HomeViewController)
+            {
+                isVcPresent = true
+                VC = vc
+            }
+        }
+        if isVcPresent == true
+        {
+            self.navigationController?.popToViewController(VC, animated: true)
+        }
+        else
+        {
+            let vc : HomeViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("HomeViewController") as! HomeViewController
+            self.navigationController!.pushViewController(vc, animated: true)
+            
+        }
+    }
+    
+
     func btnNextClicked(sender : UIButton)
     {
-        
+        let alert = UIAlertController(title: "Success!", message: "Added business successfully.", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:{
+            action in
+            var isVcPresent = false
+            var VC : UIViewController!
+
+            for vc in (self.navigationController?.viewControllers)!
+            {
+                if vc.isKindOfClass(HomeViewController)
+                {
+                    isVcPresent = true
+                    VC = vc
+                }
+            }
+            if isVcPresent == true
+            {
+                self.navigationController?.popToViewController(VC, animated: true)
+            }
+            else
+            {
+                let vc : HomeViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("HomeViewController") as! HomeViewController
+                self.navigationController!.pushViewController(vc, animated: true)
+
+            }
+        } ))
+    
+        self.presentViewController(alert, animated: true, completion: nil)
     }
     
     func getAllWorkingPatterns()
@@ -76,6 +144,8 @@ class AddResourceViewController: BaseViewController,UITextFieldDelegate {
     }
 
     @IBAction func btnViewListClicked(sender: UIButton) {
+        currenttextField.resignFirstResponder()
+
         sender.selected = !sender.selected
         if sender.selected == true{
             scrlVwAddAddResource.hidden = true
@@ -92,7 +162,8 @@ class AddResourceViewController: BaseViewController,UITextFieldDelegate {
     }
 
     @IBAction func btnSaveClicked(sender: UIButton) {
-        
+        currenttextField.resignFirstResponder()
+
         let dictParams = NSMutableDictionary()
         let defualts = NSUserDefaults.standardUserDefaults()
         dictParams.setObject(txtFldResourceName.text!, forKey: "ResourceName")
@@ -203,6 +274,8 @@ extension AddResourceViewController : UITableViewDelegate, UITableViewDataSource
     }
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+         currenttextField = textField
+
         return true
     }
     
@@ -212,6 +285,8 @@ extension AddResourceViewController : UITableViewDelegate, UITableViewDataSource
     }
 
     @IBAction func btnWorkingPatternClicked(sender: UIButton) {
+        currenttextField.resignFirstResponder()
+
         if let view : SelectOptionsCustomView = NSBundle.mainBundle().loadNibNamed("SelectOptionsCustomView", owner: nil, options: nil)[0] as? SelectOptionsCustomView
         {
             view.frame = CGRectMake(0, -64, self.view.frame.size.width, self.view.frame.size.height+64)
