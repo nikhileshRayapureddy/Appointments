@@ -37,6 +37,7 @@ enum ParsingConstant : Int
     case addService
     case updateService
     case getListResource
+    case getSkillLevelType
 }
 
 
