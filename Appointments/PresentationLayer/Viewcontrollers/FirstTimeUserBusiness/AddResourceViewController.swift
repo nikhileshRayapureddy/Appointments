@@ -15,16 +15,17 @@ class AddResourceViewController: BaseViewController,UITextFieldDelegate {
     
     @IBOutlet weak var btnWorkingPattern: UIButton!
     @IBOutlet weak var txtPriority: UITextField!
-    @IBOutlet weak var txtFldSkillLevel: UITextField!
+    @IBOutlet weak var btnSkillLevel: UIButton!
     @IBOutlet weak var txtFldContactNumber: UITextField!
     @IBOutlet weak var txtFldEmail: UITextField!
     @IBOutlet weak var txtFldResourceName: UITextField!
+    @IBOutlet weak var btnPriority: UIButton!
     var arrWorkingPatternList = NSMutableArray()
     var arrSelectedWorkingPatternList = NSMutableArray()
     var viewSelectOptions = SelectOptionsCustomView()
     var selectedReourceBO = ResourceBO()
-    var currenttextField : UITextField!
-
+    var currenttextField = UITextField()
+    var arrSkillTypes = [NSDictionary]()
     var arrResourcesList = NSMutableArray()
     
     override func viewDidLoad() {
@@ -144,10 +145,7 @@ class AddResourceViewController: BaseViewController,UITextFieldDelegate {
     }
 
     @IBAction func btnViewListClicked(sender: UIButton) {
-        if currenttextField != nil
-        {
         currenttextField.resignFirstResponder()
-        }
 
         sender.selected = !sender.selected
         if sender.selected == true{
@@ -172,7 +170,7 @@ class AddResourceViewController: BaseViewController,UITextFieldDelegate {
         dictParams.setObject(txtFldResourceName.text!, forKey: "ResourceName")
         dictParams.setObject("", forKey: "Capacity")
         dictParams.setObject(txtFldEmail.text!, forKey: "EMail")
-        dictParams.setObject(txtFldSkillLevel.text!, forKey: "SkillLevel")
+        dictParams.setObject(btnSkillLevel.titleLabel!.text!, forKey: "SkillLevel")
         
         dictParams.setObject("", forKey: "SkillString")
         let firmValue = defualts.valueForKey("FIRMID") as! NSInteger
@@ -218,7 +216,7 @@ class AddResourceViewController: BaseViewController,UITextFieldDelegate {
     {
         txtFldResourceName.text = service.strResourceName
         txtFldEmail.text = service.strEmail
-        txtFldSkillLevel.text = service.strSkillLevel
+        btnSkillLevel.setTitle(service.strSkillLevel, forState: .Normal)
         txtPriority.text = service.strPriority
         selectedReourceBO = service
         
@@ -286,6 +284,42 @@ extension AddResourceViewController : UITableViewDelegate, UITableViewDataSource
         textField.resignFirstResponder()
         return true
     }
+    @IBAction func btnPriorityClicked(sender: UIButton) {
+        currenttextField.resignFirstResponder()
+        
+        if let view : SelectOptionsCustomView = NSBundle.mainBundle().loadNibNamed("SelectOptionsCustomView", owner: nil, options: nil)[0] as? SelectOptionsCustomView
+        {
+            view.frame = CGRectMake(0, -64, self.view.frame.size.width, self.view.frame.size.height+64)
+            view.isMultipleSelection = false
+            view.viewTag = optionSelection.workingPattern.rawValue
+            view.delegate = self
+            view.arrTitles = arrWorkingPatternList
+            view.resizeView()
+            viewSelectOptions = view
+            self.view.addSubview(view)
+        }
+    }
+    @IBAction func btnSkillLevelClicked(sender: UIButton) {
+        currenttextField.resignFirstResponder()
+        
+        if let view : SelectOptionsCustomView = NSBundle.mainBundle().loadNibNamed("SelectOptionsCustomView", owner: nil, options: nil)[0] as? SelectOptionsCustomView
+        {
+            view.frame = CGRectMake(0, -64, self.view.frame.size.width, self.view.frame.size.height+64)
+            view.isMultipleSelection = false
+            view.viewTag = optionSelection.SkillLevel.rawValue
+            view.delegate = self
+            
+            let arrTemp = NSMutableArray()
+            for dict in arrSkillTypes {
+                
+                arrTemp.addObject(dict["Name"] as! String)
+            }
+            view.arrTitles = arrTemp
+            view.resizeView()
+            viewSelectOptions = view
+            self.view.addSubview(view)
+        }
+    }
 
     @IBAction func btnWorkingPatternClicked(sender: UIButton) {
         currenttextField.resignFirstResponder()
@@ -294,9 +328,9 @@ extension AddResourceViewController : UITableViewDelegate, UITableViewDataSource
         {
             view.frame = CGRectMake(0, -64, self.view.frame.size.width, self.view.frame.size.height+64)
             view.isMultipleSelection = false
-            view.viewTag = optionSelection.workingPattern.rawValue
+            view.viewTag = optionSelection.Priority.rawValue
             view.delegate = self
-            view.arrTitles = arrWorkingPatternList
+            view.arrTitles = ["0","1","2","3","4","5"]
             view.resizeView()
             viewSelectOptions = view
             self.view.addSubview(view)
@@ -368,8 +402,12 @@ extension AddResourceViewController : ParserDelegate
                     let priority = dictModel.objectForKey("Priority") as? NSNumber
                     resource.strPriority = (priority?.stringValue)!
 
-                    let resourceType = dictModel.objectForKey("ResourceType") as? NSNumber
-                    resource.strResourceType = (resourceType?.stringValue)!
+                    if ((dictModel["ResourceType"]?.isKindOfClass(NSNull)) == false)
+                    {
+                        let resourceType = dictModel.objectForKey("ResourceType") as? NSNumber
+                        resource.strResourceType = (resourceType?.stringValue)!
+                    }
+
 
                     if ((dictModel["SkillString"]?.isKindOfClass(NSNull)) == false)
                     {
@@ -378,6 +416,12 @@ extension AddResourceViewController : ParserDelegate
                     
                     arrResourcesList.addObject(resource)
                 }
+            }
+                else if tag == ParsingConstant.getSkillLevelType.rawValue
+            {
+                let dictModel = models as! NSDictionary
+                arrSkillTypes = dictModel["Model"] as! [NSDictionary]
+
             }
             else
             {
@@ -452,8 +496,48 @@ extension AddResourceViewController : SelectOptionsCustomView_Delegate
             btnWorkingPattern.setTitle(title, forState: UIControlState.Normal)
             btnWorkingPattern.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         }
+       else if tag == optionSelection.SkillLevel.rawValue
+        {
+            arrSelectedWorkingPatternList.addObjectsFromArray(arrSelected as [AnyObject])
+            var title = ""
+            for indexPath in arrSelected
+            {
+                let dict = arrWorkingPatternList.objectAtIndex(indexPath.row) as! WorkPatternListBO
+                if title.characters.count == 0
+                {
+                    title = dict.strPatternName
+                }
+                else
+                {
+                    title = String(format: "%@,%@", title,dict.strPatternName)
+                }
+            }
+            btnWorkingPattern.setTitle(title, forState: UIControlState.Normal)
+            btnWorkingPattern.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+        }
+       else if tag == optionSelection.Priority.rawValue
+        {
+            arrSelectedWorkingPatternList.addObjectsFromArray(arrSelected as [AnyObject])
+            var title = ""
+            for indexPath in arrSelected
+            {
+                let dict = arrWorkingPatternList.objectAtIndex(indexPath.row) as! WorkPatternListBO
+                if title.characters.count == 0
+                {
+                    title = dict.strPatternName
+                }
+                else
+                {
+                    title = String(format: "%@,%@", title,dict.strPatternName)
+                }
+            }
+            btnWorkingPattern.setTitle(title, forState: UIControlState.Normal)
+            btnWorkingPattern.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+        }
+
     }
     
+
     func showAlertWithMessage(message: String) {
         showAlert(message, strTitle: "Alert")
     }

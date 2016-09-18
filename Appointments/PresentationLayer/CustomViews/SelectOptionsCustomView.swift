@@ -14,6 +14,8 @@ enum optionSelection : Int
     case bookingType
     case skill
     case workingPattern
+    case SkillLevel
+    case Priority
 }
 
 protocol SelectOptionsCustomView_Delegate {
