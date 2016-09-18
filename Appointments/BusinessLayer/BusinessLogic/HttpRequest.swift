@@ -99,7 +99,8 @@ class HttpRequest
             }
             
             let dataString = NSString(data: data!, encoding: NSUTF8StringEncoding)
-           
+            print(dataString)
+
             if self.convertStringToDictionary(dataString as! String) != nil
             {
                 self.parsedDataDict = self.convertStringToDictionary(dataString as! String)!
@@ -109,8 +110,6 @@ class HttpRequest
                 self.parsedDataDict = [:]
             }
             completion (result: true)
-            
-            print(dataString)
             
         }
         
