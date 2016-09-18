@@ -151,22 +151,24 @@ class AddBranchViewController: BaseViewController {
         dictParams.setObject(txtCounty.text!, forKey: "Countynm")
         dictParams.setObject("", forKey: "AllowExtBook")
         dictParams.setObject("1", forKey: "EnablePayment")
-        let defaults = NSUserDefaults.standardUserDefaults()
-        let firmValue = defaults.valueForKey("FIRMID") as! NSInteger
-        dictParams.setObject(String (firmValue), forKey: "ParentId")
         
-        
+        let layer = BusinessLayerClass()
+        layer.callBack = self
+
         if selectedBranchBO.strFirmId.characters.count == 0
         {
-            
+            let defaults = NSUserDefaults.standardUserDefaults()
+            let firmValue = defaults.valueForKey("FIRMID") as! NSInteger
+            dictParams.setObject(String (firmValue), forKey: "ParentId")
+            layer.addBusinessDetails(dictParams)
+
         }
         else
         {
             dictParams.setObject(selectedBranchBO.strFirmId, forKey: "FirmId")
+            layer.UpdateBusinessDetails(dictParams)
+
         }
-        let layer = BusinessLayerClass()
-        layer.callBack = self
-        layer.addBusinessDetails(dictParams)
     }
 }
 
@@ -247,12 +249,14 @@ extension AddBranchViewController : ParserDelegate
                     }
                     if ((dictModel["BusinessType"]?.isKindOfClass(NSNull)) == false)
                     {
-                        branchBO.strBusinessType = (dictModel.objectForKey("BusinessType") as? String)!
+                        let BusinessType = dictModel.objectForKey("BusinessType") as? NSNumber
+                        branchBO.strBusinessType = (BusinessType?.stringValue)!
                     }
 
                     if ((dictModel["BookingType"]?.isKindOfClass(NSNull)) == false)
                     {
-                        branchBO.strBookingType = (dictModel.objectForKey("BookingType") as? String)!
+                        let BookingType = dictModel.objectForKey("BookingType") as? NSNumber
+                        branchBO.strBookingType = (BookingType?.stringValue)!
                     }
                     if ((dictModel["PostalCode"]?.isKindOfClass(NSNull)) == false)
                     {

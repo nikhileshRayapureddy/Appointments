@@ -49,7 +49,7 @@ class AddBusinessViewController: BaseViewController,UITextFieldDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.hidden = false
-
+        
         // Do any additional setup after loading the view.
         self.designNavBar("Add Business")
         self.designTabBar()
@@ -62,12 +62,12 @@ class AddBusinessViewController: BaseViewController,UITextFieldDelegate {
         btnNext.addTarget(self, action: #selector(self.btnNextClicked(_:)), forControlEvents: .TouchUpInside)
         btnNext.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         btnNext.titleLabel?.textAlignment = NSTextAlignment.Right
-       let rightBarButtonItems = UIView()
+        let rightBarButtonItems = UIView()
         rightBarButtonItems.frame = CGRectMake(ScreenWidth - 90, 0, 50, 44)
         rightBarButtonItems.addSubview(btnNext)
         let bItem = UIBarButtonItem(customView:rightBarButtonItems)
         self.navigationItem.rightBarButtonItem = bItem
-  
+        
         let btnHome : UIButton = UIButton(type: UIButtonType.Custom)
         btnHome.frame =  CGRectMake(0, 0, 50,44)
         btnHome.setTitle("Home", forState: UIControlState.Normal)
@@ -80,9 +80,7 @@ class AddBusinessViewController: BaseViewController,UITextFieldDelegate {
         leftBarButtonItems.addSubview(btnHome)
         let bLeftItem = UIBarButtonItem(customView:leftBarButtonItems)
         self.navigationItem.leftBarButtonItem = bLeftItem
-
-
-        getBusinessTypes()
+        self.getBusinessTypes()
     }
     func btnHomeClicked(sender : UIButton)
     {
@@ -177,14 +175,6 @@ class AddBusinessViewController: BaseViewController,UITextFieldDelegate {
         let dictParams = NSMutableDictionary()
         let defaults = NSUserDefaults.standardUserDefaults()
         let firmValue = defaults.valueForKey("FIRMID") as! NSInteger
-        if firmValue != 0
-        {
-            dictParams.setObject(String (firmValue), forKey: "FirmId")
-        }
-        else
-        {
-            dictParams.setObject("", forKey: "ParentId")
-        }
         dictParams.setObject(txtBusinessName.text!, forKey: "FirmName")
         dictParams.setObject("asd", forKey: "FirmLogo")
         dictParams.setObject("2", forKey: "BusinessType")
@@ -198,9 +188,26 @@ class AddBusinessViewController: BaseViewController,UITextFieldDelegate {
         dictParams.setObject(txtCounty.text!, forKey: "Countynm")
         dictParams.setObject("", forKey: "AllowExtBook")
         dictParams.setObject("1", forKey: "EnablePayment")
+        dictParams.setObject("UK", forKey: "Country")
+        let firmUserValue = defaults.valueForKey("USERID") as! NSInteger
+
+        dictParams.setObject(String (firmUserValue), forKey: "UserId")
+
         let layer = BusinessLayerClass()
         layer.callBack = self
-        layer.UpdateBusinessDetails(dictParams)
+        if firmValue != 0
+        {
+            dictParams.setObject(String (firmValue), forKey: "FirmId")
+            layer.UpdateBusinessDetails(dictParams)
+
+        }
+        else
+        {
+            dictParams.setObject("", forKey: "ParentId")
+            layer.addBusinessDetails(dictParams)
+
+        }
+
     }
     func getBusinessTypes()
     {
@@ -254,7 +261,18 @@ extension AddBusinessViewController : ParserDelegate
             let response = object as! NSDictionary
             arrBusinessBookingTypes.addObjectsFromArray(response.objectForKey("Model") as! NSArray as [AnyObject])
             print(arrBusinessBookingTypes.description)
-            getBusiness()
+            let defaults = NSUserDefaults.standardUserDefaults()
+            let firmValue = defaults.valueForKey("FIRMID") as! NSInteger
+
+            if firmValue != 0
+            {
+                getBusiness()
+            }
+            else
+            {
+                app_delegate.removeloder()
+            }
+
         }
         else if tag == ParsingConstant.getBusiness.rawValue
         {
@@ -300,11 +318,10 @@ extension AddBusinessViewController : ParserDelegate
         {
             businessBO.strFirmLogo = (dictBusiness.objectForKey("FirmLogo") as? String)!
         }
-        businessBO.strBusinessType = (dictBusiness.objectForKey("BusinessType") as? String)!
-        if ((dictBusiness["BookingType"]?.isKindOfClass(NSNull)) == false)
-        {
-            businessBO.strBookingType = (dictBusiness.objectForKey("BookingType") as? String)!
-        }
+        let BusinessType = dictBusiness.objectForKey("BusinessType") as? NSNumber
+        businessBO.strBusinessType = (BusinessType?.stringValue)!
+        let BookingType = dictBusiness.objectForKey("BookingType") as? NSNumber
+        businessBO.strBookingType = (BookingType?.stringValue)!
         if ((dictBusiness["PostalCode"]?.isKindOfClass(NSNull)) == false)
         {
             businessBO.strPostalCode = (dictBusiness.objectForKey("PostalCode") as? String)!
