@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SignUpViewController: UIViewController {
+class SignUpViewController: UIViewController ,UITextFieldDelegate{
 
     @IBOutlet weak var btnStep1: UIButton!
     @IBOutlet weak var vwStep1: UIView!
@@ -85,7 +85,20 @@ class SignUpViewController: UIViewController {
 
     }
     
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        if textField == txtFldPincode
+        {
+        if range.length + range.location > textField.text?.characters.count
+        {
+            return false
+        }
+        
+        let newLength : Int = (textField.text?.characters.count)! + string.characters.count - range.length
+        return newLength <= 6;
+        }
+        return true
 
+    }
     @IBAction func btnNextClicked(sender: UIButton) {
         if sender.selected == true{
             if self.validateStep2Fields() == true{
@@ -258,7 +271,9 @@ extension SignUpViewController : ParserDelegate
     }
     func parsingError(error: String?, withTag tag: NSInteger) {
         app_delegate.removeloder()
-        self.showAlertWithMessage(error!, strTitle: "Failed!")
+        dispatch_async(dispatch_get_main_queue()) {
+            self.showAlertWithMessage(error!, strTitle: "Failed!")
+        }
     }
    
 }
