@@ -121,6 +121,16 @@ extension SelectOptionsCustomView : UITableViewDelegate, UITableViewDataSource
             let pattern = arrTitles.objectAtIndex(indexPath.row) as! WorkPatternListBO
             cell.textLabel?.text = pattern.strPatternName
         }
+        else if viewTag == optionSelection.SkillLevel.rawValue
+        {
+            let pattern = arrTitles.objectAtIndex(indexPath.row) as! NSDictionary
+            cell.textLabel?.text = pattern["Name"] as? String
+        }
+        else if viewTag == optionSelection.Priority.rawValue
+        {
+            let pattern = arrTitles.objectAtIndex(indexPath.row) as! String
+            cell.textLabel?.text = pattern
+        }
         else
         {
             let dict = arrTitles.objectAtIndex(indexPath.row) as! NSDictionary
