@@ -148,7 +148,15 @@ class HttpRequest
             
             if object .isKindOfClass(NSString)
             {
-                soapEnvelope?.appendFormat("&%@=%@", (keys[i]) as! String , self.params.objectForKey((keys[i]) )as! String)
+//                if (keys[i] as! String) == "Patterns"
+//                {
+//                    soapEnvelope?.appendFormat("&%@:%@", (keys[i]) as! String , self.params.objectForKey((keys[i]) )as! String)
+//
+//                }
+//                else
+//                {
+                    soapEnvelope?.appendFormat("&%@=%@", (keys[i]) as! String , self.params.objectForKey((keys[i]) )as! String)
+//                }
             }
             else if object .isKindOfClass(NSMutableArray)
             {

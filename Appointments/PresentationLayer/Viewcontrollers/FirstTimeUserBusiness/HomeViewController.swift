@@ -14,7 +14,59 @@ class HomeViewController: BaseViewController {
     @IBOutlet weak var btnReports: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let StatusFlag = defaults.valueForKey("StatusFlag") as! NSInteger
         
+        if StatusFlag == 1
+        {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewControllerWithIdentifier("AddBranchViewController") as! AddBranchViewController
+            if self.navigationController!.visibleViewController?.isKindOfClass(AddBranchViewController) == true
+            {
+                return
+            }
+            self.navigationController?.pushViewController(vc, animated: false)
+        }
+        else if StatusFlag == 2
+        {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewControllerWithIdentifier("AddCalenderViewController") as! AddCalenderViewController
+            if self.navigationController!.visibleViewController?.isKindOfClass(AddCalenderViewController) == true
+            {
+                return
+            }
+            self.navigationController?.pushViewController(vc, animated: false)
+        }
+        else if StatusFlag == 3
+        {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewControllerWithIdentifier("AddSkillsViewController") as! AddSkillsViewController
+            if self.navigationController!.visibleViewController?.isKindOfClass(AddSkillsViewController) == true
+            {
+                return
+            }
+            self.navigationController?.pushViewController(vc, animated: false)
+        }
+        else if StatusFlag == 4
+        {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewControllerWithIdentifier("ServiceOfferedViewController") as! ServiceOfferedViewController
+            if self.navigationController!.visibleViewController?.isKindOfClass(ServiceOfferedViewController) == true
+            {
+                return
+            }
+            self.navigationController?.pushViewController(vc, animated: false)
+        }
+        else if StatusFlag == 5 || StatusFlag == 6
+        {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewControllerWithIdentifier("AddResourceViewController") as! AddResourceViewController
+            if self.navigationController!.visibleViewController?.isKindOfClass(AddResourceViewController) == true
+            {
+                return
+            }
+            self.navigationController?.pushViewController(vc, animated: false)
+        }
         // Do any additional setup after loading the view.
     }
     override func viewWillAppear(animated: Bool) {

@@ -58,7 +58,10 @@ class ViewController: BaseViewController,ParserDelegate {
         let firmId = model.objectForKey("FirmId") as? NSNumber
         defaults.setValue(firmId?.integerValue, forKey: "FIRMID")
         defaults.synchronize()
-        
+        let StatusFlag = model.objectForKey("StatusFlag") as? NSNumber
+        defaults.setValue(StatusFlag?.integerValue, forKey: "StatusFlag")
+        defaults.synchronize()
+
         self.performSelectorOnMainThread(#selector(self.navigateToHome), withObject: nil, waitUntilDone: true)
         
     }
@@ -69,10 +72,9 @@ class ViewController: BaseViewController,ParserDelegate {
     
     func navigateToHome()
     {
-        let vc : HomeViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("HomeViewController") as! HomeViewController
-        self.navigationController!.pushViewController(vc, animated: true)
         
-
+        let vc : HomeViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("HomeViewController") as! HomeViewController
+        self.navigationController!.pushViewController(vc, animated: false)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

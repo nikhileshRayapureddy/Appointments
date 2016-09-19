@@ -89,6 +89,7 @@ class AddCalenderViewController: BaseViewController,UITextFieldDelegate {
         self.navigationItem.leftBarButtonItem = bLeftItem
         scrlVwAddCalender.hidden = false
         tableView.hidden = true
+        datePicker.datePickerMode = UIDatePickerMode.Time
     }
     func btnHomeClicked(sender : UIButton)
     {
@@ -376,7 +377,18 @@ extension AddCalenderViewController : UITableViewDelegate, UITableViewDataSource
             datePicker.minimumDate = MinDate
             constVwDatePickerHeight.constant = 0;
             currenttextFiled = textField
-
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "HH:mm"
+            let strDate = dateFormatter.stringFromDate(datePicker.date)
+            if currenttextFiled.tag % 10 == 0
+            {
+                MinDate = datePicker.date
+            }
+            else
+            {
+                MinDate = nil
+            }
+            currenttextFiled.text = strDate
             return false
         }
     }

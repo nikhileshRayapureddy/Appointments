@@ -19,4 +19,5 @@ class ResourceBO: NSObject {
     var strPriority = ""
     var strResourceType = ""
     var strSkillString = ""
+    var strContactNumber = ""
 }
