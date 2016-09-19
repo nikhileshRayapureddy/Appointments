@@ -219,14 +219,27 @@ extension AddSkillsViewController : ParserDelegate
                 {
                     let dictModel = dict as! NSDictionary
                     let skillBO = SkillsBO()
+                    if ((dictModel["FirmId"]?.isKindOfClass(NSNull)) == false)
+                    {
+                        let firmId = dictModel.objectForKey("FirmId") as? NSNumber
+                        skillBO.strFirmId = (firmId?.stringValue)!
+                    }
                     
-                    let firmId = dictModel.objectForKey("FirmId") as? NSNumber
-                    skillBO.strFirmId = (firmId?.stringValue)!
-                    let skillId = dictModel.objectForKey("SkillId") as? NSNumber
-                    skillBO.strSkillId = (skillId?.stringValue)!
+                    if ((dictModel["SkillId"]?.isKindOfClass(NSNull)) == false)
+                    {
+                        let skillId = dictModel.objectForKey("SkillId") as? NSNumber
+                        skillBO.strSkillId = (skillId?.stringValue)!
+                    }
                     
-                    skillBO.strSkillName = (dictModel.objectForKey("SkillName") as? String)!
-                    skillBO.strSkillNotes = (dictModel.objectForKey("Notes") as? String)!
+                    if ((dictModel["SkillName"]?.isKindOfClass(NSNull)) == false)
+                    {
+                        skillBO.strSkillName = (dictModel.objectForKey("SkillName") as? String)!
+                    }
+                    
+                    if ((dictModel["Notes"]?.isKindOfClass(NSNull)) == false)
+                    {
+                        skillBO.strSkillNotes = (dictModel.objectForKey("Notes") as? String)!
+                    }
                     arrSkillsList.addObject(skillBO)
                 }
             }
@@ -235,13 +248,27 @@ extension AddSkillsViewController : ParserDelegate
                 let dictModel = models as! NSDictionary
                 let skillBO = SkillsBO()
                 
-                let firmId = dictModel.objectForKey("FirmId") as? NSNumber
-                skillBO.strFirmId = (firmId?.stringValue)!
-                let skillId = dictModel.objectForKey("SkillId") as? NSNumber
-                skillBO.strSkillId = (skillId?.stringValue)!
+                if ((dictModel["FirmId"]?.isKindOfClass(NSNull)) == false)
+                {
+                    let firmId = dictModel.objectForKey("FirmId") as? NSNumber
+                    skillBO.strFirmId = (firmId?.stringValue)!
+                }
                 
-                skillBO.strSkillName = (dictModel.objectForKey("SkillName") as? String)!
-                skillBO.strSkillNotes = (dictModel.objectForKey("Notes") as? String)!
+                if ((dictModel["SkillId"]?.isKindOfClass(NSNull)) == false)
+                {
+                    let skillId = dictModel.objectForKey("SkillId") as? NSNumber
+                    skillBO.strSkillId = (skillId?.stringValue)!
+                }
+                
+                if ((dictModel["SkillName"]?.isKindOfClass(NSNull)) == false)
+                {
+                    skillBO.strSkillName = (dictModel.objectForKey("SkillName") as? String)!
+                }
+                
+                if ((dictModel["Notes"]?.isKindOfClass(NSNull)) == false)
+                {
+                    skillBO.strSkillNotes = (dictModel.objectForKey("Notes") as? String)!
+                }
                 
                 arrSkillsList.addObject(skillBO)
             }

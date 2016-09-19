@@ -235,9 +235,16 @@ extension AddBranchViewController : ParserDelegate
                 {
                     let dictModel = dict as! NSDictionary
                     let branchBO = BranchBO()
-                    let firmId = dictModel.objectForKey("FirmId") as? NSNumber
-                    branchBO.strFirmId = (firmId?.stringValue)!
-                    branchBO.strFirmName = (dictModel.objectForKey("FirmName") as? String)!
+                    if ((dictModel["FirmId"]?.isKindOfClass(NSNull)) == false)
+                    {
+                        let firmId = dictModel.objectForKey("FirmId") as? NSNumber
+                        branchBO.strFirmId = (firmId?.stringValue)!
+                    }
+                    
+                    if ((dictModel["FirmName"]?.isKindOfClass(NSNull)) == false)
+                    {
+                        branchBO.strFirmName = (dictModel.objectForKey("FirmName") as? String)!
+                    }
                     if ((dictModel["FirmEmail"]?.isKindOfClass(NSNull)) == false)
                     {
                         branchBO.strFirmEmail = (dictModel.objectForKey("FirmEmail") as? String)!
