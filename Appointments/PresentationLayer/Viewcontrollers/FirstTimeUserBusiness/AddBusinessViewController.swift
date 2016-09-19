@@ -35,7 +35,8 @@ class AddBusinessViewController: BaseViewController,UITextFieldDelegate {
     var arrBusinessTypes : NSMutableArray! = NSMutableArray()
     var arrBusinessBookingTypes : NSMutableArray! = NSMutableArray()
     var viewSelectOptions = SelectOptionsCustomView()
-    var arrSelectedOptions = NSMutableArray()
+    var arrSelectedBusinessTypeOptions = NSMutableArray()
+    var arrSelectedBookingTypeOptions = NSMutableArray()
     var isSaved = false
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -177,8 +178,45 @@ class AddBusinessViewController: BaseViewController,UITextFieldDelegate {
         let firmValue = defaults.valueForKey("FIRMID") as! NSInteger
         dictParams.setObject(txtBusinessName.text!, forKey: "FirmName")
         dictParams.setObject("asd", forKey: "FirmLogo")
-        dictParams.setObject("2", forKey: "BusinessType")
-        dictParams.setObject("2", forKey: "BookingType")
+        
+        
+        var businessIds = ""
+        for indexPath in arrSelectedBusinessTypeOptions
+        {
+            let dict = arrBusinessTypes.objectAtIndex(indexPath.row) as! NSDictionary
+            if businessIds.characters.count == 0
+            {
+                let businessIdNumber = dict.objectForKey("Id") as! NSInteger
+                businessIds = String(format: "%d", businessIdNumber)
+            }
+            else
+            {
+                let businessIdNumber = dict.objectForKey("Id") as! NSInteger
+                businessIds = String(format: "%@,%d", businessIds,businessIdNumber)
+            }
+        }
+
+        
+        dictParams.setObject(businessIds, forKey: "BusinessType")
+        
+        var bookingIds = ""
+        for indexPath in arrSelectedBookingTypeOptions
+        {
+            let dict = arrBusinessBookingTypes.objectAtIndex(indexPath.row) as! NSDictionary
+            if bookingIds.characters.count == 0
+            {
+                let bookingIdNumber = dict.objectForKey("Id") as! NSInteger
+                bookingIds = String(format: "%d", bookingIdNumber)
+            }
+            else
+            {
+                let bookingIdNumber = dict.objectForKey("Id") as! NSInteger
+                bookingIds = String(format: "%@,%d", bookingIds,bookingIdNumber)
+            }
+        }
+        
+        
+        dictParams.setObject(bookingIds, forKey: "BookingType")
         dictParams.setObject(txtEmail.text!, forKey: "FirmEmail")
         dictParams.setObject("", forKey: "PostalCode")
         dictParams.setObject(txtContactNumber.text!, forKey: "FirmPrimaryPhone")
@@ -301,8 +339,12 @@ extension AddBusinessViewController : ParserDelegate
         
         let dictBusiness = response.objectForKey("Model") as! NSDictionary
         let businessBO = AddBusinessBO()
-        let firmId = dictBusiness.objectForKey("FirmId") as? NSNumber
-        businessBO.strFirmId = (firmId?.stringValue)!
+        if ((dictBusiness["FirmId"]?.isKindOfClass(NSNull)) == false)
+        {
+            let firmId = dictBusiness.objectForKey("FirmId") as? NSNumber
+            businessBO.strFirmId = (firmId?.stringValue)!
+
+        }
         
         if businessBO.strFirmId == ""
         {
@@ -312,25 +354,62 @@ extension AddBusinessViewController : ParserDelegate
         {
             isSaved = true
         }
-        businessBO.strFirmName = (dictBusiness.objectForKey("FirmName") as? String)!
-        businessBO.strFirmEmail = (dictBusiness.objectForKey("FirmEmail") as? String)!
+        if ((dictBusiness["FirmName"]?.isKindOfClass(NSNull)) == false)
+        {
+            businessBO.strFirmName = (dictBusiness.objectForKey("FirmName") as? String)!
+        }
+
+        if ((dictBusiness["FirmEmail"]?.isKindOfClass(NSNull)) == false)
+        {
+            businessBO.strFirmEmail = (dictBusiness.objectForKey("FirmEmail") as? String)!
+        }
+        
         if ((dictBusiness["FirmLogo"]?.isKindOfClass(NSNull)) == false)
         {
             businessBO.strFirmLogo = (dictBusiness.objectForKey("FirmLogo") as? String)!
         }
-        let BusinessType = dictBusiness.objectForKey("BusinessType") as? NSNumber
-        businessBO.strBusinessType = (BusinessType?.stringValue)!
-        let BookingType = dictBusiness.objectForKey("BookingType") as? NSNumber
-        businessBO.strBookingType = (BookingType?.stringValue)!
+        if ((dictBusiness["BusinessType"]?.isKindOfClass(NSNull)) == false)
+        {
+            let BusinessType = dictBusiness.objectForKey("BusinessType") as? NSNumber
+            businessBO.strBusinessType = (BusinessType?.stringValue)!
+
+        }
+        
+        if ((dictBusiness["BookingType"]?.isKindOfClass(NSNull)) == false)
+        {
+            let BookingType = dictBusiness.objectForKey("BookingType") as? NSNumber
+            businessBO.strBookingType = (BookingType?.stringValue)!
+            
+        }
         if ((dictBusiness["PostalCode"]?.isKindOfClass(NSNull)) == false)
         {
             businessBO.strPostalCode = (dictBusiness.objectForKey("PostalCode") as? String)!
         }
-        businessBO.strFirmPrimaryPhone = (dictBusiness.objectForKey("FirmPrimaryPhone") as? String)!
-        businessBO.strAddressLine1 = (dictBusiness.objectForKey("AddressLine1") as? String)!
-        businessBO.strAddressLine2 = (dictBusiness.objectForKey("AddressLine2") as? String)!
-        businessBO.strCitynm = (dictBusiness.objectForKey("Citynm") as? String)!
-        businessBO.strCountynm = (dictBusiness.objectForKey("Countynm") as? String)!
+        if ((dictBusiness["FirmPrimaryPhone"]?.isKindOfClass(NSNull)) == false)
+        {
+            businessBO.strFirmPrimaryPhone = (dictBusiness.objectForKey("FirmPrimaryPhone") as? String)!
+        }
+        
+        if ((dictBusiness["AddressLine1"]?.isKindOfClass(NSNull)) == false)
+        {
+            businessBO.strAddressLine1 = (dictBusiness.objectForKey("AddressLine1") as? String)!
+        }
+        
+        if ((dictBusiness["AddressLine2"]?.isKindOfClass(NSNull)) == false)
+        {
+            businessBO.strAddressLine2 = (dictBusiness.objectForKey("AddressLine2") as? String)!
+        }
+        
+        if ((dictBusiness["Citynm"]?.isKindOfClass(NSNull)) == false)
+        {
+            businessBO.strCitynm = (dictBusiness.objectForKey("Citynm") as? String)!
+        }
+        
+        if ((dictBusiness["Countynm"]?.isKindOfClass(NSNull)) == false)
+        {
+            businessBO.strCountynm = (dictBusiness.objectForKey("Countynm") as? String)!
+        }
+        
         if ((dictBusiness["AllowExtBook"]?.isKindOfClass(NSNull)) == false)
         {
             businessBO.strAllowExtBook = (dictBusiness.objectForKey("AllowExtBook") as? String)!
@@ -374,6 +453,8 @@ extension AddBusinessViewController : SelectOptionsCustomView_Delegate
         
         if tag == optionSelection.bookingType.rawValue
         {
+            arrSelectedBookingTypeOptions.removeAllObjects()
+            arrSelectedBookingTypeOptions.addObjectsFromArray(arrSelected as [AnyObject])
             var title = ""
             for indexPath in arrSelected
             {
@@ -392,6 +473,8 @@ extension AddBusinessViewController : SelectOptionsCustomView_Delegate
         }
         else if tag == optionSelection.businessType.rawValue
         {
+            arrSelectedBusinessTypeOptions.removeAllObjects()
+            arrSelectedBusinessTypeOptions.addObjectsFromArray(arrSelected as [AnyObject])
             var title = ""
             for indexPath in arrSelected
             {

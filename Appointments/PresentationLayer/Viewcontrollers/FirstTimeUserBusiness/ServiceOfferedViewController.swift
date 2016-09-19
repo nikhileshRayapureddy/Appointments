@@ -164,6 +164,7 @@ class ServiceOfferedViewController: BaseViewController,UITextFieldDelegate {
             txtPrice.text = ""
             txtDuration.text = ""
             btnTwoMenJob.selected = false
+            arrSelectedSkills.removeAllObjects()
         }
         else
         {
@@ -267,7 +268,7 @@ extension ServiceOfferedViewController : UITableViewDelegate, UITableViewDataSou
         if let view : SelectOptionsCustomView = NSBundle.mainBundle().loadNibNamed("SelectOptionsCustomView", owner: nil, options: nil)[0] as? SelectOptionsCustomView
         {
             view.frame = CGRectMake(0, -64, self.view.frame.size.width, self.view.frame.size.height+64)
-            view.isMultipleSelection = false
+            view.isMultipleSelection = true
             view.viewTag = optionSelection.skill.rawValue
             view.delegate = self
             view.arrTitles = arrSkillsList
