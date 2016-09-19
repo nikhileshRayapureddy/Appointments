@@ -118,7 +118,7 @@ class AddCalenderViewController: BaseViewController,UITextFieldDelegate {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        scrlVwAddCalender.contentSize = CGSizeMake(scrlVwAddCalender.frame.size.width, 720)
+        scrlVwAddCalender.contentSize = CGSizeMake(scrlVwAddCalender.frame.size.width, 780)
         
     }
     func getAllWorkingPatterns()

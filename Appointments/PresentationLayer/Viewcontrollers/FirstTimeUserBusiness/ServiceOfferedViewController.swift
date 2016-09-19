@@ -297,13 +297,32 @@ extension ServiceOfferedViewController : ParserDelegate
                     let service = ServiceBO()
                     let firmId = dictModel.objectForKey("FirmId") as? NSNumber
                     service.strFirmId = (firmId?.stringValue)!
-                    let serviceId = dictModel.objectForKey("ServiceId") as? NSNumber
-                    service.strServiceId = (serviceId?.stringValue)!
-                    service.strServiceName = (dictModel.objectForKey("ServiceName") as? String)!
-                    service.strDescription = (dictModel.objectForKey("Description") as? String)!
-                    service.Price = (dictModel.objectForKey("Price") as? Double)!
-                    service.Duration = (dictModel.objectForKey("Duration") as? Int)!
-                    service.isTwoManJob = (dictModel.objectForKey("TwoManJob") as? Bool)!
+                    if ((dictModel["ServiceId"]?.isKindOfClass(NSNull)) == false)
+                    {
+                        let serviceId = dictModel.objectForKey("ServiceId") as? NSNumber
+                        service.strServiceId = (serviceId?.stringValue)!
+                    }
+                    if ((dictModel["ServiceName"]?.isKindOfClass(NSNull)) == false)
+                    {
+                        service.strServiceName = (dictModel.objectForKey("ServiceName") as? String)!
+                    }
+                    if ((dictModel["Description"]?.isKindOfClass(NSNull)) == false)
+                    {
+                        service.strDescription = (dictModel.objectForKey("Description") as? String)!
+                    }
+                    if ((dictModel["Price"]?.isKindOfClass(NSNull)) == false)
+                    {
+                        service.Price = (dictModel.objectForKey("Price") as? Double)!
+                    }
+                    if ((dictModel["Duration"]?.isKindOfClass(NSNull)) == false)
+                    {
+                        service.Duration = (dictModel.objectForKey("Duration") as? Int)!
+                    }
+                    if ((dictModel["TwoManJob"]?.isKindOfClass(NSNull)) == false)
+                    {
+                        service.isTwoManJob = (dictModel.objectForKey("TwoManJob") as? Bool)!
+                    }
+                  
                     if ((dictModel["SkillString"]?.isKindOfClass(NSNull)) == false)
                     {
                         service.strSkillString = (dictModel.objectForKey("SkillString") as? String)!

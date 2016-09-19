@@ -135,8 +135,8 @@ class AddBranchViewController: BaseViewController {
         txtStreet.text = branchDetails.strAddressLine2
         txtTown.text = branchDetails.strCitynm
         txtCounty.text = branchDetails.strCountynm
-        txtLocation.text = ""
-        txtCountry.text = ""
+        txtLocation.text = branchDetails.strPostalCode
+        txtCountry.text = branchDetails.strCountry
         selectedBranchBO = branchDetails
     }
     @IBAction func btnSaveClicked(sender: UIButton) {
@@ -151,7 +151,9 @@ class AddBranchViewController: BaseViewController {
         dictParams.setObject(txtCounty.text!, forKey: "Countynm")
         dictParams.setObject("", forKey: "AllowExtBook")
         dictParams.setObject("1", forKey: "EnablePayment")
-        
+        dictParams.setObject(txtLocation.text!, forKey: "PostalCode")
+        dictParams.setObject(txtCountry.text!, forKey: "Country")
+
         let layer = BusinessLayerClass()
         layer.callBack = self
 
@@ -288,6 +290,10 @@ extension AddBranchViewController : ParserDelegate
                     if ((dictModel["Countynm"]?.isKindOfClass(NSNull)) == false)
                     {
                         branchBO.strCountynm = (dictModel.objectForKey("Countynm") as? String)!
+                    }
+                    if ((dictModel["Country"]?.isKindOfClass(NSNull)) == false)
+                    {
+                        branchBO.strCountry = (dictModel.objectForKey("Country") as? String)!
                     }
 
                     if ((dictModel["AllowExtBook"]?.isKindOfClass(NSNull)) == false)

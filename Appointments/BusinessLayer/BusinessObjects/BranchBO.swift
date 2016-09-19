@@ -21,6 +21,7 @@ class BranchBO: NSObject {
     var strAddressLine2 = ""
     var strCitynm = ""
     var strCountynm = ""
+    var strCountry = ""
     var strAllowExtBook = ""
     var strEnablePayment = ""
     var strParentId = ""

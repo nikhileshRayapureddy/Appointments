@@ -3505,13 +3505,13 @@
                                                     <constraint firstAttribute="width" constant="25" id="gmL-dH-c5X"/>
                                                 </constraints>
                                             </imageView>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1LT-R0-8Pi">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Postal Code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1LT-R0-8Pi">
                                                 <rect key="frame" x="60" y="190" width="300" height="37"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="37" id="xLX-HV-lBM"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" returnKeyType="done"/>
                                             </textField>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgSep" translatesAutoresizingMaskIntoConstraints="NO" id="dx8-Kq-48l">
                                                 <rect key="frame" x="15" y="229" width="345" height="3"/>

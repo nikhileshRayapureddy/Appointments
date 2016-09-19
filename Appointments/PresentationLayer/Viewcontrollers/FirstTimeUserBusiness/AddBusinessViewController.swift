@@ -226,7 +226,7 @@ class AddBusinessViewController: BaseViewController,UITextFieldDelegate {
         dictParams.setObject(txtCounty.text!, forKey: "Countynm")
         dictParams.setObject("", forKey: "AllowExtBook")
         dictParams.setObject("1", forKey: "EnablePayment")
-        dictParams.setObject("UK", forKey: "Country")
+        dictParams.setObject(txtCountry.text!, forKey: "Country")
         let firmUserValue = defaults.valueForKey("USERID") as! NSInteger
 
         dictParams.setObject(String (firmUserValue), forKey: "UserId")
@@ -322,7 +322,7 @@ extension AddBusinessViewController : ParserDelegate
             isSaved = true
             
             dispatch_async(dispatch_get_main_queue(), { 
-//                self.showAlertWithMessage("")
+               self.showAlertWithMessage("Business saved successfully.")
             })
         }
         
@@ -370,15 +370,50 @@ extension AddBusinessViewController : ParserDelegate
         }
         if ((dictBusiness["BusinessType"]?.isKindOfClass(NSNull)) == false)
         {
-            let BusinessType = dictBusiness.objectForKey("BusinessType") as? NSNumber
-            businessBO.strBusinessType = (BusinessType?.stringValue)!
-
+            let BookingType = dictBusiness.objectForKey("BusinessType") as? NSNumber
+            var dictSelBookingType = NSDictionary()
+            for dict  in arrBusinessTypes
+            {
+                let dictTemp = dict as? NSDictionary
+                let Id = dictTemp!["Id"] as? NSNumber
+                if Id == BookingType
+                {
+                    dictSelBookingType = dictTemp!
+                }
+            }
+            if dictSelBookingType.allKeys.count == 0
+            {
+                businessBO.strBusinessType = ""
+            }
+            else
+            {
+                let title = dictSelBookingType["Name"] as? String
+                businessBO.strBusinessType = title!
+            }
         }
         
         if ((dictBusiness["BookingType"]?.isKindOfClass(NSNull)) == false)
         {
             let BookingType = dictBusiness.objectForKey("BookingType") as? NSNumber
-            businessBO.strBookingType = (BookingType?.stringValue)!
+            var dictSelBookingType = NSDictionary()
+            for dict  in arrBusinessBookingTypes
+            {
+                let dictTemp = dict as? NSDictionary
+                let Id = dictTemp!["Id"] as! Int
+                if Id == Int(BookingType!)
+                {
+                    dictSelBookingType = dictTemp!
+                }
+            }
+            if dictSelBookingType.allKeys.count == 0
+            {
+                businessBO.strBookingType = ""
+            }
+            else
+            {
+                let title = dictSelBookingType["Name"] as? String
+                businessBO.strBookingType = title!
+            }
             
         }
         if ((dictBusiness["PostalCode"]?.isKindOfClass(NSNull)) == false)
@@ -409,7 +444,11 @@ extension AddBusinessViewController : ParserDelegate
         {
             businessBO.strCountynm = (dictBusiness.objectForKey("Countynm") as? String)!
         }
-        
+        if ((dictBusiness["Country"]?.isKindOfClass(NSNull)) == false)
+        {
+            businessBO.strCountrynm = (dictBusiness.objectForKey("Country") as? String)!
+        }
+      
         if ((dictBusiness["AllowExtBook"]?.isKindOfClass(NSNull)) == false)
         {
             businessBO.strAllowExtBook = (dictBusiness.objectForKey("AllowExtBook") as? String)!
@@ -425,14 +464,32 @@ extension AddBusinessViewController : ParserDelegate
         }
         dispatch_async(dispatch_get_main_queue()) { 
             self.txtBusinessName.text = businessBO.strFirmName
-            self.btnBusinessTypes.setTitle(businessBO.strBusinessType, forState: UIControlState.Normal)
-            self.btnBusinessTypes.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
-            self.btnBookingType.setTitle(businessBO.strBookingType, forState: UIControlState.Normal)
-            self.btnBookingType.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+            
+            if businessBO.strBusinessType == ""
+            {
+                self.btnBusinessTypes.setTitle("Type of Business", forState: UIControlState.Normal)
+                self.btnBusinessTypes.setTitleColor(UIColor(red: 187.0/255.0, green: 188.0/255.0, blue: 190.0/255.0, alpha: 1.0), forState: .Normal)
+            }
+            else
+            {
+                self.btnBusinessTypes.setTitle(businessBO.strBusinessType, forState: UIControlState.Normal)
+                self.btnBusinessTypes.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+            }
+            if businessBO.strBookingType == ""
+            {
+                self.btnBookingType.setTitle("Type of Booking", forState: UIControlState.Normal)
+                self.btnBookingType.setTitleColor(UIColor(red: 187.0/255.0, green: 188.0/255.0, blue: 190.0/255.0, alpha: 1.0), forState: .Normal)
+            }
+            else
+            {
+                self.btnBookingType.setTitle(businessBO.strBookingType, forState: UIControlState.Normal)
+                self.btnBookingType.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+            }
             self.txtEmail.text = businessBO.strFirmEmail
             self.txtContactNumber.text = businessBO.strFirmPrimaryPhone
             self.txtHouseName.text = businessBO.strAddressLine1
             self.txtCounty.text = businessBO.strCountynm
+            self.txtCountry.text = businessBO.strCountrynm
             self.txtStreet.text = businessBO.strAddressLine2
             self.txtTown.text = businessBO.strCitynm
         }
