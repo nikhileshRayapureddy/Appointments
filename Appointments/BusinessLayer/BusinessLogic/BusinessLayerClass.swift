@@ -431,7 +431,7 @@ func doUserLoginWithUserName(strUsername : String, strPassword : String){
     func addResource(dictParams : NSMutableDictionary)
     {
         let obj : HttpRequest = HttpRequest()
-        obj.tag = ParsingConstant.addBusiness.rawValue
+        obj.tag = ParsingConstant.addResource.rawValue
         obj._serviceURL = NSString(format: "http://103.231.43.83:120/api/business/AddResource") as String
         obj.MethodNamee = "POST";
         obj.serviceName = ""
@@ -472,7 +472,7 @@ func doUserLoginWithUserName(strUsername : String, strPassword : String){
     func updateResource(dictParams : NSMutableDictionary)
     {
         let obj : HttpRequest = HttpRequest()
-        obj.tag = ParsingConstant.addBusiness.rawValue
+        obj.tag = ParsingConstant.updateResource.rawValue
         obj._serviceURL = NSString(format: "http://103.231.43.83:120/api/business/UpdateResource") as String
         obj.MethodNamee = "POST";
         obj.serviceName = ""
