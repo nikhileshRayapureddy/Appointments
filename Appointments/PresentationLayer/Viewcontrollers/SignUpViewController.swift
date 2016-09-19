@@ -243,7 +243,19 @@ extension SignUpViewController : ParserDelegate
             action in
             var isVcPresent = false
             var VC : UIViewController!
-            
+            let dictResponse = object as! NSDictionary
+            let model = dictResponse.objectForKey("Model") as! NSDictionary
+            let defaults = NSUserDefaults.standardUserDefaults()
+//            defaults.setValue(model.objectForKey("UserId"), forKey: "USERID")
+            let firmId = model.objectForKey("ReturnTypeValue") as? NSNumber
+            defaults.setValue(firmId?.integerValue, forKey: "FIRMID")
+            defaults.setValue(0, forKey: "StatusFlag")
+            defaults.synchronize()
+
+            let models = object!.objectForKey("Model")
+            if ((models?.isKindOfClass(NSDictionary)) == true)
+            {
+            }
             for vc in (self.navigationController?.viewControllers)!
             {
                 if vc.isKindOfClass(HomeViewController)

@@ -852,7 +852,7 @@ func doUserLoginWithUserName(strUsername : String, strPassword : String){
         obj.tag = ParsingConstant.addWorkingPattern.rawValue
         if isUpdate == false
         {
-            obj._serviceURL = NSString(format: "http://103.231.43.83:120/api/business/AddWorkPattern") as String
+            obj._serviceURL = NSString(format: "http://103.231.43.83:120/api/business/AddWorkPatternNew") as String
         }
         else
         {

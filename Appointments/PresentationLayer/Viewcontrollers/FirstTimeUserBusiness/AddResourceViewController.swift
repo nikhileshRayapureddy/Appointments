@@ -179,9 +179,10 @@ class AddResourceViewController: BaseViewController,UITextFieldDelegate {
         dictParams.setObject(txtFldResourceName.text!, forKey: "ResourceName")
         dictParams.setObject("", forKey: "Capacity")
         dictParams.setObject(txtFldEmail.text!, forKey: "EMail")
-        dictParams.setObject(btnSkillLevel.titleLabel!.text!, forKey: "SkillLevel")
+        dictParams.setObject("2", forKey: "SkillLevel")
         dictParams.setObject(strSelPriority, forKey: "Priority")
         dictParams.setObject(dicSkillType["Id"]!, forKey: "SkillString")
+        dictParams.setObject(txtFldContactNumber.text!, forKey: "ContactNumber")
         let firmValue = defualts.valueForKey("FIRMID") as! NSInteger
         
         dictParams.setObject(String (firmValue), forKey: "FirmId")
@@ -222,6 +223,8 @@ class AddResourceViewController: BaseViewController,UITextFieldDelegate {
     {
         txtFldResourceName.text = service.strResourceName
         txtFldEmail.text = service.strEmail
+        txtFldContactNumber.text = service.strContactNumber
+
         if service.strSkillLevel == ""
         {
             btnSkillLevel.setTitle("Skill Level", forState: .Normal)
@@ -451,17 +454,21 @@ extension AddResourceViewController : ParserDelegate
                         resource.strSkillLevel = (skillLevel?.stringValue)!
                     }
                     
-                    
-                    let priority = dictModel.objectForKey("Priority") as? NSNumber
-                    resource.strPriority = (priority?.stringValue)!
+                    if ((dictModel["Priority"]?.isKindOfClass(NSNull)) == false)
+                    {
+                        let priority = dictModel.objectForKey("Priority") as? NSNumber
+                        resource.strPriority = (priority?.stringValue)!
+                    }
 
                     if ((dictModel["ResourceType"]?.isKindOfClass(NSNull)) == false)
                     {
                         let resourceType = dictModel.objectForKey("ResourceType") as? NSNumber
                         resource.strResourceType = (resourceType?.stringValue)!
                     }
-
-
+                    if ((dictModel["ContactNumber"]?.isKindOfClass(NSNull)) == false)
+                    {
+                        resource.strContactNumber = (dictModel.objectForKey("ContactNumber") as? String)!
+                    }
                     if ((dictModel["SkillString"]?.isKindOfClass(NSNull)) == false)
                     {
                         resource.strSkillString = (dictModel.objectForKey("SkillString") as? String)!

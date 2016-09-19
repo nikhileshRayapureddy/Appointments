@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="dro-oh-2Gr">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="dro-oh-2Gr">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -1653,9 +1653,16 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l4Y-Hl-vKM">
                                 <rect key="frame" x="0.0" y="667" width="375" height="250"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uhC-rj-Y6h">
+                                        <rect key="frame" x="0.0" y="34" width="375" height="1"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="wSJ-J0-NdT"/>
+                                        </constraints>
+                                    </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="m84-Ap-xuH">
                                         <rect key="frame" x="0.0" y="34" width="375" height="216"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" red="0.98084590517241355" green="0.97901400862068966" blue="0.98084590517241377" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="216" id="3sQ-j1-ZlV"/>
                                         </constraints>
@@ -1675,13 +1682,13 @@
                                     </datePicker>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sgb-t1-P3s">
                                         <rect key="frame" x="280" y="0.0" width="95" height="34"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" red="0.1843137255" green="0.53333333329999999" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="95" id="24f-Qm-E4l"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
                                         <state key="normal" title="Done">
-                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="btnDoneClicked:" destination="Ztd-ct-JYI" eventType="touchUpInside" id="ST9-ps-og1"/>
@@ -1690,10 +1697,13 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="uhC-rj-Y6h" secondAttribute="trailing" id="FKq-ij-O1f"/>
+                                    <constraint firstItem="uhC-rj-Y6h" firstAttribute="top" secondItem="l4Y-Hl-vKM" secondAttribute="top" constant="34" id="FO7-L6-pJ9"/>
                                     <constraint firstItem="K5g-pn-UtD" firstAttribute="top" secondItem="sgb-t1-P3s" secondAttribute="bottom" id="IDG-LP-jhQ"/>
                                     <constraint firstAttribute="trailing" secondItem="K5g-pn-UtD" secondAttribute="trailing" id="RRs-qs-nVx"/>
                                     <constraint firstItem="m84-Ap-xuH" firstAttribute="leading" secondItem="l4Y-Hl-vKM" secondAttribute="leading" id="STO-sW-0bR"/>
                                     <constraint firstItem="K5g-pn-UtD" firstAttribute="leading" secondItem="l4Y-Hl-vKM" secondAttribute="leading" id="XMR-dB-RXN"/>
+                                    <constraint firstItem="uhC-rj-Y6h" firstAttribute="leading" secondItem="l4Y-Hl-vKM" secondAttribute="leading" id="bJq-35-NQ2"/>
                                     <constraint firstAttribute="trailing" secondItem="sgb-t1-P3s" secondAttribute="trailing" id="cgJ-M3-w3U"/>
                                     <constraint firstAttribute="trailing" secondItem="m84-Ap-xuH" secondAttribute="trailing" id="eqF-7N-fVW"/>
                                     <constraint firstAttribute="bottom" secondItem="K5g-pn-UtD" secondAttribute="bottom" id="iXu-59-8ew"/>
