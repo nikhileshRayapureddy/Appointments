@@ -431,23 +431,35 @@ extension AddResourceViewController : ParserDelegate
                 {
                     let dictModel = dict as! NSDictionary
                     let resource = ResourceBO()
-                    
-                    let firmId = dictModel.objectForKey("FirmId") as? NSNumber
-                    resource.strFirmId = (firmId?.stringValue)!
-                    
-                    let resourceId = dictModel.objectForKey("ResourceId") as? NSNumber
-                    resource.strResourceId = (resourceId?.stringValue)!
-                    
-                    resource.strResourceName = (dictModel.objectForKey("ResourceName") as? String)!
-                   
-                    let WPId = dictModel.objectForKey("WPId") as? NSNumber
-                    resource.strWPId = (WPId?.stringValue)!
+                    if ((dictModel["FirmId"]?.isKindOfClass(NSNull)) == false)
+                    {
+                        let firmId = dictModel.objectForKey("FirmId") as? NSNumber
+                        resource.strFirmId = (firmId?.stringValue)!
+                    }
+        
+                    if ((dictModel["ResourceId"]?.isKindOfClass(NSNull)) == false)
+                    {
+                        let resourceId = dictModel.objectForKey("ResourceId") as? NSNumber
+                        resource.strResourceId = (resourceId?.stringValue)!
+                    }
+                    if ((dictModel["ResourceName"]?.isKindOfClass(NSNull)) == false)
+                    {
+                        resource.strResourceName = (dictModel.objectForKey("ResourceName") as? String)!
+                    }
+                    if ((dictModel["WPId"]?.isKindOfClass(NSNull)) == false)
+                    {
+                        let WPId = dictModel.objectForKey("WPId") as? NSNumber
+                        resource.strWPId = (WPId?.stringValue)!
+                    }
+
                     if ((dictModel["Capacity"]?.isKindOfClass(NSNull)) == false)
                     {
                         resource.strCapacity = (dictModel.objectForKey("Capacity") as? String)!
                     }
-
-                    resource.strEmail = (dictModel.objectForKey("EMail") as? String)!
+                    if ((dictModel["EMail"]?.isKindOfClass(NSNull)) == false)
+                    {
+                        resource.strEmail = (dictModel.objectForKey("EMail") as? String)!
+                    }
                     if ((dictModel["SkillLevel"]?.isKindOfClass(NSNull)) == false)
                     {
                         let skillLevel = dictModel.objectForKey("SkillLevel") as? NSNumber

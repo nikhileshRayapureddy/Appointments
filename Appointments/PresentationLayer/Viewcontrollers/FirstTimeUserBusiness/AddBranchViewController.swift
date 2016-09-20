@@ -33,6 +33,10 @@ class AddBranchViewController: BaseViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
 
     }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        scrlVwAddBranch.contentSize = CGSizeMake(scrlVwAddBranch.frame.size.width, 570)
+    }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.hidden = false
