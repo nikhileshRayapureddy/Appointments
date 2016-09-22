@@ -529,7 +529,16 @@ extension AddResourceViewController : ParserDelegate
         }
         else if tag == ParsingConstant.addResource.rawValue
         {
-            dispatch_async(dispatch_get_main_queue(), { 
+            let defaults = NSUserDefaults.standardUserDefaults()
+            let StatusFlag = defaults.valueForKey("StatusFlag") as! NSInteger
+            
+            if StatusFlag <= 5
+            {
+                defaults.setValue(6, forKey: "StatusFlag")
+            }
+            defaults.synchronize()
+
+            dispatch_async(dispatch_get_main_queue(), {
                 self.showAlert("Resource added successfully.", strTitle: "Success!")
                 self.txtFldContactNumber.text = ""
                 self.txtFldEmail.text = ""

@@ -128,6 +128,10 @@ class HomeViewController: BaseViewController {
 
     func btnlogoutClicked(sender : UIButton)
     {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setValue(0, forKey: "FIRMID")
+        defaults.synchronize()
+
         self.navigationController?.popViewControllerAnimated(true)
     }
     

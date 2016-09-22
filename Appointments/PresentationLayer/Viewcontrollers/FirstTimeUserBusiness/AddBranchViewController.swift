@@ -146,7 +146,6 @@ class AddBranchViewController: BaseViewController {
     @IBAction func btnSaveClicked(sender: UIButton) {
         
         let dictParams = NSMutableDictionary()
-        dictParams.setObject("", forKey: "FirmId")
         dictParams.setObject(txtBranchName.text!, forKey: "FirmName")
         dictParams.setObject("", forKey: "FirmLogo")
         dictParams.setObject(txtHouseName.text!, forKey: "AddressLine1")
@@ -171,6 +170,7 @@ class AddBranchViewController: BaseViewController {
         }
         else
         {
+            
             dictParams.setObject(selectedBranchBO.strFirmId, forKey: "FirmId")
             layer.UpdateBusinessDetails(dictParams)
 
@@ -212,7 +212,20 @@ extension AddBranchViewController : UITextFieldDelegate
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         return true
     }
-    
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        if textField == txtLocation
+        {
+            if range.length + range.location > textField.text?.characters.count
+            {
+                return false
+            }
+            
+            let newLength : Int = (textField.text?.characters.count)! + string.characters.count - range.length
+            return newLength <= 6;
+        }
+        return true
+    }
+
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
@@ -306,7 +319,8 @@ extension AddBranchViewController : ParserDelegate
                     }
                     if ((dictModel["EnablePayment"]?.isKindOfClass(NSNull)) == false)
                     {
-                        branchBO.strEnablePayment = (dictModel.objectForKey("EnablePayment") as? String)!
+                        let EnablePayment = dictModel.objectForKey("EnablePayment") as? NSNumber
+                        branchBO.strEnablePayment = (EnablePayment?.stringValue)!
                     }
                     if ((dictModel["ParentId"]?.isKindOfClass(NSNull)) == false)
                     {
@@ -365,6 +379,16 @@ extension AddBranchViewController : ParserDelegate
         }
         else
         {
+            
+            let defaults = NSUserDefaults.standardUserDefaults()
+            let StatusFlag = defaults.valueForKey("StatusFlag") as! NSInteger
+            
+            if StatusFlag <= 1
+            {
+                defaults.setValue(2, forKey: "StatusFlag")
+            }
+            defaults.synchronize()
+            selectedBranchBO = BranchBO()
             self.performSelectorOnMainThread(#selector(self.bindDataFromList), withObject: BranchBO(), waitUntilDone: true)
         }
     }

@@ -113,17 +113,23 @@ class BaseViewController: UIViewController {
     }
     func btnTabClicked (sender:UIButton)
     {
-        let vwBase = self.view.viewWithTag(1875)! as UIView
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let StatusFlag = defaults.valueForKey("StatusFlag") as! NSInteger
         
-        for  i in 0..<arrSelImages.count
+        if sender.tag - TAG_BOTTOM_BAR <= StatusFlag
         {
-            let btn : UIButton = vwBase.viewWithTag(TAG_BOTTOM_BAR+i) as! UIButton
-            btn.selected = false
+            
+            let vwBase = self.view.viewWithTag(1875)! as UIView
+            
+            for  i in 0..<arrSelImages.count
+            {
+                let btn : UIButton = vwBase.viewWithTag(TAG_BOTTOM_BAR+i) as! UIButton
+                btn.selected = false
+            }
+            sender.selected = true;
+            let imgSel = self.view.viewWithTag(1876)! as! UIImageView
+            imgSel.frame = CGRectMake(sender.frame.origin.x, 53, sender.frame.size.width, 2)
         }
-        sender.selected = true;
-        let imgSel = self.view.viewWithTag(1876)! as! UIImageView
-        imgSel.frame = CGRectMake(sender.frame.origin.x, 53, sender.frame.size.width, 2)
-
         
         if sender.tag == TAG_BOTTOM_BAR
         {
@@ -137,61 +143,82 @@ class BaseViewController: UIViewController {
         }
         else if sender.tag == TAG_BOTTOM_BAR + 1
         {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewControllerWithIdentifier("AddBranchViewController") as! AddBranchViewController
-            if self.navigationController!.visibleViewController?.isKindOfClass(AddBranchViewController) == true
+            if StatusFlag >= 1
             {
-                return
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let vc = storyboard.instantiateViewControllerWithIdentifier("AddBranchViewController") as! AddBranchViewController
+                if self.navigationController!.visibleViewController?.isKindOfClass(AddBranchViewController) == true
+                {
+                    return
+                }
+                self.navigationController?.pushViewController(vc, animated: false)
             }
-            self.navigationController?.pushViewController(vc, animated: false)
         }
         else if sender.tag == TAG_BOTTOM_BAR + 2
         {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewControllerWithIdentifier("AddCalenderViewController") as! AddCalenderViewController
-            if self.navigationController!.visibleViewController?.isKindOfClass(AddCalenderViewController) == true
+            if StatusFlag >= 2
             {
-                return
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let vc = storyboard.instantiateViewControllerWithIdentifier("AddCalenderViewController") as! AddCalenderViewController
+                if self.navigationController!.visibleViewController?.isKindOfClass(AddCalenderViewController) == true
+                {
+                    return
+                }
+                self.navigationController?.pushViewController(vc, animated: false)
             }
-            self.navigationController?.pushViewController(vc, animated: false)
         }
         else if sender.tag == TAG_BOTTOM_BAR + 3
         {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewControllerWithIdentifier("AddSkillsViewController") as! AddSkillsViewController
-            if self.navigationController!.visibleViewController?.isKindOfClass(AddSkillsViewController) == true
+            if StatusFlag >= 3
             {
-                return
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let vc = storyboard.instantiateViewControllerWithIdentifier("AddSkillsViewController") as! AddSkillsViewController
+                if self.navigationController!.visibleViewController?.isKindOfClass(AddSkillsViewController) == true
+                {
+                    return
+                }
+                self.navigationController?.pushViewController(vc, animated: false)
             }
-            self.navigationController?.pushViewController(vc, animated: false)
         }
         else if sender.tag == TAG_BOTTOM_BAR + 4
         {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewControllerWithIdentifier("ServiceOfferedViewController") as! ServiceOfferedViewController
-            if self.navigationController!.visibleViewController?.isKindOfClass(ServiceOfferedViewController) == true
+            if StatusFlag >= 4
             {
-                return
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let vc = storyboard.instantiateViewControllerWithIdentifier("ServiceOfferedViewController") as! ServiceOfferedViewController
+                if self.navigationController!.visibleViewController?.isKindOfClass(ServiceOfferedViewController) == true
+                {
+                    return
+                }
+                self.navigationController?.pushViewController(vc, animated: false)
             }
-            self.navigationController?.pushViewController(vc, animated: false)
         }
         else if sender.tag == TAG_BOTTOM_BAR + 5
         {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewControllerWithIdentifier("AddResourceViewController") as! AddResourceViewController
-            if self.navigationController!.visibleViewController?.isKindOfClass(AddResourceViewController) == true
+            if StatusFlag >= 5
             {
-                return
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let vc = storyboard.instantiateViewControllerWithIdentifier("AddResourceViewController") as! AddResourceViewController
+                if self.navigationController!.visibleViewController?.isKindOfClass(AddResourceViewController) == true
+                {
+                    return
+                }
+                self.navigationController?.pushViewController(vc, animated: false)
             }
-            self.navigationController?.pushViewController(vc, animated: false)
         }
-
+        
     }
     func setSelected(Vc : Int)
     {
-        let vwBase = self.view.viewWithTag(1875)
-        if vwBase != nil{
-            
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let StatusFlag = defaults.valueForKey("StatusFlag") as! NSInteger
+        
+        if Vc <= StatusFlag+1
+        {
+            let vwBase = self.view.viewWithTag(1875)
+            if vwBase != nil{
+                
                 let sender = vwBase!.viewWithTag(TAG_BOTTOM_BAR + Vc - 1) as! UIButton
                 let vwBase = self.view.viewWithTag(1875)! as UIView
                 
@@ -203,8 +230,9 @@ class BaseViewController: UIViewController {
                 sender.selected = true;
                 let imgSel = self.view.viewWithTag(1876)! as! UIImageView
                 imgSel.frame = CGRectMake(sender.frame.origin.x, 53, sender.frame.size.width, 2)
-
-            
+                
+                
+            }
         }
     }
     
