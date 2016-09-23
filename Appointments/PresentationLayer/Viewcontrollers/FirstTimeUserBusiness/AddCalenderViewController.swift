@@ -222,6 +222,10 @@ class AddCalenderViewController: BaseViewController,UITextFieldDelegate {
             xPos = 0
         }
             lblReturn.frame = CGRectMake(xPos, yPos, rect.width, 12)
+        if startTime == "" && endTime == ""
+        {
+            lblReturn.frame = CGRectMake(xPos, yPos, 0, 0)
+        }
 
         
         return lblReturn

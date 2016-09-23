@@ -339,6 +339,13 @@ extension AddBusinessViewController : ParserDelegate
             let firmId = model["ReturnTypeValue"]
             defaults.setValue(firmId?.integerValue, forKey: "FIRMID")
             defaults.synchronize()
+            let StatusFlag = defaults.valueForKey("StatusFlag") as! NSInteger
+            
+            if StatusFlag <= 0
+            {
+                defaults.setValue(1, forKey: "StatusFlag")
+            }
+            defaults.synchronize()
 
             dispatch_async(dispatch_get_main_queue(), {
                 

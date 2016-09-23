@@ -19,6 +19,7 @@ class AddResourceViewController: BaseViewController,UITextFieldDelegate {
     @IBOutlet weak var txtFldEmail: UITextField!
     @IBOutlet weak var txtFldResourceName: UITextField!
     @IBOutlet weak var btnPriority: UIButton!
+    @IBOutlet weak var btnCapacity: UIButton!
     var arrWorkingPatternList = NSMutableArray()
     var arrSelectedWorkingPatternList = NSMutableArray()
     var viewSelectOptions = SelectOptionsCustomView()
@@ -27,12 +28,15 @@ class AddResourceViewController: BaseViewController,UITextFieldDelegate {
     var arrResourcesList = NSMutableArray()
     var arrSkillLevelType = NSMutableArray()
     var arrPriority =  NSMutableArray()
+    var arrCapacity =  NSMutableArray()
     var strSelPriority =  String()
+    var strSelCapacity =  String()
     var dicSkillType = NSDictionary()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         arrPriority = NSMutableArray(objects: "1","2","3","4","5")
+        arrCapacity = NSMutableArray(objects: "1","2","3","4","5","6","7","8","9","10")
         // Do any additional setup after loading the view.
     }
     override func viewWillAppear(animated: Bool) {
@@ -200,6 +204,8 @@ class AddResourceViewController: BaseViewController,UITextFieldDelegate {
             }
         }
         dictParams.setObject(skillString, forKey: "WPId")
+        dictParams.setObject(strSelCapacity, forKey: "Capacity")
+
         let layer = BusinessLayerClass()
         layer.callBack = self
         if selectedReourceBO.strFirmId.characters.count == 0
@@ -214,6 +220,7 @@ class AddResourceViewController: BaseViewController,UITextFieldDelegate {
             }
             dictParams.setObject(selectedReourceBO.strResourceType, forKey: "ResourceType")
             dictParams.setObject(selectedReourceBO.strResourceId, forKey: "ResourceId")
+            dictParams.setObject(selectedReourceBO.strCapacity, forKey: "Capacity")
             layer.updateResource(dictParams)
         }
         
@@ -254,6 +261,16 @@ class AddResourceViewController: BaseViewController,UITextFieldDelegate {
             btnPriority.setTitle(service.strPriority, forState: .Normal)
             btnPriority.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         }
+        if service.strCapacity == ""
+        {
+            btnCapacity.setTitle("Capacity", forState: .Normal)
+            btnCapacity.setTitleColor(UIColor(red: 187.0/255.0, green: 188.0/255.0, blue: 190.0/255.0, alpha: 1.0), forState: .Normal)
+        }
+        else
+        {
+            btnCapacity.setTitle(service.strCapacity, forState: .Normal)
+            btnCapacity.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+        }
         selectedReourceBO = service
         
         if service.strWPId.characters.count == 0
@@ -282,6 +299,22 @@ class AddResourceViewController: BaseViewController,UITextFieldDelegate {
         
     }
 
+    @IBAction func btnCapacityClicked(sender: UIButton) {
+        currenttextField.resignFirstResponder()
+        
+        if let view : SelectOptionsCustomView = NSBundle.mainBundle().loadNibNamed("SelectOptionsCustomView", owner: nil, options: nil)[0] as? SelectOptionsCustomView
+        {
+            view.frame = CGRectMake(0, -64, self.view.frame.size.width, self.view.frame.size.height+64)
+            view.isMultipleSelection = false
+            view.viewTag = optionSelection.Capacity.rawValue
+            view.delegate = self
+            view.arrTitles = arrCapacity
+            view.resizeView()
+            viewSelectOptions = view
+            self.view.addSubview(view)
+        }
+
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -454,7 +487,8 @@ extension AddResourceViewController : ParserDelegate
 
                     if ((dictModel["Capacity"]?.isKindOfClass(NSNull)) == false)
                     {
-                        resource.strCapacity = (dictModel.objectForKey("Capacity") as? String)!
+                        let Capacity = dictModel.objectForKey("Capacity") as? NSNumber
+                        resource.strCapacity = (Capacity?.stringValue)!
                     }
                     if ((dictModel["EMail"]?.isKindOfClass(NSNull)) == false)
                     {
@@ -546,6 +580,7 @@ extension AddResourceViewController : ParserDelegate
                 self.btnPriority.setTitle("", forState: .Normal)
                 self.btnSkillLevel.setTitle("", forState: .Normal)
                 self.btnWorkingPattern.setTitle("", forState: .Normal)
+                self.btnCapacity.setTitle("", forState: .Normal)
             })
         }
         else if tag == ParsingConstant.updateResource.rawValue
@@ -558,9 +593,11 @@ extension AddResourceViewController : ParserDelegate
                 self.btnPriority.setTitle("Priority", forState: .Normal)
                 self.btnSkillLevel.setTitle("Skill Level", forState: .Normal)
                 self.btnWorkingPattern.setTitle("Working Pattern", forState: .Normal)
+                self.btnCapacity.setTitle("Capacity", forState: .Normal)
                 self.btnPriority.setTitleColor(UIColor(red: 187.0/255.0, green: 188.0/255.0, blue: 190.0/255.0, alpha: 1.0), forState: .Normal)
                 self.btnSkillLevel.setTitleColor(UIColor(red: 187.0/255.0, green: 188.0/255.0, blue: 190.0/255.0, alpha: 1.0), forState: .Normal)
                 self.btnWorkingPattern.setTitleColor(UIColor(red: 187.0/255.0, green: 188.0/255.0, blue: 190.0/255.0, alpha: 1.0), forState: .Normal)
+                self.btnCapacity.setTitleColor(UIColor(red: 187.0/255.0, green: 188.0/255.0, blue: 190.0/255.0, alpha: 1.0), forState: .Normal)
                 
             })
         }
@@ -613,8 +650,18 @@ extension AddResourceViewController : SelectOptionsCustomView_Delegate
             
             let index = arrSelected.firstObject as! NSIndexPath
             strSelPriority = arrPriority[index.row]  as! String
+            selectedReourceBO.strPriority = strSelPriority
             btnPriority.setTitle(strSelPriority, forState: UIControlState.Normal)
             btnPriority.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+        }
+        else if tag == optionSelection.Capacity.rawValue
+        {
+            
+            let index = arrSelected.firstObject as! NSIndexPath
+            strSelCapacity = arrCapacity[index.row]  as! String
+            selectedReourceBO.strCapacity = strSelCapacity
+            btnCapacity.setTitle(strSelCapacity, forState: UIControlState.Normal)
+            btnCapacity.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         }
 
     }
