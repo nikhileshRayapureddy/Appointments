@@ -16,6 +16,7 @@ enum optionSelection : Int
     case workingPattern
     case SkillLevel
     case Priority
+    case Capacity
 }
 
 protocol SelectOptionsCustomView_Delegate {
@@ -131,7 +132,12 @@ extension SelectOptionsCustomView : UITableViewDelegate, UITableViewDataSource
             let pattern = arrTitles.objectAtIndex(indexPath.row) as! String
             cell.textLabel?.text = pattern
         }
-        else
+        else if viewTag == optionSelection.Capacity.rawValue
+        {
+            let pattern = arrTitles.objectAtIndex(indexPath.row) as! String
+            cell.textLabel?.text = pattern
+        }
+       else
         {
             let dict = arrTitles.objectAtIndex(indexPath.row) as! NSDictionary
             cell.textLabel?.text = dict.objectForKey("Name") as? String

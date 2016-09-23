@@ -241,7 +241,9 @@ extension SignUpViewController : ParserDelegate
         let alert = UIAlertController(title: "Success!", message: "You have been registered successfully.", preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:{
             action in
-            var isVcPresent = false
+            
+            self.navigationController?.popViewControllerAnimated(true)
+            /*var isVcPresent = false
             var VC : UIViewController!
             let dictResponse = object as! NSDictionary
             let model = dictResponse.objectForKey("Model") as! NSDictionary
@@ -273,7 +275,7 @@ extension SignUpViewController : ParserDelegate
                 let vc : HomeViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("HomeViewController") as! HomeViewController
                 self.navigationController!.pushViewController(vc, animated: true)
                 
-            }
+            }*/
         } ))
         
         self.presentViewController(alert, animated: true, completion: nil)

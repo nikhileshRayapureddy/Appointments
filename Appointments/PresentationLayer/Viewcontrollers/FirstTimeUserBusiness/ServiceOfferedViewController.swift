@@ -168,8 +168,8 @@ class ServiceOfferedViewController: BaseViewController,UITextFieldDelegate {
         }
         else
         {
-            txtPrice.text = String (format: "%lf", service.Price)
-            txtDuration.text = String (format: "%lf", service.Duration)
+            txtPrice.text = String (service.Price)
+            txtDuration.text = String (service.Duration)
             btnTwoMenJob.selected = service.isTwoManJob
         }
         selectedServiceBO = service
@@ -216,6 +216,7 @@ class ServiceOfferedViewController: BaseViewController,UITextFieldDelegate {
         }
         else
         {
+            dictParams.setObject(selectedServiceBO.strServiceId, forKey: "ServiceId")
             layer.updateService(dictParams)
         }
         
@@ -312,20 +313,57 @@ extension ServiceOfferedViewController : ParserDelegate
                     }
                     if ((dictModel["Price"]?.isKindOfClass(NSNull)) == false)
                     {
-                        service.Price = (dictModel.objectForKey("Price") as? Double)!
+                        let Price = dictModel.objectForKey("Price") as? NSNumber
+                        service.Price = (Price?.doubleValue)!
                     }
                     if ((dictModel["Duration"]?.isKindOfClass(NSNull)) == false)
                     {
-                        service.Duration = (dictModel.objectForKey("Duration") as? Int)!
+                        let Duration = dictModel.objectForKey("Duration") as? NSNumber
+                        service.Duration = (Duration?.integerValue)!
                     }
                     if ((dictModel["TwoManJob"]?.isKindOfClass(NSNull)) == false)
                     {
-                        service.isTwoManJob = (dictModel.objectForKey("TwoManJob") as? Bool)!
+                        let TwoManJob = dictModel.objectForKey("TwoManJob") as? NSNumber
+                        service.isTwoManJob = (TwoManJob?.boolValue)!
                     }
                   
                     if ((dictModel["SkillString"]?.isKindOfClass(NSNull)) == false)
                     {
-                        service.strSkillString = (dictModel.objectForKey("SkillString") as? String)!
+                        let strSkills = (dictModel.objectForKey("SkillString") as? String)!
+                        var strSkillString = ""
+                        let arrSkillStrings = strSkills.componentsSeparatedByString(",")
+                        var arrSelSkill = [SkillsBO]()
+                        for skill in arrSkillStrings
+                        {
+                            let filteredArray = arrSkillsList.filter() {
+                                if let type : String = ($0 as! SkillsBO).strSkillId as String {
+                                    return type == skill
+                                } else {
+                                    return false
+                                }
+                            }
+                            arrSelSkill.appendContentsOf(filteredArray as! [SkillsBO])
+                        }
+                        for skillBo in arrSelSkill {
+                            
+                            if arrSelSkill.count == 1
+                            {
+                                strSkillString = skillBo.strSkillName
+                            }
+                            else
+                            {
+                                if strSkillString == ""
+                                {
+                                    strSkillString = skillBo.strSkillName
+                                }
+                                else
+                                {
+                                    strSkillString = strSkillString + "," + skillBo.strSkillName
+                                }
+                            }
+
+                        }
+                        service.strSkillString = strSkillString
                     }
                     arrServicesList.addObject(service)
                 }
@@ -393,7 +431,18 @@ extension ServiceOfferedViewController : ParserDelegate
         }
         else
         {
-            dispatch_async(dispatch_get_main_queue(), { 
+            let defaults = NSUserDefaults.standardUserDefaults()
+            let StatusFlag = defaults.valueForKey("StatusFlag") as! NSInteger
+            
+            if StatusFlag <= 4
+            {
+                defaults.setValue(5, forKey: "StatusFlag")
+            }
+            defaults.synchronize()
+
+            dispatch_async(dispatch_get_main_queue(), {
+                self.showAlert("Service saved successfully.", strTitle: "Success!")
+
                 self.bindDataFromList(ServiceBO())
             })
         }

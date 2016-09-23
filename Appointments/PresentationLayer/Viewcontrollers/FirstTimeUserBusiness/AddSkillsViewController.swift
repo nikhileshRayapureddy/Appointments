@@ -279,6 +279,15 @@ extension AddSkillsViewController : ParserDelegate
             dispatch_async(dispatch_get_main_queue(), { 
                 self.txtSkillName.text = ""
                 self.txtVwDescription.text = ""
+                let defaults = NSUserDefaults.standardUserDefaults()
+                let StatusFlag = defaults.valueForKey("StatusFlag") as! NSInteger
+                
+                if StatusFlag <= 3
+                {
+                    defaults.setValue(4, forKey: "StatusFlag")
+                }
+                defaults.synchronize()
+                self.selectedSkillBO = SkillsBO()
             })
         }
     }

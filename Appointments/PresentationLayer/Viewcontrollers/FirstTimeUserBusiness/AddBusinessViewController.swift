@@ -273,6 +273,19 @@ class AddBusinessViewController: BaseViewController,UITextFieldDelegate {
         currenttextField = textField
         return true
     }
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        if textField == txtContactNumber
+        {
+            if range.length + range.location > textField.text?.characters.count
+            {
+                return false
+            }
+            
+            let newLength : Int = (textField.text?.characters.count)! + string.characters.count - range.length
+            return newLength <= 10;
+        }
+        return true
+    }
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         currenttextField.resignFirstResponder()
         return true
@@ -320,9 +333,36 @@ extension AddBusinessViewController : ParserDelegate
         else if tag == ParsingConstant.addBusiness.rawValue
         {
             isSaved = true
+            let dictResponse = object as! NSDictionary
+            let model = dictResponse.objectForKey("Model") as! NSDictionary
+            let defaults = NSUserDefaults.standardUserDefaults()
+            let firmId = model["ReturnTypeValue"]
+            defaults.setValue(firmId?.integerValue, forKey: "FIRMID")
+            defaults.synchronize()
+            let StatusFlag = defaults.valueForKey("StatusFlag") as! NSInteger
             
-            dispatch_async(dispatch_get_main_queue(), { 
-               self.showAlertWithMessage("Business saved successfully.")
+            if StatusFlag <= 0
+            {
+                defaults.setValue(1, forKey: "StatusFlag")
+            }
+            defaults.synchronize()
+
+            dispatch_async(dispatch_get_main_queue(), {
+                
+                let alert = UIAlertController(title: "Success!", message: "Business saved successfully.", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:
+                    { action in
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        let vc = storyboard.instantiateViewControllerWithIdentifier("AddBranchViewController") as! AddBranchViewController
+                        if self.navigationController!.visibleViewController?.isKindOfClass(AddBranchViewController) == true
+                        {
+                            return
+                        }
+                        self.navigationController?.pushViewController(vc, animated: false)
+
+                        
+                }))
+                self.presentViewController(alert, animated: true, completion: nil)
             })
         }
         
@@ -455,7 +495,8 @@ extension AddBusinessViewController : ParserDelegate
         }
         if ((dictBusiness["EnablePayment"]?.isKindOfClass(NSNull)) == false)
         {
-            businessBO.strEnablePayment = (dictBusiness.objectForKey("EnablePayment") as? String)!
+            let EnablePayment = dictBusiness.objectForKey("EnablePayment") as? NSNumber
+            businessBO.strEnablePayment = (EnablePayment?.stringValue)!
         }
         if ((dictBusiness["ParentId"]?.isKindOfClass(NSNull)) == false)
         {

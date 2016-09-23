@@ -157,29 +157,16 @@ class AddCalenderViewController: BaseViewController,UITextFieldDelegate {
             isUpdate = true
             dictParams.setObject(selectedBO.strFirmWPId, forKey: "FirmWPId")
         }
-        var arrDict = [NSDictionary]()
-        
+        var strXML = "<Patterns>\n"
         for i in 1...7 {
-            let dict = NSMutableDictionary()
             let DayId : Int = Int(i)
-            dict.setObject(String(DayId), forKey: "DayId")
-            
             let txtFrom : UITextField = scrlVwAddCalender.viewWithTag(10*i) as! UITextField
             let txtTo : UITextField = scrlVwAddCalender.viewWithTag((10*i)+1) as! UITextField
-            dict.setObject(txtFrom.text!, forKey: "FromTime")
-            dict.setObject(txtTo.text!, forKey: "ToTime")
-            arrDict.append(dict)
+            strXML =  strXML + "<Pattern><Day_id>" + String(DayId) + "</Day_id><From_Time>" + txtFrom.text! + "</From_Time><To_Time>" + txtTo.text! + "</To_Time></Pattern>"
         }
-        var dataString : String = ""
+        strXML =  strXML + "</Patterns>"
+        dictParams.setObject(strXML, forKey: "PatternsXML")
         let txtYear : UITextField = scrlVwAddCalender.viewWithTag(151) as! UITextField
-        do {
-            let data = try NSJSONSerialization.dataWithJSONObject(arrDict, options:[])
-            dataString = NSString(data: data, encoding: NSUTF8StringEncoding)! as String
-            
-        } catch {
-            print("JSON serialization failed:  \(error)")
-        }
-        dictParams.setObject(dataString, forKey: "Patterns")
         dictParams.setObject(txtYear.text!, forKey: "CalanderYear")
         if btnBankHoliday.selected == true
         {
@@ -235,6 +222,10 @@ class AddCalenderViewController: BaseViewController,UITextFieldDelegate {
             xPos = 0
         }
             lblReturn.frame = CGRectMake(xPos, yPos, rect.width, 12)
+        if startTime == "" && endTime == ""
+        {
+            lblReturn.frame = CGRectMake(xPos, yPos, 0, 0)
+        }
 
         
         return lblReturn
@@ -277,7 +268,10 @@ extension AddCalenderViewController : UITableViewDelegate, UITableViewDataSource
         
         var xPos = CGFloat(0)
         var yPos = CGFloat(0)
-        
+        for view in cell.vwLblTimeBg.subviews
+        {
+            view.removeFromSuperview()
+        }
         if BO.arrPatterns.count > 0
         {
             for i in 0...(BO.arrPatterns.count-1)
@@ -484,6 +478,15 @@ extension AddCalenderViewController : ParserDelegate
         }
         else if tag == ParsingConstant.addWorkingPattern.rawValue
         {
+            let defaults = NSUserDefaults.standardUserDefaults()
+            let StatusFlag = defaults.valueForKey("StatusFlag") as! NSInteger
+            
+            if StatusFlag <= 2
+            {
+                defaults.setValue(3, forKey: "StatusFlag")
+            }
+            defaults.synchronize()
+
             self.showAlert("Working Pattern saved Successfully.", strTitle: "Success!")
             dispatch_async(dispatch_get_main_queue()) {
                 for i in 1...7 {
