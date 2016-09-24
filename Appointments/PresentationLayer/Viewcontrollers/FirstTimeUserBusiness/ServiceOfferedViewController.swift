@@ -19,7 +19,7 @@ class ServiceOfferedViewController: BaseViewController,UITextFieldDelegate {
     @IBOutlet weak var txtServiceDescription: UITextField!
     @IBOutlet weak var txtPrice: UITextField!
     @IBOutlet weak var txtDuration: UITextField!
-    var currenttextField : UITextField!
+    var currenttextField = UITextField()
 
     var arrSkillsList = NSMutableArray()
     var arrServicesList = NSMutableArray()
@@ -175,7 +175,8 @@ class ServiceOfferedViewController: BaseViewController,UITextFieldDelegate {
         selectedServiceBO = service
     }
     @IBAction func btnSaveClicked(sender: UIButton) {
-        
+        self.view.endEditing(true)
+  
         let dictParams = NSMutableDictionary()
         let defualts = NSUserDefaults.standardUserDefaults()
         dictParams.setObject(txtServiceType.text!, forKey: "ServiceName")
@@ -262,10 +263,7 @@ extension ServiceOfferedViewController : UITableViewDelegate, UITableViewDataSou
         sender.selected = !sender.selected
     }
     @IBAction func btnSelectSkillClicked(sender: UIButton) {
-        if currenttextField != nil
-        {
-        currenttextField.resignFirstResponder()
-        }
+        self.view.endEditing(true)
         if let view : SelectOptionsCustomView = NSBundle.mainBundle().loadNibNamed("SelectOptionsCustomView", owner: nil, options: nil)[0] as? SelectOptionsCustomView
         {
             view.frame = CGRectMake(0, -64, self.view.frame.size.width, self.view.frame.size.height+64)
@@ -441,9 +439,22 @@ extension ServiceOfferedViewController : ParserDelegate
             defaults.synchronize()
 
             dispatch_async(dispatch_get_main_queue(), {
-                self.showAlert("Service saved successfully.", strTitle: "Success!")
-
                 self.bindDataFromList(ServiceBO())
+                let alert = UIAlertController(title: "Success!", message: "Service saved Successfully.", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:
+                    { action in
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        let vc = storyboard.instantiateViewControllerWithIdentifier("AddResourceViewController") as! AddResourceViewController
+                        if self.navigationController!.visibleViewController?.isKindOfClass(AddResourceViewController) == true
+                        {
+                            return
+                        }
+                        self.navigationController?.pushViewController(vc, animated: false)
+                        
+                        
+                }))
+                self.presentViewController(alert, animated: true, completion: nil)
+
             })
         }
     }

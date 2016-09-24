@@ -144,6 +144,7 @@ class AddBranchViewController: BaseViewController {
         selectedBranchBO = branchDetails
     }
     @IBAction func btnSaveClicked(sender: UIButton) {
+        self.view.endEditing(true)
         
         let dictParams = NSMutableDictionary()
         dictParams.setObject(txtBranchName.text!, forKey: "FirmName")
@@ -388,6 +389,24 @@ extension AddBranchViewController : ParserDelegate
                 defaults.setValue(2, forKey: "StatusFlag")
             }
             defaults.synchronize()
+            dispatch_async(dispatch_get_main_queue(), {
+                
+                let alert = UIAlertController(title: "Success!", message: "Branch saved successfully.", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:
+                    { action in
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        let vc = storyboard.instantiateViewControllerWithIdentifier("AddCalenderViewController") as! AddCalenderViewController
+                        if self.navigationController!.visibleViewController?.isKindOfClass(AddCalenderViewController) == true
+                        {
+                            return
+                        }
+                        self.navigationController?.pushViewController(vc, animated: false)
+                        
+                        
+                }))
+                self.presentViewController(alert, animated: true, completion: nil)
+            })
+
             selectedBranchBO = BranchBO()
             self.performSelectorOnMainThread(#selector(self.bindDataFromList), withObject: BranchBO(), waitUntilDone: true)
         }

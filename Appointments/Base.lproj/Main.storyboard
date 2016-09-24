@@ -3159,7 +3159,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8lf-Qq-ITh">
-                                <rect key="frame" x="0.0" y="75" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="75" width="375" height="592"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -3372,7 +3372,7 @@
                             <constraint firstItem="GOM-nB-bhp" firstAttribute="leading" secondItem="ZF1-yP-4hb" secondAttribute="leading" id="Bfu-On-1EK"/>
                             <constraint firstAttribute="trailing" secondItem="GOM-nB-bhp" secondAttribute="trailing" id="Upc-K1-MpM"/>
                             <constraint firstItem="GOM-nB-bhp" firstAttribute="bottom" secondItem="Ib3-ca-qf4" secondAttribute="top" constant="55" id="V29-qR-olm"/>
-                            <constraint firstItem="Ib3-ca-qf4" firstAttribute="top" secondItem="8lf-Qq-ITh" secondAttribute="bottom" constant="-55" id="eXX-st-gso"/>
+                            <constraint firstItem="Ib3-ca-qf4" firstAttribute="top" secondItem="8lf-Qq-ITh" secondAttribute="bottom" id="eXX-st-gso"/>
                             <constraint firstItem="Cud-Ft-UBt" firstAttribute="top" secondItem="5fU-eD-1Ey" secondAttribute="bottom" constant="65" id="gEJ-Tj-Icy"/>
                             <constraint firstAttribute="trailing" secondItem="8lf-Qq-ITh" secondAttribute="trailing" id="h0E-dD-0ck"/>
                             <constraint firstAttribute="trailing" secondItem="Cud-Ft-UBt" secondAttribute="trailing" constant="10" id="j7W-R5-HjD"/>
