@@ -132,6 +132,7 @@ class AddSkillsViewController: BaseViewController {
     }
 
     @IBAction func btnSaveClicked(sender: UIButton) {
+        self.view.endEditing(true)
         let dictParams = NSMutableDictionary()
         dictParams.setObject(txtSkillName.text!, forKey: "SkillName")
         dictParams.setObject(txtVwDescription.text, forKey: "Notes")
@@ -288,6 +289,22 @@ extension AddSkillsViewController : ParserDelegate
                 }
                 defaults.synchronize()
                 self.selectedSkillBO = SkillsBO()
+                
+                    let alert = UIAlertController(title: "Success!", message: "Skill saved Successfully.", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:
+                        { action in
+                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                            let vc = storyboard.instantiateViewControllerWithIdentifier("ServiceOfferedViewController") as! ServiceOfferedViewController
+                            if self.navigationController!.visibleViewController?.isKindOfClass(ServiceOfferedViewController) == true
+                            {
+                                return
+                            }
+                            self.navigationController?.pushViewController(vc, animated: false)
+                            
+                            
+                    }))
+                    self.presentViewController(alert, animated: true, completion: nil)
+
             })
         }
     }

@@ -31,7 +31,7 @@ class AddBusinessViewController: BaseViewController,UITextFieldDelegate {
     @IBOutlet weak var txtBusinessName: UITextField!
     
     @IBOutlet weak var btnSave: UIButton!
-    var currenttextField : UITextField!
+    var currenttextField  =  UITextField()
     var arrBusinessTypes : NSMutableArray! = NSMutableArray()
     var arrBusinessBookingTypes : NSMutableArray! = NSMutableArray()
     var viewSelectOptions = SelectOptionsCustomView()
@@ -81,7 +81,7 @@ class AddBusinessViewController: BaseViewController,UITextFieldDelegate {
         leftBarButtonItems.addSubview(btnHome)
         let bLeftItem = UIBarButtonItem(customView:leftBarButtonItems)
         self.navigationItem.leftBarButtonItem = bLeftItem
-        self.getBusinessTypes()
+        getBusinessTypes()
     }
     func btnHomeClicked(sender : UIButton)
     {
@@ -136,10 +136,7 @@ class AddBusinessViewController: BaseViewController,UITextFieldDelegate {
     }
     
     @IBAction func btnBusinessTypesClicked(sender: UIButton) {
-        if currenttextField != nil
-        {
-            currenttextField.resignFirstResponder()
-        }
+            self.view.endEditing(true)
         if let view : SelectOptionsCustomView = NSBundle.mainBundle().loadNibNamed("SelectOptionsCustomView", owner: nil, options: nil)[0] as? SelectOptionsCustomView
         {
             view.frame = CGRectMake(0, -64, self.view.frame.size.width, self.view.frame.size.height+64)
@@ -155,10 +152,7 @@ class AddBusinessViewController: BaseViewController,UITextFieldDelegate {
     }
     @IBAction func btnBookingTypeClicked(sender: UIButton)
     {
-        if currenttextField != nil
-        {
-         currenttextField.resignFirstResponder()
-        }
+        self.view.endEditing(true)
         if let view : SelectOptionsCustomView = NSBundle.mainBundle().loadNibNamed("SelectOptionsCustomView", owner: nil, options: nil)[0] as? SelectOptionsCustomView
         {
             view.frame = CGRectMake(0, -64, self.view.frame.size.width, self.view.frame.size.height+64)
@@ -173,6 +167,7 @@ class AddBusinessViewController: BaseViewController,UITextFieldDelegate {
     }
     
     @IBAction func btnSaveClicked(sender: UIButton) {
+        self.view.endEditing(true)
         let dictParams = NSMutableDictionary()
         let defaults = NSUserDefaults.standardUserDefaults()
         let firmValue = defaults.valueForKey("FIRMID") as! NSInteger
@@ -337,12 +332,11 @@ extension AddBusinessViewController : ParserDelegate
             let model = dictResponse.objectForKey("Model") as! NSDictionary
             let defaults = NSUserDefaults.standardUserDefaults()
             let firmId = model["ReturnTypeValue"]
-            defaults.setValue(firmId?.integerValue, forKey: "FIRMID")
-            defaults.synchronize()
             let StatusFlag = defaults.valueForKey("StatusFlag") as! NSInteger
             
             if StatusFlag <= 0
             {
+                defaults.setValue(firmId?.integerValue, forKey: "FIRMID")
                 defaults.setValue(1, forKey: "StatusFlag")
             }
             defaults.synchronize()
@@ -419,6 +413,8 @@ extension AddBusinessViewController : ParserDelegate
                 if Id == BookingType
                 {
                     dictSelBookingType = dictTemp!
+                    let row  = dictSelBookingType["Id"] as! NSNumber
+                    arrSelectedBusinessTypeOptions.addObject(NSIndexPath(forRow: row.integerValue - 1, inSection: 0))
                 }
             }
             if dictSelBookingType.allKeys.count == 0
@@ -429,6 +425,7 @@ extension AddBusinessViewController : ParserDelegate
             {
                 let title = dictSelBookingType["Name"] as? String
                 businessBO.strBusinessType = title!
+                
             }
         }
         
@@ -443,6 +440,9 @@ extension AddBusinessViewController : ParserDelegate
                 if Id == Int(BookingType!)
                 {
                     dictSelBookingType = dictTemp!
+                    
+                    let row  = dictSelBookingType["Id"] as! NSNumber
+                    arrSelectedBookingTypeOptions.addObject(NSIndexPath(forRow: row.integerValue - 1, inSection: 0))
                 }
             }
             if dictSelBookingType.allKeys.count == 0

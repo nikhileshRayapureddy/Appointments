@@ -177,7 +177,7 @@ class AddResourceViewController: BaseViewController,UITextFieldDelegate {
     }
 
     @IBAction func btnSaveClicked(sender: UIButton) {
-        currenttextField.resignFirstResponder()
+        self.view.endEditing(true)
         let dictParams = NSMutableDictionary()
         let defualts = NSUserDefaults.standardUserDefaults()
         dictParams.setObject(txtFldResourceName.text!, forKey: "ResourceName")
@@ -300,8 +300,7 @@ class AddResourceViewController: BaseViewController,UITextFieldDelegate {
     }
 
     @IBAction func btnCapacityClicked(sender: UIButton) {
-        currenttextField.resignFirstResponder()
-        
+        self.view.endEditing(true)
         if let view : SelectOptionsCustomView = NSBundle.mainBundle().loadNibNamed("SelectOptionsCustomView", owner: nil, options: nil)[0] as? SelectOptionsCustomView
         {
             view.frame = CGRectMake(0, -64, self.view.frame.size.width, self.view.frame.size.height+64)
@@ -340,6 +339,7 @@ extension AddResourceViewController : UITableViewDelegate, UITableViewDataSource
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         btnViewListClicked(btnViewList)
+        selectedReourceBO = arrResourcesList[indexPath.row] as! ResourceBO
         bindDataFromList(arrResourcesList.objectAtIndex(indexPath.row) as! ResourceBO)
     }
     
@@ -368,8 +368,7 @@ extension AddResourceViewController : UITableViewDelegate, UITableViewDataSource
         return true
     }
     @IBAction func btnPriorityClicked(sender: UIButton) {
-        currenttextField.resignFirstResponder()
-        
+self.view.endEditing(true)
         if let view : SelectOptionsCustomView = NSBundle.mainBundle().loadNibNamed("SelectOptionsCustomView", owner: nil, options: nil)[0] as? SelectOptionsCustomView
         {
             view.frame = CGRectMake(0, -64, self.view.frame.size.width, self.view.frame.size.height+64)
@@ -383,8 +382,7 @@ extension AddResourceViewController : UITableViewDelegate, UITableViewDataSource
         }
     }
     @IBAction func btnSkillLevelClicked(sender: UIButton) {
-        currenttextField.resignFirstResponder()
-        
+        self.view.endEditing(true)
         if let view : SelectOptionsCustomView = NSBundle.mainBundle().loadNibNamed("SelectOptionsCustomView", owner: nil, options: nil)[0] as? SelectOptionsCustomView
         {
             view.frame = CGRectMake(0, -64, self.view.frame.size.width, self.view.frame.size.height+64)
@@ -399,8 +397,7 @@ extension AddResourceViewController : UITableViewDelegate, UITableViewDataSource
     }
 
     @IBAction func btnWorkingPatternClicked(sender: UIButton) {
-        currenttextField.resignFirstResponder()
-        
+        self.view.endEditing(true)
         if let view : SelectOptionsCustomView = NSBundle.mainBundle().loadNibNamed("SelectOptionsCustomView", owner: nil, options: nil)[0] as? SelectOptionsCustomView
         {
             view.frame = CGRectMake(0, -64, self.view.frame.size.width, self.view.frame.size.height+64)
@@ -577,11 +574,19 @@ extension AddResourceViewController : ParserDelegate
                 self.txtFldContactNumber.text = ""
                 self.txtFldEmail.text = ""
                 self.txtFldResourceName.text = ""
-                self.btnPriority.setTitle("", forState: .Normal)
-                self.btnSkillLevel.setTitle("", forState: .Normal)
-                self.btnWorkingPattern.setTitle("", forState: .Normal)
-                self.btnCapacity.setTitle("", forState: .Normal)
+                self.btnPriority.setTitle("Priority", forState: .Normal)
+                self.btnSkillLevel.setTitle("Skill Level", forState: .Normal)
+                self.btnWorkingPattern.setTitle("Working Pattern", forState: .Normal)
+                self.btnCapacity.setTitle("Capacity", forState: .Normal)
+                self.btnPriority.setTitleColor(UIColor(red: 187.0/255.0, green: 188.0/255.0, blue: 190.0/255.0, alpha: 1.0), forState: .Normal)
+                self.btnSkillLevel.setTitleColor(UIColor(red: 187.0/255.0, green: 188.0/255.0, blue: 190.0/255.0, alpha: 1.0), forState: .Normal)
+                self.btnWorkingPattern.setTitleColor(UIColor(red: 187.0/255.0, green: 188.0/255.0, blue: 190.0/255.0, alpha: 1.0), forState: .Normal)
+                self.btnCapacity.setTitleColor(UIColor(red: 187.0/255.0, green: 188.0/255.0, blue: 190.0/255.0, alpha: 1.0), forState: .Normal)
+
             })
+            selectedReourceBO =  ResourceBO()
+            arrSelectedWorkingPatternList.removeAllObjects()
+
         }
         else if tag == ParsingConstant.updateResource.rawValue
         {
@@ -600,6 +605,7 @@ extension AddResourceViewController : ParserDelegate
                 self.btnCapacity.setTitleColor(UIColor(red: 187.0/255.0, green: 188.0/255.0, blue: 190.0/255.0, alpha: 1.0), forState: .Normal)
                 
             })
+            selectedReourceBO =  ResourceBO()
         }
    }
     func parsingError(error: String?, withTag tag: NSInteger) {

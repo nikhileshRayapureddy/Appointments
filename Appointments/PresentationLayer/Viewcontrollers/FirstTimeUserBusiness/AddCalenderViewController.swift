@@ -128,13 +128,6 @@ class AddCalenderViewController: BaseViewController,UITextFieldDelegate {
         layer.callBack = self
         layer.getAllWorkingPatterns()
     }
-    func getWorkingPatternsWithID(strID : String)
-    {
-        app_delegate.showLoader("")
-       let layer = BusinessLayerClass()
-        layer.callBack = self
-        layer.getDetailsForWorkingPatternWithID(strID)
-    }
 
     func btnNextClicked(sender : UIButton)
     {
@@ -192,6 +185,16 @@ class AddCalenderViewController: BaseViewController,UITextFieldDelegate {
         {
             scrlVwAddCalender.hidden = false
             tableView.hidden = true
+            for i in 1...7 {
+                let txtFrom : UITextField = self.scrlVwAddCalender.viewWithTag(10*i) as! UITextField
+                let txtTo : UITextField = self.scrlVwAddCalender.viewWithTag((10*i)+1) as! UITextField
+                txtFrom.text = ""
+                txtTo.text = ""
+            }
+            self.txtFldPatternName.text = ""
+            self.btnBankHoliday.selected = false
+            self.txtFldYear.text = ""
+            selectedBO = WorkPatternListBO()
         }
     }
     func designWorkingHourLabelWithDay(day:String,startTime:String,endTime:String,frame:CGRect) -> UILabel
@@ -236,6 +239,7 @@ class AddCalenderViewController: BaseViewController,UITextFieldDelegate {
         
     }
     @IBAction func btnSaveClicked(sender: UIButton) {
+        self.view.endEditing(true)
         self.addWorkingPattern()
     }
     override func didReceiveMemoryWarning() {
@@ -321,8 +325,27 @@ extension AddCalenderViewController : UITableViewDelegate, UITableViewDataSource
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        self.btnViewListClicked(self.btnViewList)
         selectedBO = arrWorkingPatternList[indexPath.row]
-        self.getWorkingPatternsWithID(selectedBO.strFirmWPId)
+
+        if self.selectedBO.arrPatterns.count > 0
+        {
+            self.bindDataForWorkingPattern()
+        }
+        else
+        {
+            for i in 1...7 {
+                let txtFrom : UITextField = self.scrlVwAddCalender.viewWithTag(10*i) as! UITextField
+                let txtTo : UITextField = self.scrlVwAddCalender.viewWithTag((10*i)+1) as! UITextField
+                txtFrom.text = ""
+                txtTo.text = ""
+            }
+            
+        }
+        self.btnBankHoliday.selected = self.selectedBO.isIsBankHoliday
+        self.txtFldPatternName.text = self.selectedBO.strPatternName
+        self.txtFldYear.text = self.selectedBO.strCalanderYear
+
     }
     
     @IBAction func datePickerChanged(sender: UIDatePicker) {
@@ -395,49 +418,7 @@ extension AddCalenderViewController : ParserDelegate
 {
     func parsingFinished(object: AnyObject?, withTag tag: NSInteger) {
         app_delegate.removeloder()
-        if tag == ParsingConstant.getWorkingPattern.rawValue
-        {
-            let response = object as! NSDictionary
-            print(response)
-            arrWorkingPattern.removeAll()
-            let arrModel = response.valueForKey("Model") as! NSArray
-            for dict in arrModel {
-                let workingPatternBO = WorkPatternBO()
-                let DayId : NSNumber = dict.valueForKey("DayId") as! NSNumber
-                workingPatternBO.strDayId = String(DayId.integerValue)
-                let FirmWPId : NSNumber = dict.valueForKey("FirmWPId") as! NSNumber
-                workingPatternBO.strFirmWPId = String(FirmWPId.integerValue)
-                let WPId : NSNumber = dict.valueForKey("WPId") as! NSNumber
-                workingPatternBO.strWPId = String(WPId.integerValue)
-                workingPatternBO.strFromTime = dict.valueForKey("FromTime") as! String
-                workingPatternBO.strToTime = dict.valueForKey("ToTime") as! String
-                arrWorkingPattern.append(workingPatternBO)
-            }
-            
-            dispatch_async(dispatch_get_main_queue()) {
-                self.btnViewListClicked(self.btnViewList)
-
-                if self.arrWorkingPattern.count > 0
-                {
-                    self.bindDataForWorkingPattern()
-                }
-                else
-                {
-                    for i in 1...7 {
-                        let txtFrom : UITextField = self.scrlVwAddCalender.viewWithTag(10*i) as! UITextField
-                        let txtTo : UITextField = self.scrlVwAddCalender.viewWithTag((10*i)+1) as! UITextField
-                        txtFrom.text = ""
-                        txtTo.text = ""
-                    }
-
-                }
-                self.btnBankHoliday.selected = self.selectedBO.isIsBankHoliday
-                self.txtFldPatternName.text = self.selectedBO.strPatternName
-                self.txtFldYear.text = self.selectedBO.strCalanderYear
-            }
-
-        }
-        else if tag == ParsingConstant.getWorkingPatternList.rawValue
+        if tag == ParsingConstant.getWorkingPatternList.rawValue
         {
             let response = object as! NSDictionary
             print(response)
@@ -486,8 +467,8 @@ extension AddCalenderViewController : ParserDelegate
                 defaults.setValue(3, forKey: "StatusFlag")
             }
             defaults.synchronize()
+            selectedBO = WorkPatternListBO()
 
-            self.showAlert("Working Pattern saved Successfully.", strTitle: "Success!")
             dispatch_async(dispatch_get_main_queue()) {
                 for i in 1...7 {
                     let txtFrom : UITextField = self.scrlVwAddCalender.viewWithTag(10*i) as! UITextField
@@ -498,8 +479,22 @@ extension AddCalenderViewController : ParserDelegate
                 self.txtFldPatternName.text = ""
                 self.btnBankHoliday.selected = false
                 self.txtFldYear.text = ""
+                
+                let alert = UIAlertController(title: "Success!", message: "Working Pattern saved Successfully.", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:
+                    { action in
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        let vc = storyboard.instantiateViewControllerWithIdentifier("AddSkillsViewController") as! AddSkillsViewController
+                        if self.navigationController!.visibleViewController?.isKindOfClass(AddSkillsViewController) == true
+                        {
+                            return
+                        }
+                        self.navigationController?.pushViewController(vc, animated: false)
+                        
+                        
+                }))
+                self.presentViewController(alert, animated: true, completion: nil)
             }
-
 
         }
         
@@ -513,9 +508,9 @@ extension AddCalenderViewController : ParserDelegate
     {
         for i in 0...6 {
             var tempBo = WorkPatternBO()
-            if i < arrWorkingPattern.count
+            if i < self.selectedBO.arrPatterns.count
             {
-                tempBo = arrWorkingPattern[i] as WorkPatternBO
+                tempBo = self.selectedBO.arrPatterns[i] as WorkPatternBO
             }
             if Int(tempBo.strDayId) == i+1
             {
