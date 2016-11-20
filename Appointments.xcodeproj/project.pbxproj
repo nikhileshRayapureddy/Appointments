@@ -55,6 +55,15 @@
 		A7F502EE1D5B5A9600D9A427 /* AddSkillsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F502ED1D5B5A9600D9A427 /* AddSkillsViewController.swift */; };
 		A7F502F01D5B5AA800D9A427 /* ServiceOfferedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F502EF1D5B5AA800D9A427 /* ServiceOfferedViewController.swift */; };
 		A7F502F21D5B5AB600D9A427 /* AddResourceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F502F11D5B5AB600D9A427 /* AddResourceViewController.swift */; };
+		CCA3D85D1DDDE9DC004D1E32 /* CLWeeklyCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA3D84F1DDDE9DC004D1E32 /* CLWeeklyCalendarView.m */; };
+		CCA3D85E1DDDE9DC004D1E32 /* DailyCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA3D8511DDDE9DC004D1E32 /* DailyCalendarView.m */; };
+		CCA3D85F1DDDE9DC004D1E32 /* DayTitleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA3D8531DDDE9DC004D1E32 /* DayTitleLabel.m */; };
+		CCA3D8601DDDE9DC004D1E32 /* NSDate+CL.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA3D8561DDDE9DC004D1E32 /* NSDate+CL.m */; };
+		CCA3D8611DDDE9DC004D1E32 /* NSDictionary+CL.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA3D8581DDDE9DC004D1E32 /* NSDictionary+CL.m */; };
+		CCA3D8621DDDE9DC004D1E32 /* UIColor+CL.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA3D85A1DDDE9DC004D1E32 /* UIColor+CL.m */; };
+		CCA3D8631DDDE9DC004D1E32 /* UIImage+CL.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA3D85C1DDDE9DC004D1E32 /* UIImage+CL.m */; };
+		CCA3D8651DDDEA85004D1E32 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA3D8641DDDEA85004D1E32 /* CalendarViewController.swift */; };
+		CCA3D8671DDDEAC3004D1E32 /* HourCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA3D8661DDDEAC3004D1E32 /* HourCollectionViewCell.swift */; };
 		CCE3227E1D869410000F819B /* SelectOptionsCustomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCE3227D1D869410000F819B /* SelectOptionsCustomView.xib */; };
 		CCE322831D869456000F819B /* SelectOptionsCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE322821D869456000F819B /* SelectOptionsCustomView.swift */; };
 		CCE60D801D88520B00915031 /* AddBusinessCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE60D7F1D88520B00915031 /* AddBusinessCustomCell.swift */; };
@@ -142,6 +151,22 @@
 		A7F502ED1D5B5A9600D9A427 /* AddSkillsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSkillsViewController.swift; sourceTree = "<group>"; };
 		A7F502EF1D5B5AA800D9A427 /* ServiceOfferedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceOfferedViewController.swift; sourceTree = "<group>"; };
 		A7F502F11D5B5AB600D9A427 /* AddResourceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddResourceViewController.swift; sourceTree = "<group>"; };
+		CCA3D84E1DDDE9DC004D1E32 /* CLWeeklyCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLWeeklyCalendarView.h; sourceTree = "<group>"; };
+		CCA3D84F1DDDE9DC004D1E32 /* CLWeeklyCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLWeeklyCalendarView.m; sourceTree = "<group>"; };
+		CCA3D8501DDDE9DC004D1E32 /* DailyCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailyCalendarView.h; sourceTree = "<group>"; };
+		CCA3D8511DDDE9DC004D1E32 /* DailyCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailyCalendarView.m; sourceTree = "<group>"; };
+		CCA3D8521DDDE9DC004D1E32 /* DayTitleLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DayTitleLabel.h; sourceTree = "<group>"; };
+		CCA3D8531DDDE9DC004D1E32 /* DayTitleLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DayTitleLabel.m; sourceTree = "<group>"; };
+		CCA3D8551DDDE9DC004D1E32 /* NSDate+CL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+CL.h"; sourceTree = "<group>"; };
+		CCA3D8561DDDE9DC004D1E32 /* NSDate+CL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+CL.m"; sourceTree = "<group>"; };
+		CCA3D8571DDDE9DC004D1E32 /* NSDictionary+CL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+CL.h"; sourceTree = "<group>"; };
+		CCA3D8581DDDE9DC004D1E32 /* NSDictionary+CL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+CL.m"; sourceTree = "<group>"; };
+		CCA3D8591DDDE9DC004D1E32 /* UIColor+CL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+CL.h"; sourceTree = "<group>"; };
+		CCA3D85A1DDDE9DC004D1E32 /* UIColor+CL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+CL.m"; sourceTree = "<group>"; };
+		CCA3D85B1DDDE9DC004D1E32 /* UIImage+CL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+CL.h"; sourceTree = "<group>"; };
+		CCA3D85C1DDDE9DC004D1E32 /* UIImage+CL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CL.m"; sourceTree = "<group>"; };
+		CCA3D8641DDDEA85004D1E32 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		CCA3D8661DDDEAC3004D1E32 /* HourCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HourCollectionViewCell.swift; sourceTree = "<group>"; };
 		CCE3227D1D869410000F819B /* SelectOptionsCustomView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectOptionsCustomView.xib; sourceTree = "<group>"; };
 		CCE322821D869456000F819B /* SelectOptionsCustomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectOptionsCustomView.swift; sourceTree = "<group>"; };
 		CCE60D7F1D88520B00915031 /* AddBusinessCustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBusinessCustomCell.swift; sourceTree = "<group>"; };
@@ -267,6 +292,7 @@
 				A78D2A1D1D4A6D4500756F2A /* ViewController.swift */,
 				A78D2A571D4A85B800756F2A /* SignUpViewController.swift */,
 				A7F502DE1D5AE1D700D9A427 /* BaseViewController.swift */,
+				CCA3D8641DDDEA85004D1E32 /* CalendarViewController.swift */,
 			);
 			path = Viewcontrollers;
 			sourceTree = "<group>";
@@ -274,6 +300,7 @@
 		A78D2A1E1D4A6D4500756F2A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CCA3D84D1DDDE9DC004D1E32 /* CLWeeklyCalendarViewSourceCode */,
 				A780BB891D7BFA3300D70BF3 /* SAMTextView.h */,
 				A780BB8A1D7BFA3300D70BF3 /* SAMTextView.m */,
 				A78D2A2F1D4A7A3D00756F2A /* IQKeyboardManagerSwift */,
@@ -363,6 +390,7 @@
 		A7CC02161D5EFF3A0018A428 /* CustomCells */ = {
 			isa = PBXGroup;
 			children = (
+				CCA3D8661DDDEAC3004D1E32 /* HourCollectionViewCell.swift */,
 				A7CC021C1D5EFF520018A428 /* AddBranchAddressCustomCell.swift */,
 				A780BB911D7C175E00D70BF3 /* AddCalenderCustomCell.swift */,
 				CCE60D7F1D88520B00915031 /* AddBusinessCustomCell.swift */,
@@ -404,6 +432,35 @@
 				A7F502F11D5B5AB600D9A427 /* AddResourceViewController.swift */,
 			);
 			path = FirstTimeUserBusiness;
+			sourceTree = "<group>";
+		};
+		CCA3D84D1DDDE9DC004D1E32 /* CLWeeklyCalendarViewSourceCode */ = {
+			isa = PBXGroup;
+			children = (
+				CCA3D84E1DDDE9DC004D1E32 /* CLWeeklyCalendarView.h */,
+				CCA3D84F1DDDE9DC004D1E32 /* CLWeeklyCalendarView.m */,
+				CCA3D8501DDDE9DC004D1E32 /* DailyCalendarView.h */,
+				CCA3D8511DDDE9DC004D1E32 /* DailyCalendarView.m */,
+				CCA3D8521DDDE9DC004D1E32 /* DayTitleLabel.h */,
+				CCA3D8531DDDE9DC004D1E32 /* DayTitleLabel.m */,
+				CCA3D8541DDDE9DC004D1E32 /* Misc */,
+			);
+			path = CLWeeklyCalendarViewSourceCode;
+			sourceTree = "<group>";
+		};
+		CCA3D8541DDDE9DC004D1E32 /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				CCA3D8551DDDE9DC004D1E32 /* NSDate+CL.h */,
+				CCA3D8561DDDE9DC004D1E32 /* NSDate+CL.m */,
+				CCA3D8571DDDE9DC004D1E32 /* NSDictionary+CL.h */,
+				CCA3D8581DDDE9DC004D1E32 /* NSDictionary+CL.m */,
+				CCA3D8591DDDE9DC004D1E32 /* UIColor+CL.h */,
+				CCA3D85A1DDDE9DC004D1E32 /* UIColor+CL.m */,
+				CCA3D85B1DDDE9DC004D1E32 /* UIImage+CL.h */,
+				CCA3D85C1DDDE9DC004D1E32 /* UIImage+CL.m */,
+			);
+			path = Misc;
 			sourceTree = "<group>";
 		};
 		CCE3227C1D869406000F819B /* CustomViews */ = {
@@ -580,6 +637,7 @@
 				A78D2A481D4A7A3D00756F2A /* IQUITextFieldView+Additions.swift in Sources */,
 				A7F502E11D5AE1FE00D9A427 /* HomeViewController.swift in Sources */,
 				A78D2A4D1D4A7A3D00756F2A /* IQKeyboardManagerConstantsInternal.swift in Sources */,
+				CCA3D85D1DDDE9DC004D1E32 /* CLWeeklyCalendarView.m in Sources */,
 				A7E694AA1D60A9E60042DAE9 /* BusinessLayerClass.swift in Sources */,
 				A780BB8B1D7BFA3300D70BF3 /* SAMTextView.m in Sources */,
 				A78D2A4B1D4A7A3D00756F2A /* IQUIWindow+Hierarchy.swift in Sources */,
@@ -591,7 +649,9 @@
 				A7CC021D1D5EFF520018A428 /* AddBranchAddressCustomCell.swift in Sources */,
 				A7F502F01D5B5AA800D9A427 /* ServiceOfferedViewController.swift in Sources */,
 				A78D2A521D4A7A3D00756F2A /* IQBarButtonItem.swift in Sources */,
+				CCA3D8651DDDEA85004D1E32 /* CalendarViewController.swift in Sources */,
 				A7F502EE1D5B5A9600D9A427 /* AddSkillsViewController.swift in Sources */,
+				CCA3D85F1DDDE9DC004D1E32 /* DayTitleLabel.m in Sources */,
 				A78D2A471D4A7A3D00756F2A /* IQUIScrollView+Additions.swift in Sources */,
 				A78D2A4A1D4A7A3D00756F2A /* IQUIViewController+Additions.swift in Sources */,
 				A78D2A581D4A85B800756F2A /* SignUpViewController.swift in Sources */,
@@ -599,13 +659,18 @@
 				CCE60D801D88520B00915031 /* AddBusinessCustomCell.swift in Sources */,
 				CCE60D891D88F74C00915031 /* SkillsBO.swift in Sources */,
 				A78D2A4C1D4A7A3D00756F2A /* IQKeyboardManagerConstants.swift in Sources */,
+				CCA3D8671DDDEAC3004D1E32 /* HourCollectionViewCell.swift in Sources */,
 				CCE60D871D88F61E00915031 /* SkillListCustomCell.swift in Sources */,
 				CCE322831D869456000F819B /* SelectOptionsCustomView.swift in Sources */,
+				CCA3D8631DDDE9DC004D1E32 /* UIImage+CL.m in Sources */,
 				A78D2A541D4A7A3D00756F2A /* IQTitleBarButtonItem.swift in Sources */,
+				CCA3D8611DDDE9DC004D1E32 /* NSDictionary+CL.m in Sources */,
 				A7E694AC1D60AA910042DAE9 /* BaseBL.swift in Sources */,
 				A78D2A201D4A6D4500756F2A /* Appointments.xcdatamodeld in Sources */,
 				CCE60D8D1D8A4CAE00915031 /* ServicesOfferedCustomCell.swift in Sources */,
+				CCA3D85E1DDDE9DC004D1E32 /* DailyCalendarView.m in Sources */,
 				CCE60D8B1D8A45AD00915031 /* ServiceBO.swift in Sources */,
+				CCA3D8601DDDE9DC004D1E32 /* NSDate+CL.m in Sources */,
 				CCE60D831D88595B00915031 /* AddBusinessBO.swift in Sources */,
 				CCE60D8F1D8A7EFC00915031 /* ResourceBO.swift in Sources */,
 				A78D2A511D4A7A3D00756F2A /* IQTextView.swift in Sources */,
@@ -613,6 +678,7 @@
 				CCE60D951D8A88DB00915031 /* ResourcesListCustomCell.swift in Sources */,
 				A7F502F21D5B5AB600D9A427 /* AddResourceViewController.swift in Sources */,
 				A7E7B2031D89AFD300A17422 /* WorkPatternListBO.swift in Sources */,
+				CCA3D8621DDDE9DC004D1E32 /* UIColor+CL.m in Sources */,
 				A7F502EC1D5B5A8500D9A427 /* AddCalenderViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

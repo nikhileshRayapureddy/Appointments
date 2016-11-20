@@ -143,6 +143,10 @@ class HomeViewController: BaseViewController {
     }
     
     @IBAction func btnReportsClicked(sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier("CalendarViewController") as! CalendarViewController
+        self.navigationController?.pushViewController(vc, animated: false)
+
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
